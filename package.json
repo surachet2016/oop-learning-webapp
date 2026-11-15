@@ -1,1 +1,9 @@
-{"name":"oop-learning-webapp","version":"1.0.0","private":true,"scripts":{"start":"node server.mjs","check":"node --check dist/app.js && node --check dist/lessons.js"}}
+{
+  "name": "oop-learning-webapp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check dist/app.js && node --check dist/lessons.js && node --check dist/slides-data.js && node --check dist/slides-3d.js && node --check dist/slides.js"
+  }
+}
