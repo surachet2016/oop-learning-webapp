@@ -1,67 +1,68 @@
 const LESSONS = [
   {
     "week": 1,
-    "title": "เริ่มต้นคิดแบบวัตถุ",
-    "subtitle": "Java และสภาพแวดล้อมการพัฒนา",
+    "title": "เริ่มต้น OOP ด้วย TypeScript",
+    "subtitle": "บทที่ 1 JavaScript → TypeScript → JavaScript runtime",
     "clo": "CLO1, CLO6",
-    "goal": "แยกบทบาท JDK, JVM และอธิบายคลาสกับวัตถุได้",
+    "goal": "อธิบายคลาส วัตถุ และเส้นทางการรัน TypeScript ได้",
     "body": [
-      "คลาสเป็นแบบกำหนดข้อมูลและพฤติกรรม ส่วนวัตถุเป็นสิ่งที่สร้างจากคลาส เช่น Product คือแบบ และสินค้าหนึ่งรายการคือวัตถุหนึ่งตัว",
-      "JDK มีเครื่องมือพัฒนาและคอมไพล์ javac แปลงซอร์สเป็น bytecode แล้ว JVM รันโปรแกรม เริ่มจากเขียนไฟล์ Main.java และรันด้วย javac Main.java ตามด้วย java Main"
+      "เชื่อมจากวิชาหลักการเขียนโปรแกรมที่ใช้ Python เบื้องต้น: Python และ TypeScript ต่างมี class/object แต่รายวิชานี้จะศึกษาการออกแบบ OOP และการทดสอบอย่างเป็นระบบ โดยไม่สอน Python OOP ซ้ำทั้งรายวิชา",
+      "ใช้ระบบยืม–คืนอุปกรณ์เป็นกรณีศึกษาตลอดภาค คลาสกำหนดข้อมูลและพฤติกรรม ส่วนวัตถุแต่ละตัวมีสถานะของตนเอง React Function Components เป็นส่วนแสดงผล ไม่จำเป็นต้องเปลี่ยนเป็น Class Components",
+      "TypeScript เพิ่มการตรวจชนิดให้ JavaScript ใช้ tsc ตรวจชนิดและแปลงไฟล์ .ts เป็น .js แล้วรันด้วย Node.js เริ่มจากชุดตัวอย่างที่ดาวน์โหลดบนหน้าหลัก ใช้ npm ci, npm test และ npm run demo หลังติดตั้ง Node.js และ npm ตาม README"
     ],
-    "code": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Welcome to Object Lab\");\n    }\n}",
-    "lab": "สร้าง Main.java แสดงชื่อระบบและผู้พัฒนา จากนั้นจงใจลบเครื่องหมาย ; สังเกตข้อความผิดพลาดและแก้ไข",
-    "ai": "ช่วยอธิบายข้อความผิดพลาด Java นี้ด้วยภาษาที่ผู้เริ่มต้นเข้าใจ ให้คำใบ้โดยไม่เขียนคำตอบทั้งหมด",
+    "code": "const course: string = \"OOP Equipment Loan\";\nconsole.log(course);",
+    "lab": "รันชุดตัวอย่าง บันทึกผลทดสอบ วาดเส้นทาง React → API → Service → Repository และแยกว่าส่วนใดทำงานในเบราว์เซอร์หรือเซิร์ฟเวอร์",
+    "ai": "อธิบาย type error นี้เป็นคำใบ้ แล้วให้ฉันทดลองแก้และรันเอง",
     "evidence": "บันทึกคำสั่งที่ใช้รัน ผลลัพธ์ และสิ่งที่แก้ไข พร้อมระบุการใช้ AI",
-    "question": "สิ่งใดทำหน้าที่รัน Java bytecode?",
+    "question": "การตรวจชนิด TypeScript ช่วยรับรองข้อมูลจากผู้ใช้ขณะรันทั้งหมดหรือไม่?",
     "options": [
-      "JVM",
-      "ไฟล์ README",
-      "Git"
+      "รับรองทั้งหมด",
+      "ไม่ ต้องตรวจข้อมูลขณะรันด้วย",
+      "ไม่จำเป็นต้องทดสอบ"
     ],
-    "answer": 0,
-    "explain": "JVM ประมวลผล bytecode ส่วน javac เป็นตัวคอมไพล์",
+    "answer": 1,
+    "explain": "ชนิดข้อมูลช่วยตอนพัฒนา แต่ข้อมูลจากเครือข่ายยังต้องตรวจขณะรัน",
     "exam": false
   },
   {
     "week": 2,
-    "title": "ข้อมูลและการคำนวณ",
-    "subtitle": "ตัวแปร ตัวดำเนินการ และ Scanner",
+    "title": "ข้อมูลและเงื่อนไขการยืม",
+    "subtitle": "บทที่ 2 number string boolean และ union type",
     "clo": "CLO1, CLO3",
-    "goal": "เลือกชนิดข้อมูลและรับข้อมูลเพื่อคำนวณได้",
+    "goal": "กำหนดชนิดข้อมูลและตรวจค่าจำนวนวันยืมได้",
     "body": [
-      "ตัวแปรเก็บค่าตามชนิดที่กำหนด int เหมาะกับจำนวนเต็ม double ใช้กับทศนิยม และ String ใช้กับข้อความ การหารจำนวนเต็มจะตัดส่วนทศนิยม",
-      "Scanner รับข้อมูลจากผู้ใช้ ควรแยกการรับข้อมูล การคำนวณ และการแสดงผล สำหรับงานการเงินจริงต้องพิจารณาความแม่นยำ เช่น BigDecimal แทนการถือว่า double ให้ค่าทศนิยมตรงเสมอ"
+      "ใช้ number สำหรับจำนวน string สำหรับรหัส และ boolean สำหรับสถานะ JavaScript และ TypeScript คำนวณ 5/2 ได้ 2.5 ไม่ตัดทศนิยมแบบการหารจำนวนเต็มบางภาษา",
+      "ชนิด number รวม NaN และ Infinity ต้องตรวจ Number.isInteger และขอบเขตเมื่อโจทย์ต้องการจำนวนเต็ม กำหนดสถานะด้วย union type เพื่อลดการสะกดผิด"
     ],
-    "code": "int quantity = 3;\ndouble price = 120.50;\ndouble total = quantity * price;\nSystem.out.println(total);\nSystem.out.println(5 / 2);\nSystem.out.println(5 / 2.0);",
-    "lab": "รับราคาสินค้าและจำนวนด้วย Scanner แสดงยอดรวมและทดลองการหาร 5/2 กับ 5/2.0",
-    "ai": "เสนอข้อมูลทดสอบสำหรับโปรแกรมคำนวณราคาสินค้า โดยยังไม่เฉลยผลลัพธ์",
+    "code": "type Status = \"available\" | \"borrowed\";\nconst status: Status = \"available\";\nconst days: number = 7;\nconsole.log(Number.isInteger(days) && days > 0);\nconsole.log(5 / 2); // 2.5",
+    "lab": "กำหนดรหัสอุปกรณ์และจำนวนวัน ตรวจ -1, 0, 1, 7, 1.5 และ NaN พร้อมผลที่คาดหวัง",
+    "ai": "เสนอข้อมูลขอบเขตสำหรับจำนวนวันยืม โดยยังไม่บอกผลที่คาดหวัง",
     "evidence": "ใบงาน 2 ส่วนที่ 1: ค่าป้อนเข้า ผลที่คาดหวัง และผลจริง",
-    "question": "5 / 2 ใน Java ให้ค่าใด?",
+    "question": "5 / 2 ใน JavaScript และ TypeScript ได้เท่าไร?",
     "options": [
-      "2.5",
       "2",
+      "2.5",
       "3"
     ],
     "answer": 1,
-    "explain": "ตัวถูกหารและตัวหารเป็นจำนวนเต็ม ผลจึงเป็นจำนวนเต็ม 2",
+    "explain": "การหาร number ให้ 2.5 หากต้องการจำนวนเต็มต้องกำหนดวิธีปัดเศษเอง",
     "exam": false
   },
   {
     "week": 3,
     "title": "เงื่อนไขและการวนซ้ำ",
-    "subtitle": "ควบคุมการทำงานของโปรแกรม",
+    "subtitle": "บทที่ 2 ตรวจสิทธิ์และรายการอุปกรณ์",
     "clo": "CLO1, CLO3, CLO4",
-    "goal": "เลือกใช้เงื่อนไขและตรวจจำนวนรอบของลูปได้",
+    "goal": "เขียนเงื่อนไขอนุญาตยืมและตรวจจำนวนรอบได้",
     "body": [
-      "if-else ใช้เลือกทางทำงานตามเงื่อนไข boolean ส่วน for เหมาะเมื่อทราบจำนวนรอบ และ while เหมาะเมื่อรอเงื่อนไขสิ้นสุด",
-      "ตรวจข้อมูลก่อนใช้ เช่น จำนวนสินค้าต้องมากกว่า 0 ระวัง off-by-one จากการใช้ < กับ <= และต้องมีการเปลี่ยนค่าที่ทำให้ลูปสิ้นสุด"
+      "ใช้ if ตรวจสถานะอุปกรณ์และสิทธิ์ผู้ยืมก่อนเปลี่ยนข้อมูล การตรวจที่หน้าจอช่วยผู้ใช้ แต่กฎสำคัญต้องตรวจซ้ำใน Backend",
+      "ใช้ for หรือ for...of ประมวลผลหลายรายการ ระวังขอบเขตลูปและเงื่อนไขที่ไม่สิ้นสุด ทำนายผลก่อนรัน"
     ],
-    "code": "for (int i = 1; i <= 3; i++) {\n    System.out.println(\"รายการที่ \" + i);\n}\nint quantity = -1;\nif (quantity <= 0) {\n    System.out.println(\"จำนวนต้องมากกว่า 0\");\n}",
-    "lab": "เขียนโปรแกรมรับสินค้า 3 รายการ ตรวจจำนวน และคำนวณส่วนลดเมื่อยอดถึงเกณฑ์ที่กำหนด",
-    "ai": "ช่วยชี้จุดที่อาจทำให้ลูปทำงานเกินหนึ่งรอบในโค้ดนี้ ให้เหตุผลและคำใบ้",
+    "code": "const ids = [\"EQ01\", \"EQ02\", \"EQ03\"];\nfor (const id of ids) { console.log(id); }\nconst active = true;\nconst available = false;\nconsole.log(active && available); // false",
+    "lab": "เขียนตารางเงื่อนไขสมาชิกมีสิทธิ์/ไม่มีสิทธิ์และอุปกรณ์ว่าง/ไม่ว่าง แล้วทดสอบทุกคู่",
+    "ai": "ตรวจว่าตารางเงื่อนไขนี้ขาดกรณีใด พร้อมเหตุผลโดยไม่แก้โค้ดแทน",
     "evidence": "ใบงาน 2 ส่วนที่ 2 และแบบทดสอบย่อยครั้งที่ 1 ในชั้นเรียนโดยไม่ใช้ AI",
-    "question": "ลูป for(int i=0; i<3; i++) ทำงานกี่รอบ?",
+    "question": "for(let i=0; i<3; i++) ทำงานกี่รอบ?",
     "options": [
       "2",
       "3",
@@ -73,104 +74,104 @@ const LESSONS = [
   },
   {
     "week": 4,
-    "title": "แถวลำดับและข้อความ",
-    "subtitle": "Array และ String",
+    "title": "แถวลำดับและการค้นหา",
+    "subtitle": "บทที่ 3 Array String และ object reference",
     "clo": "CLO1, CLO3, CLO4",
-    "goal": "จัดเก็บหลายค่าและเปรียบเทียบเนื้อหาข้อความได้",
+    "goal": "ค้นหาอุปกรณ์และแยกการเทียบข้อความกับวัตถุได้",
     "body": [
-      "Array มีขนาดคงที่และเริ่มดัชนีจาก 0 ดัชนีสุดท้ายคือ length-1 การเข้าถึงเกินขอบเขตทำให้เกิดข้อยกเว้น",
-      "String ใช้ equals เปรียบเทียบเนื้อหา ส่วน == เปรียบเทียบการอ้างอิงวัตถุ ใช้ \"ข้อความ\".equals(value) เมื่อต้องรองรับ value ที่อาจเป็น null"
+      "Array เริ่มดัชนีจาก 0 และเปลี่ยนขนาดได้ find คืน undefined เมื่อไม่พบ การอ่านดัชนีนอกขอบเขตให้ undefined จึงต้องตรวจผลก่อนใช้",
+      "ใช้ === เปรียบเทียบ string primitive ตามค่า ส่วนวัตถุเปรียบเทียบตามการอ้างอิง วัตถุคนละตัวแม้ข้อมูลเหมือนกันก็ไม่เท่ากันด้วย ==="
     ],
-    "code": "String[] products = {\"Book\", \"Pen\"};\nfor (String name : products) {\n    System.out.println(name);\n}\nString query = new String(\"Book\");\nSystem.out.println(\"Book\".equals(query));",
-    "lab": "สร้างรายการสินค้า ค้นหาด้วยชื่อ และทดสอบกรณีไม่พบ ข้อมูลซ้ำ และแถวลำดับว่าง",
-    "ai": "เสนอกรณีขอบเขตสำหรับการค้นหาข้อมูลใน array พร้อมอธิบายเหตุผล",
+    "code": "const items = [{ id: \"EQ01\", name: \"Camera\" }];\nconst item = items.find(x => x.id === \"EQ02\");\nconsole.log(item?.name ?? \"ไม่พบอุปกรณ์\");\nconsole.log(\"EQ01\" === String(\"EQ01\")); // true",
+    "lab": "ค้นอุปกรณ์ด้วยรหัส ทดสอบรายการว่าง ไม่พบ และรหัสซ้ำ โดยกำหนดนโยบายปฏิเสธรหัสซ้ำ",
+    "ai": "เสนอกรณีทดสอบสำหรับ find และอธิบายความแตกต่างของ undefined กับรายการว่าง",
     "evidence": "ใบงาน 3 พร้อมบันทึกข้อผิดพลาดและผลหลังแก้ไข",
-    "question": "ควรใช้วิธีใดเปรียบเทียบเนื้อหา String?",
+    "question": "เมื่อ Array.find ไม่พบข้อมูล จะคืนค่าใด?",
     "options": [
-      "== เสมอ",
-      "equals",
-      "length เท่ากันก็เพียงพอ"
+      "null เสมอ",
+      "undefined",
+      "เกิดข้อยกเว้นเสมอ"
     ],
     "answer": 1,
-    "explain": "equals เปรียบเทียบเนื้อหา ข้อความยาวเท่ากันอาจไม่ใช่ข้อความเดียวกัน",
+    "explain": "ต้องตรวจ undefined ก่อนใช้คุณสมบัติของผลค้นหา",
     "exam": false
   },
   {
     "week": 5,
-    "title": "เมธอดที่ทดสอบได้",
-    "subtitle": "พารามิเตอร์ การคืนค่า และ JUnit",
+    "title": "ฟังก์ชันและการทดสอบ",
+    "subtitle": "บทที่ 4 Pure function และ automated tests",
     "clo": "CLO1, CLO3, CLO4",
-    "goal": "แยกการคำนวณเป็นเมธอดและกำหนดผลทดสอบได้",
+    "goal": "แยกกฎที่ทดสอบได้และเขียนผลคาดหวังได้",
     "body": [
-      "เมธอดรับพารามิเตอร์และคืนค่าตามชนิดที่ประกาศ แยกงานหนึ่งอย่างให้ชัดเจนเพื่อเรียกใช้ซ้ำและทดสอบง่าย ตัวแปรภายในเมธอดมีขอบเขตเฉพาะบล็อกนั้น",
-      "เริ่มทดสอบจากการกำหนด input และ expected result ก่อนรัน ใช้ assertEquals ตรวจค่าที่ได้จากเมธอดกับค่าที่คาดหวัง ทดสอบทั้งค่าปกติและค่าขอบเขต"
+      "กฎคำนวณที่ไม่ต้องเก็บสถานะเหมาะกับ pure function ส่วนคลาสเหมาะเมื่อข้อมูลและพฤติกรรมต้องรักษาเงื่อนไขร่วมกัน ไม่บังคับทุกฟังก์ชันให้อยู่ในคลาส",
+      "เริ่มจากข้อกำหนดและ expected result แล้วเขียนการทดสอบด้วย node:test ในชุดตัวอย่าง ทดสอบกรณีปกติ ขอบเขต และผิดเงื่อนไข"
     ],
-    "code": "static int total(int price, int quantity) {\n    return price * quantity;\n}\n// ในคลาสทดสอบ JUnit ที่ตั้งค่า dependency แล้ว\n// @Test\n// void calculatesTotal() {\n//     assertEquals(300, total(100, 3));\n// }",
-    "lab": "สร้างเมธอดคำนวณยอดรวมและส่วนลด กำหนดผลลัพธ์ที่คาดหวังอย่างน้อย 3 กรณี",
-    "ai": "ช่วยเสนอกรณีทดสอบที่ฉันอาจขาดไปจากรายการนี้ ไม่ต้องเขียนเมธอดให้",
+    "code": "function canBorrowDays(days: number, limit: number): boolean {\n  return Number.isInteger(days) && days > 0 && days <= limit;\n}\nconsole.log(canBorrowDays(7, 7)); // true\nconsole.log(canBorrowDays(8, 7)); // false",
+    "lab": "เขียนฟังก์ชันตรวจจำนวนวันและ tests สำหรับ 0, 1, ค่าสูงสุด และเกินค่าสูงสุด",
+    "ai": "เสนอข้อผิดพลาดที่ชุดทดสอบของฉันยังตรวจไม่พบ ให้ฉันเขียน test เพิ่มก่อนแก้",
     "evidence": "ใบงาน 4 พร้อมชุดทดสอบและผลการรัน",
-    "question": "ควรกำหนดผลลัพธ์ที่คาดหวังเมื่อใด?",
+    "question": "กฎคำนวณที่ไม่เก็บสถานะจำเป็นต้องใช้คลาสหรือไม่?",
     "options": [
-      "ก่อนรันการทดสอบ",
-      "หลังคัดลอกค่าที่โปรแกรมให้",
-      "ไม่จำเป็นต้องกำหนด"
+      "จำเป็นเสมอ",
+      "ไม่ ฟังก์ชันอาจเหมาะกว่า",
+      "ไม่ต้องทดสอบ"
     ],
-    "answer": 0,
-    "explain": "ผลคาดหวังต้องมาจากข้อกำหนดอย่างอิสระ ไม่ใช่คัดลอกจากโปรแกรม",
+    "answer": 1,
+    "explain": "เลือกโครงสร้างตามความรับผิดชอบและความจำเป็นในการเก็บสถานะ",
     "exam": false
   },
   {
     "week": 6,
-    "title": "ออกแบบคลาสสินค้า",
-    "subtitle": "Class, Object และ Constructor",
+    "title": "คลาสและวัตถุอุปกรณ์",
+    "subtitle": "บทที่ 5 Class Constructor และ Instance",
     "clo": "CLO1, CLO2, CLO3",
-    "goal": "สร้างคลาสและอธิบายความต่างของสมาชิกแต่ละประเภทได้",
+    "goal": "ออกแบบคลาส Equipment และสร้างวัตถุที่มีสถานะแยกกันได้",
     "body": [
-      "คลาสรวมข้อมูลและพฤติกรรม คอนสตรักเตอร์กำหนดสถานะเริ่มต้น สมาชิก instance เป็นของวัตถุแต่ละตัว ส่วน static เป็นของคลาส",
-      "แผนภาพคลาสช่วยระบุชื่อ คุณลักษณะ เมธอด และความสัมพันธ์ เริ่มจากคำถามว่าคลาสรับผิดชอบอะไร โดยไม่ใส่งานทุกอย่างในคลาสเดียว"
+      "Equipment แทนอุปกรณ์ Loan แทนรายการยืม และ LoanService ประสานกฎการทำรายการ กำหนดความรับผิดชอบก่อนเขียนคลาส",
+      "constructor กำหนดข้อมูลเริ่มต้น readonly ช่วยป้องกันการกำหนดค่าใหม่ขณะตรวจชนิด แต่ไม่ใช่การแช่แข็งข้อมูลทั้งหมดขณะรัน"
     ],
-    "code": "class Product {\n    private final String name;\n    Product(String name) { this.name = name; }\n    String getName() { return name; }\n}\n// Product book = new Product(\"Book\");",
-    "lab": "ออกแบบ Product ด้วยแผนภาพคลาส สร้างสินค้า 2 วัตถุและเปรียบเทียบข้อมูล",
-    "ai": "ทบทวนหน้าที่คลาส Product จากแบบของฉัน มีหน้าที่ใดไม่ควรอยู่ในคลาสนี้ เพราะอะไร",
+    "code": "class Equipment {\n  constructor(public readonly id: string, public readonly name: string) {\n    if (!id.trim() || !name.trim()) throw new Error(\"ข้อมูลไม่ครบ\");\n  }\n}\nconst camera = new Equipment(\"EQ01\", \"Camera\");\nconsole.log(camera.name);",
+    "lab": "วาดคลาสและสร้างอุปกรณ์สองตัว อธิบายข้อมูล instance และความแตกต่างจาก static",
+    "ai": "ทบทวนหน้าที่ของ Equipment, Loan และ LoanService โดยถามคำถามก่อนเสนอคลาสเพิ่ม",
     "evidence": "ใบงาน 5 ส่วนที่ 1 แผนภาพคลาสและโค้ด",
-    "question": "คอนสตรักเตอร์มีหน้าที่หลักอะไร?",
+    "question": "วัตถุสองตัวจากคลาสเดียวกันจำเป็นต้องมีค่าเหมือนกันหรือไม่?",
     "options": [
-      "ลบคลาส",
-      "กำหนดสถานะเริ่มต้นของวัตถุ",
-      "รันทุกครั้งที่อ่านตัวแปร"
+      "จำเป็น",
+      "ไม่จำเป็น",
+      "เป็นวัตถุเดียวกันเสมอ"
     ],
     "answer": 1,
-    "explain": "คอนสตรักเตอร์ทำงานขณะสร้างวัตถุ",
+    "explain": "แต่ละ instance มีสถานะของตนเอง",
     "exam": false
   },
   {
     "week": 7,
-    "title": "รักษาความถูกต้องของวัตถุ",
-    "subtitle": "Encapsulation และเงื่อนไขของข้อมูล",
-    "clo": "CLO2, CLO3, CLO5, CLO6",
-    "goal": "ป้องกันการเปลี่ยนสถานะที่ผิดข้อกำหนดได้",
+    "title": "ห่อหุ้มและป้องกันการยืมซ้ำ",
+    "subtitle": "บทที่ 5 Encapsulation และ Invariant",
+    "clo": "CLO2, CLO3, CLO4, CLO6",
+    "goal": "รักษาสถานะอุปกรณ์ผ่านเมธอดยืมและคืนได้",
     "body": [
-      "การใช้ private จำกัดการเข้าถึงข้อมูล แต่การห่อหุ้มที่ดีต้องมีเมธอดควบคุมการเปลี่ยนสถานะด้วย ไม่จำเป็นต้องมี setter ให้ทุกฟิลด์",
-      "Invariant คือเงื่อนไขที่ต้องจริงเสมอ เช่น stock ต้องไม่ติดลบ กำหนดไว้ทั้งตอนสร้างและเปลี่ยนข้อมูล พร้อมตรวจสอบข้อเสนอของ AI ที่อาจข้ามเงื่อนไข"
+      "ใช้ #borrowed เพื่อเก็บสถานะภายในแบบ private field ขณะรัน ไม่เปิดให้ภายนอกเปลี่ยนโดยตรง เมธอด borrow และ giveBack ต้องตรวจเงื่อนไขก่อนแก้สถานะ",
+      "TypeScript private ตรวจการเข้าถึงหลัก ๆ ตอนตรวจชนิด ส่วน #field มีการบังคับที่ runtime ทั้งสองแนวทางยังต้องออกแบบกฎในเมธอดให้ถูกต้อง"
     ],
-    "code": "class Inventory {\n    private int stock = 0;\n    void add(int quantity) {\n        if (quantity <= 0) {\n            throw new IllegalArgumentException(\"quantity > 0\");\n        }\n        stock += quantity;\n    }\n}",
-    "lab": "ปรับ Product หรือ Inventory ให้ป้องกันค่าติดลบ นำเสนอขอบเขตโครงงานและแบบจำลอง",
-    "ai": "ช่วยเสนอการเรียกเมธอดที่อาจทำให้สถานะวัตถุผิดเงื่อนไขจากโค้ดนี้",
+    "code": "class Equipment {\n  #borrowed = false;\n  borrow(): void {\n    if (this.#borrowed) throw new Error(\"อุปกรณ์ถูกยืมแล้ว\");\n    this.#borrowed = true;\n  }\n  giveBack(): void {\n    if (!this.#borrowed) throw new Error(\"ไม่มีรายการยืม\");\n    this.#borrowed = false;\n  }\n}",
+    "lab": "ทดสอบยืมครั้งแรก ยืมซ้ำ คืนครั้งแรก และคืนซ้ำ ส่งขอบเขตและแบบจำลองโครงงาน",
+    "ai": "ตรวจว่ามีเส้นทางใดเปลี่ยนสถานะโดยไม่ตรวจเงื่อนไข แล้วเสนอ test ที่พิสูจน์ได้",
     "evidence": "ใบงาน 5 ส่วนที่ 2 โครงงานจุดตรวจที่ 1 และทดสอบย่อยครั้งที่ 2 ไม่ใช้ AI",
-    "question": "private เพียงอย่างเดียวรับประกัน stock ไม่ติดลบหรือไม่?",
+    "question": "การใช้ private field เพียงอย่างเดียวรับรองกฎธุรกิจหรือไม่?",
     "options": [
-      "รับประกันเสมอ",
-      "ไม่ ต้องตรวจเงื่อนไขในเมธอดด้วย",
-      "ขึ้นกับชื่อคลาส"
+      "รับรอง",
+      "ไม่ ต้องตรวจในเมธอดด้วย",
+      "ไม่ต้องมีเมธอด"
     ],
     "answer": 1,
-    "explain": "เมธอดในคลาสยังแก้ข้อมูลได้ จึงต้องควบคุมเงื่อนไข",
+    "explain": "การจำกัดการเข้าถึงไม่ทดแทนการตรวจเงื่อนไข",
     "exam": false
   },
   {
     "week": 8,
     "title": "สอบกลางภาค",
-    "subtitle": "บทที่ 1–5: พื้นฐาน Java แถวลำดับ เมธอด คลาส วัตถุ และการห่อหุ้ม",
+    "subtitle": "บทที่ 1–5 พื้นฐาน TypeScript คลาส การห่อหุ้ม และการทดสอบ",
     "clo": "CLO1–CLO4",
     "exam": true,
     "weight": 20
@@ -178,199 +179,199 @@ const LESSONS = [
   {
     "week": 9,
     "title": "ความสัมพันธ์ของวัตถุ",
-    "subtitle": "Composition และ Inheritance",
-    "clo": "CLO2, CLO3, CLO4",
-    "goal": "เลือกความสัมพันธ์ตามความหมายของโจทย์ได้",
+    "subtitle": "บทที่ 6 Composition และ Inheritance",
+    "clo": "CLO2, CLO3",
+    "goal": "เลือก has-a หรือ is-a ให้ตรงความหมายได้",
     "body": [
-      "Composition แสดงความสัมพันธ์แบบ has-a เช่น Order มี OrderItem ส่วน Inheritance แสดง is-a และควรใช้เมื่อวัตถุชนิดย่อยแทนชนิดหลักได้อย่างเหมาะสม",
-      "การใช้ super เรียกคอนสตรักเตอร์หรือเมธอดของคลาสแม่ ชั่งน้ำหนักความสัมพันธ์ก่อนสืบทอด อย่าใช้เพียงเพื่อลดจำนวนบรรทัด"
+      "Loan มี Equipment เป็นองค์ประกอบ จึงเป็น has-a ไม่ใช่ Loan สืบทอดจาก Equipment ใช้ composition ประกอบหน้าที่แทนลำดับชั้นที่ซับซ้อน",
+      "ฝึก extends และ super ผ่านชนิดย่อยที่มีความหมายจริง เช่น Camera เป็น Equipment ชนิดหนึ่ง แล้วเปรียบเทียบกับการเก็บชนิดอุปกรณ์เป็นข้อมูล"
     ],
-    "code": "class OrderItem {\n    private final int quantity;\n    OrderItem(int quantity) { this.quantity = quantity; }\n}\nclass Order {\n    private final java.util.List<OrderItem> items =\n        new java.util.ArrayList<>();\n    void add(OrderItem item) { items.add(item); }\n}",
-    "lab": "สร้าง Order และ OrderItem แล้วอธิบายว่าทำไมไม่ให้ Order สืบทอดจาก OrderItem",
-    "ai": "เปรียบเทียบการใช้ composition กับ inheritance ในแบบจำลองคำสั่งซื้อของฉัน",
+    "code": "class Equipment { constructor(public readonly id: string) {} }\nclass Camera extends Equipment {\n  constructor(id: string, public readonly lens: string) { super(id); }\n}\nclass Loan {\n  constructor(public readonly equipment: Equipment) {}\n}",
+    "lab": "สร้าง Loan ที่อ้าง Equipment แล้วอภิปรายว่า Camera ควรเป็นคลาสย่อยหรือใช้ข้อมูลประเภทเมื่อพฤติกรรมไม่ต่าง",
+    "ai": "เปรียบเทียบ composition กับ inheritance ของแบบจำลองนี้ พร้อมกรณีที่ไม่ควรสร้างคลาสย่อย",
     "evidence": "ใบงาน 6 แบบจำลอง โค้ด และผลทดสอบ",
-    "question": "Order มีหลาย OrderItem สื่อถึงอะไร?",
+    "question": "Loan มี Equipment สื่อถึงความสัมพันธ์ใด?",
     "options": [
       "is-a",
       "has-a",
-      "ทั้งสองคำมีความหมายเดียวกัน"
+      "ไม่มีความสัมพันธ์"
     ],
     "answer": 1,
-    "explain": "คำสั่งซื้อประกอบด้วยรายการสินค้า ไม่ใช่รายการสินค้าชนิดย่อย",
+    "explain": "รายการยืมประกอบด้วยหรืออ้างถึงอุปกรณ์ ไม่ใช่อุปกรณ์ชนิดย่อย",
     "exam": false
   },
   {
     "week": 10,
     "title": "พฤติกรรมหลายรูปแบบ",
-    "subtitle": "Polymorphism และ Abstract Class",
+    "subtitle": "บทที่ 7 Polymorphism และ Abstract Class",
     "clo": "CLO1, CLO2, CLO3",
-    "goal": "อธิบายการเลือกเมธอดขณะทำงานได้",
+    "goal": "สลับนโยบายระยะเวลายืมผ่านชนิดหลักได้",
     "body": [
-      "Polymorphism ช่วยเรียกพฤติกรรมผ่านชนิดหลัก แต่ใช้การทำงานของวัตถุจริง Overriding แทนที่เมธอดที่สืบทอดมา ส่วน Overloading คือชื่อเดียวกันแต่รายการพารามิเตอร์ต่างกัน",
-      "Abstract class สร้างวัตถุโดยตรงไม่ได้ และกำหนดพฤติกรรมที่คลาสย่อยต้องเติมได้ ใช้ตัวอย่างส่วนลดตามประเภทลูกค้าโดยแยกกฎให้ชัดเจน"
+      "กำหนดนโยบายระยะเวลายืมสำหรับนักศึกษาและบุคลากรเป็นกฎสมมติ ผู้เรียกใช้ maxDays โดยไม่ต้องรู้รายละเอียดของแต่ละนโยบาย",
+      "abstract class กำหนดส่วนร่วมและเมธอดที่คลาสย่อยเติมได้ การ override เปลี่ยนพฤติกรรมให้ตรงชนิดย่อย ต้องยังรักษาข้อตกลงของชนิดหลัก"
     ],
-    "code": "abstract class Customer {\n    abstract int discountPercent();\n}\nclass Member extends Customer {\n    @Override int discountPercent() { return 10; }\n}\n// Customer customer = new Member();\n// System.out.println(customer.discountPercent()); // 10",
-    "lab": "สร้างลูกค้าทั่วไปและสมาชิก คาดการณ์ผลการเรียกเมธอดผ่านตัวแปรชนิด Customer แล้วรันจริง",
-    "ai": "อธิบายลำดับการเรียกเมธอดของโค้ดนี้ แล้วเสนอกรณีให้ฉันทดลองตรวจคำอธิบาย",
+    "code": "abstract class LoanPolicy { abstract maxDays(): number; }\nclass StudentPolicy extends LoanPolicy { maxDays() { return 7; } }\nclass StaffPolicy extends LoanPolicy { maxDays() { return 14; } }\nconst policy: LoanPolicy = new StaffPolicy();\nconsole.log(policy.maxDays()); // 14",
+    "lab": "สร้างนโยบาย 7 และ 14 วัน แล้วทดสอบที่ขอบเขตของแต่ละแบบโดยใช้โค้ดผู้เรียกเดียวกัน",
+    "ai": "อธิบายการเลือกเมธอดจากวัตถุจริงและเสนอกรณีทดสอบการแทนที่นโยบาย",
     "evidence": "ใบงาน 7 ส่วนที่ 1 พร้อมคำอธิบายผลลัพธ์",
-    "question": "เมื่อ Customer c = new Member() เรียกเมธอดที่ override จะใช้ของใคร?",
+    "question": "LoanPolicy ที่อ้าง new StaffPolicy() เรียก maxDays ได้เท่าไร?",
     "options": [
-      "Member",
-      "Customer เสมอ",
-      "เลือกแบบสุ่ม"
+      "7",
+      "14",
+      "0"
     ],
-    "answer": 0,
-    "explain": "เมธอด instance ที่ override เลือกตามชนิดวัตถุจริงขณะรัน",
+    "answer": 1,
+    "explain": "เรียก implementation ของ StaffPolicy ที่เป็นวัตถุจริง",
     "exam": false
   },
   {
     "week": 11,
-    "title": "ข้อตกลงระหว่างคลาส",
-    "subtitle": "Interface และหน้าที่ของคลาส",
+    "title": "ข้อตกลงและการส่ง dependency",
+    "subtitle": "บทที่ 7 Interface และ Dependency Injection",
     "clo": "CLO2, CLO3, CLO4",
-    "goal": "ใช้ interface แยกกฎธุรกิจออกจากผู้เรียกได้",
+    "goal": "แยกกฎการยืมออกจากผู้เรียกและส่งผ่าน constructor ได้",
     "body": [
-      "Interface กำหนดข้อตกลงที่ผู้ใช้งานพึ่งพา โดยไม่ผูกกับรายละเอียดของ implementation คลาสที่ implements ต้องทำตามข้อตกลง",
-      "แยกหน้าที่ของการคำนวณส่วนลดออกจากการแสดงผล ทำให้เปลี่ยนกฎและทดสอบได้ง่าย ใช้ผลทดสอบเดิมตรวจว่าการปรับโครงสร้างไม่เปลี่ยนพฤติกรรมที่ต้องการ"
+      "interface กำหนดรูปแบบที่โค้ดพึ่งพา และถูกลบเมื่อแปลงเป็น JavaScript จึงใช้ interface เป็น runtime injection token โดยตรงไม่ได้",
+      "เริ่มจากส่ง policy ผ่าน constructor ด้วยตนเองก่อนเรียน container ของ NestJS ทำให้ทดสอบกฎได้โดยไม่ต้องเปิดเว็บเซิร์ฟเวอร์"
     ],
-    "code": "interface DiscountPolicy {\n    int percent();\n}\nclass MemberDiscount implements DiscountPolicy {\n    public int percent() { return 10; }\n}\nclass RegularDiscount implements DiscountPolicy {\n    public int percent() { return 0; }\n}",
-    "lab": "สร้าง DiscountPolicy สำหรับลูกค้าทั่วไปและสมาชิก ทดสอบผลก่อนและหลังแยกคลาส",
-    "ai": "ทบทวนว่าคลาสนี้มีหลายหน้าที่เกินไปหรือไม่ เสนอเหตุผลก่อนเสนอการเปลี่ยนโค้ด",
+    "code": "interface LoanPolicy { maxDays(): number; }\nclass StudentPolicy implements LoanPolicy { maxDays() { return 7; } }\nclass LoanService {\n  constructor(private readonly policy: LoanPolicy) {}\n  canBorrow(days: number) {\n    return Number.isInteger(days) && days > 0 && days <= this.policy.maxDays();\n  }\n}\nconsole.log(new LoanService(new StudentPolicy()).canBorrow(8)); // false",
+    "lab": "สลับนโยบายผ่าน constructor และใช้ fake policy ทดสอบโดยไม่แก้ LoanService",
+    "ai": "ตรวจว่าผู้เรียกผูกกับ implementation เกินจำเป็นหรือไม่ พร้อมเหตุผลและ test",
     "evidence": "ใบงาน 7 ส่วนที่ 2 และหลักฐานผลทดสอบ",
-    "question": "เหตุผลสำคัญในการใช้ interface คืออะไร?",
+    "question": "TypeScript interface ใช้เป็น NestJS runtime token โดยตรงได้หรือไม่?",
     "options": [
-      "ทำให้ไม่ต้องทดสอบ",
-      "แยกข้อตกลงออกจากรายละเอียดการทำงาน",
-      "ทำให้ทุกคลาสมีข้อมูลเดียวกัน"
+      "ได้เสมอ",
+      "ไม่ได้ เพราะถูกลบตอนแปลงโค้ด",
+      "ไม่ต้องลงทะเบียน provider"
     ],
     "answer": 1,
-    "explain": "ผู้เรียกพึ่งพาข้อตกลงและสลับ implementation ได้",
+    "explain": "ใช้ class หรือ explicit token เช่น Symbol/string และลงทะเบียน provider",
     "exam": false
   },
   {
     "week": 12,
-    "title": "จัดการกลุ่มข้อมูล",
-    "subtitle": "Collections, Generics, List และ Map",
+    "title": "คอลเลกชันและ Repository",
+    "subtitle": "บทที่ 8 Array Map และการแยกแหล่งข้อมูล",
     "clo": "CLO3, CLO4",
-    "goal": "เลือกโครงสร้างข้อมูลตามลักษณะการเข้าถึงได้",
+    "goal": "จัดเก็บและค้นอุปกรณ์ผ่าน repository ในหน่วยความจำได้",
     "body": [
-      "List จัดเก็บข้อมูลเป็นลำดับและมีค่าซ้ำได้ Map จัดเก็บคู่ key-value โดย key ไม่ซ้ำ การ put key เดิมจะแทนที่ค่าเดิม",
-      "Generics เช่น List<String> ระบุชนิดข้อมูลเพื่อให้ตัวคอมไพล์ช่วยตรวจสอบ ต้องกำหนดกฎข้อมูลซ้ำให้ตรงโจทย์ ไม่ถือว่าการแทนที่อัตโนมัติถูกต้องทุกกรณี"
+      "Array เหมาะกับรายการ ส่วน Map เก็บคู่ key-value ที่ key ไม่ซ้ำ Map.set ด้วย key เดิมแทนค่า จึงต้องตรวจ has เมื่อข้อกำหนดห้ามรหัสซ้ำ",
+      "Repository แยกการเข้าถึงข้อมูลออกจากกฎการยืม ใช้ข้อมูลในหน่วยความจำในรายวิชา ฐานข้อมูลเป็นภาพสถาปัตยกรรมและหัวข้อต่อยอด ข้อมูลในหน่วยความจำหายเมื่อเริ่มโปรแกรมใหม่"
     ],
-    "code": "java.util.Map<String, String> products =\n    new java.util.HashMap<>();\nproducts.put(\"P01\", \"Book\");\nproducts.put(\"P01\", \"Notebook\");\nSystem.out.println(products.get(\"P01\"));",
-    "lab": "ใช้ List และ Map เก็บสินค้า ทดลองรหัสซ้ำและกำหนดวิธีป้องกันตามข้อกำหนด",
-    "ai": "เสนอวิธีจัดการรหัสสินค้าซ้ำโดยเปรียบเทียบข้อดีข้อเสีย ไม่ตัดสินใจแทนฉัน",
+    "code": "const items = new Map<string, { name: string }>();\nfunction add(id: string, name: string) {\n  if (items.has(id)) throw new Error(\"รหัสซ้ำ\");\n  items.set(id, { name });\n}\nadd(\"EQ01\", \"Camera\");\nconsole.log(items.get(\"EQ01\")?.name);",
+    "lab": "สร้าง InMemoryEquipmentRepository ทดสอบรหัสซ้ำ ไม่พบ และการอ่านกลับ พร้อมทดสอบย่อยครั้งที่ 3",
+    "ai": "เสนอกรณีที่การแทนค่าของ Map ทำให้ข้อมูลผิด และเขียนข้อกำหนดป้องกันก่อนแก้",
     "evidence": "ใบงาน 8 ส่วนที่ 1 และทดสอบย่อยครั้งที่ 3 ไม่ใช้ AI",
-    "question": "Map.put ด้วย key เดิมมีผลอย่างไร?",
+    "question": "Map.set ด้วย key เดิมมีผลอย่างไร?",
     "options": [
-      "เพิ่ม key ซ้ำอีกตัว",
-      "แทนที่ค่าของ key เดิม",
-      "เกิดข้อผิดพลาดเสมอ"
+      "เพิ่ม key ซ้ำ",
+      "แทนค่าของ key เดิม",
+      "เกิดข้อยกเว้นเสมอ"
     ],
     "answer": 1,
-    "explain": "Map มี key ไม่ซ้ำ put จึงแทนค่าที่ผูกกับ key เดิม",
+    "explain": "ต้องตรวจรหัสซ้ำเองเมื่อไม่ต้องการให้แทนค่า",
     "exam": false
   },
   {
     "week": 13,
-    "title": "ข้อผิดพลาดที่จัดการได้",
-    "subtitle": "Exception และ Refactoring",
+    "title": "ตรวจข้อมูลและปรับปรุงโค้ด",
+    "subtitle": "บทที่ 8 Runtime validation Error และ Refactoring",
     "clo": "CLO3, CLO4, CLO5",
-    "goal": "จัดการข้อมูลผิดรูปแบบและยืนยันการแก้ด้วยการทดสอบได้",
+    "goal": "ตรวจข้อมูลภายนอกและพิสูจน์ผลแก้ด้วย tests ได้",
     "body": [
-      "try-catch จัดการข้อยกเว้นที่คาดหมาย ควรจับชนิดที่เกี่ยวข้องและแจ้งข้อมูลที่ช่วยแก้ปัญหา การ catch แล้วไม่ทำอะไรทำให้ข้อผิดพลาดถูกซ่อน",
-      "Refactoring เปลี่ยนโครงสร้างโดยรักษาพฤติกรรมเดิม เริ่มจากกรณีทดสอบที่แสดงปัญหา แก้ไข แล้วรันทดสอบซ้ำ แยกตรรกะธุรกิจออกจากการรับและแสดงข้อมูล"
+      "ข้อมูล API เริ่มเป็นข้อมูลที่ยังเชื่อถือไม่ได้ การ cast เป็นชนิดที่ต้องการไม่ใช่ validation เช่น Number(\"abc\") ให้ NaN ไม่ได้ throw เอง",
+      "ตรวจชนิดและขอบเขตก่อนเรียก domain method แยกข้อผิดพลาดจากระบบกับข้อมูลผิดเงื่อนไข รันทดสอบเดิมหลัง refactoring และเพิ่ม regression test สำหรับข้อผิดพลาดที่พบ"
     ],
-    "code": "try {\n    int quantity = Integer.parseInt(\"abc\");\n    System.out.println(quantity);\n} catch (NumberFormatException e) {\n    System.out.println(\"กรุณากรอกจำนวนเต็ม\");\n}",
-    "lab": "ทดสอบข้อความแทนจำนวน จัดการข้อยกเว้น และนำเสนอความก้าวหน้าโครงงาน",
-    "ai": "หาเงื่อนไขที่ยังไม่ถูกทดสอบในโค้ดนี้ และอธิบายวิธีทำให้เกิดปัญหาซ้ำ",
+    "code": "function parseDays(input: unknown): number {\n  if (typeof input !== \"number\" || !Number.isInteger(input) || input <= 0) {\n    throw new Error(\"จำนวนวันต้องเป็นจำนวนเต็มบวก\");\n  }\n  return input;\n}\nconsole.log(parseDays(7));",
+    "lab": "ทดสอบ string, null, NaN, ทศนิยม และจำนวนวันเกินสิทธิ์ พร้อมสาธิตความก้าวหน้าโครงงาน",
+    "ai": "หา test gap ของ validation นี้ ให้เสนอ input และ expected result ก่อนแก้โค้ด",
     "evidence": "ใบงาน 8 ส่วนที่ 2 จุดตรวจโครงงานครั้งที่ 2 และผลก่อน–หลังแก้ไข",
-    "question": "Refactoring ที่ถูกต้องควรทำอะไร?",
+    "question": "Number(\"abc\") ให้ผลใด?",
     "options": [
-      "รักษาพฤติกรรมที่ต้องการไว้",
-      "ลบการทดสอบทั้งหมด",
-      "เพิ่มคุณสมบัติใหม่เสมอ"
+      "0",
+      "NaN",
+      "throw เสมอ"
     ],
-    "answer": 0,
-    "explain": "ใช้ชุดทดสอบตรวจว่าการเปลี่ยนโครงสร้างยังรักษาพฤติกรรม",
+    "answer": 1,
+    "explain": "ต้องตรวจ NaN หรือเงื่อนไขจำนวนก่อนนำไปใช้",
     "exam": false
   },
   {
     "week": 14,
-    "title": "เชื่อมโปรแกรมกับผู้ใช้",
-    "subtitle": "JavaFX และเหตุการณ์บนหน้าจอ",
+    "title": "เชื่อม OOP กับ API และ React",
+    "subtitle": "บทที่ 9 NestJS Controller Service และ Function Components",
     "clo": "CLO2, CLO3, CLO4",
-    "goal": "เชื่อมการกดปุ่มกับตรรกะธุรกิจและทดสอบได้",
+    "goal": "อธิบายเส้นทาง request และเชื่อมหน้าจอกับกฎการยืมได้",
     "body": [
-      "JavaFX ใช้องค์ประกอบหน้าจอและ event handler เช่น setOnAction เมื่อผู้ใช้กดปุ่ม ควรส่งข้อมูลไปยังส่วนประมวลผลแทนการใส่กฎทั้งหมดใน handler",
-      "ทดสอบตรรกะแยกด้วย JUnit และทดสอบหน้าจอตามรายการ เช่น ช่องว่าง ข้อความผิดรูปแบบ และการกดซ้ำ ตัวอย่างส่วนนี้ต้องตั้งค่า JavaFX ก่อน ไม่ใช่ Java มาตรฐานเพียงอย่างเดียว"
+      "React Function Component แสดงผลและส่งคำขอ API ส่วน NestJS Controller รับข้อมูลและเรียก Service ที่บังคับกฎการยืม Controller ไม่ควรเก็บกฎทั้งหมด หน้าจอใช้ชุดตัวอย่างที่ผู้สอนเตรียมเพื่อลดภาระการเรียน framework",
+      "ตัวอย่างนี้เป็นส่วนหนึ่งของ NestJS project ต้องลงทะเบียน controller/provider ใน module และตรวจข้อมูล request ขณะรัน ใช้ repository ในหน่วยความจำ ไม่เปิดฐานข้อมูลจริงบนเว็บบทเรียน"
     ],
-    "code": "// ส่วนหนึ่งของ JavaFX Application ที่ตั้งค่าแล้ว\njavafx.scene.control.Button button =\n    new javafx.scene.control.Button(\"คำนวณ\");\njavafx.scene.control.Label result =\n    new javafx.scene.control.Label();\nbutton.setOnAction(event -> result.setText(\"พร้อมคำนวณ\"));",
-    "lab": "สร้างหน้าจอรับจำนวนและราคา แสดงยอดรวมและข้อความเมื่อกรอกผิด",
-    "ai": "อธิบาย event flow ของโค้ด JavaFX นี้ และระบุ API ที่ต้องตรวจสอบในเอกสาร",
+    "code": "// ส่วนประกอบใน NestJS project ที่ตั้งค่าแล้ว\nimport { Controller, Get, Injectable } from \"@nestjs/common\";\n@Injectable()\nexport class EquipmentService {\n  list() { return [{ id: \"EQ01\", name: \"Camera\" }]; }\n}\n@Controller(\"equipment\")\nexport class EquipmentController {\n  constructor(private readonly service: EquipmentService) {}\n  @Get() list() { return this.service.list(); }\n}",
+    "lab": "ใช้ template สร้าง GET /equipment และ POST /loans เชื่อม React Function Component ทดสอบสำเร็จ ข้อมูลผิด และยืมซ้ำ โดยไม่ใช้ Class Component",
+    "ai": "ตรวจการแบ่งหน้าที่ React, Controller, Service และ Repository พร้อมชี้จุดที่ต้อง validate ขณะรัน",
     "evidence": "ใบงาน 9 โค้ดหน้าจอ ผลทดสอบตรรกะ และรายการตรวจหน้าจอ",
-    "question": "ควรวางกฎคำนวณธุรกิจหลักไว้ที่ใด?",
+    "question": "กฎห้ามยืมซ้ำควรตรวจที่ใด?",
     "options": [
-      "รวมทั้งหมดในข้อความบนปุ่ม",
-      "ในส่วนประมวลผลที่เรียกทดสอบแยกได้",
-      "ในไฟล์รูปภาพ"
+      "เฉพาะปุ่ม React",
+      "Backend service/domain แม้เรียก API โดยตรง",
+      "เฉพาะ CSS"
     ],
     "answer": 1,
-    "explain": "การแยกส่วนทำให้ทดสอบและนำกลับมาใช้ใหม่ได้",
+    "explain": "Backend ต้องบังคับกฎโดยไม่พึ่งการตรวจจากหน้าจอ",
     "exam": false
   },
   {
     "week": 15,
     "title": "รวมระบบและตรวจคุณภาพ",
-    "subtitle": "Integration, Code Review และ README",
+    "subtitle": "บทที่ 10 Integration Tests และ Code Review",
     "clo": "CLO2, CLO3, CLO4, CLO5, CLO6",
-    "goal": "ส่งมอบโปรแกรมที่ทดสอบและมีคู่มือทำซ้ำได้",
+    "goal": "ทดสอบเส้นทางยืมคืนและส่งมอบคู่มือทำซ้ำได้",
     "body": [
-      "เชื่อม UI ข้อมูล และตรรกะโดยตรวจตามข้อกำหนด สร้างรายการตรวจทั้งเส้นทางปกติและเมื่อข้อมูลผิด รวมถึงสิ่งที่โปรแกรมยังไม่รองรับ",
-      "Code review ใช้หลักฐานและเหตุผล จัดลำดับปัญหาที่กระทบความถูกต้องก่อนความสวยงาม README ต้องบอกการตั้งค่า วิธีรัน ทดสอบ และข้อจำกัด รวมถึงการใช้ AI"
+      "ทดสอบระดับ domain แยกจาก framework แล้วเพิ่ม integration/API tests และตรวจหน้าจอทั้งสถานะ loading สำเร็จ และผิดพลาด ใช้ข้อมูลจำลองเท่านั้น",
+      "README ระบุเครื่องมือ คำสั่งติดตั้ง รัน และทดสอบ รวมถึงข้อมูลในหน่วยความจำที่ไม่คงอยู่ การยืมพร้อมกันและ transaction เป็นข้อจำกัดที่ต้องพิจารณาก่อนใช้ระบบจริง"
     ],
-    "code": "// รายการตรวจใน README\n// 1. ต้องใช้ JDK และ dependencies รุ่นใด\n// 2. คำสั่งติดตั้ง รัน และทดสอบ\n// 3. ข้อมูลตัวอย่างและผลที่คาดหวัง\n// 4. ข้อจำกัดและแหล่งอ้างอิง",
-    "lab": "ให้เพื่อนทำตาม README โดยไม่ช่วยด้วยคำพูด บันทึกปัญหาและแก้ไข",
-    "ai": "ตรวจโค้ดตัวอย่างที่ลบข้อมูลลับแล้ว จัดลำดับปัญหาตามผลกระทบ พร้อมเหตุผลและกรณีทดสอบ",
+    "code": "// Acceptance checklist\n// 1. ยืมอุปกรณ์ว่างได้\n// 2. ยืมซ้ำถูกปฏิเสธโดยสถานะไม่เสีย\n// 3. คืนครั้งแรกได้ คืนซ้ำไม่ได้\n// 4. React แสดงข้อความจาก API อย่างเหมาะสม",
+    "lab": "ให้เพื่อนทำตาม README ทดสอบทั้งหน้าจอและ API โดยตรง บันทึกปัญหาแล้วแก้พร้อมหลักฐาน",
+    "ai": "รีวิว diff โดยจัดลำดับปัญหาความถูกต้องก่อนรูปแบบโค้ด ห้ามแก้เกณฑ์ทดสอบเพื่อให้ผ่าน",
     "evidence": "ใบงาน 10 ส่วนที่ 1 โปรแกรมก่อนส่งมอบ README และ AI log",
-    "question": "หลักฐานที่ดีว่าคู่มือใช้งานได้คืออะไร?",
+    "question": "เหตุใดต้องทดสอบเรียก API โดยตรงด้วย?",
     "options": [
-      "ผู้เขียนอ่านเองเท่านั้น",
-      "เพื่อนทำตามแล้วรันและทดสอบได้",
-      "มีจำนวนหน้ามาก"
+      "เพื่อข้ามกฎทั้งหมด",
+      "เพื่อยืนยัน Backend บังคับกฎโดยไม่พึ่งหน้าจอ",
+      "เพื่อไม่ต้องทดสอบ React"
     ],
     "answer": 1,
-    "explain": "ผู้อื่นทำซ้ำได้แสดงว่าขั้นตอนชัดเจน",
+    "explain": "ผู้ใช้ไม่ได้จำเป็นต้องส่งคำขอผ่านหน้าจอของเราเสมอ",
     "exam": false
   },
   {
     "week": 16,
     "title": "นำเสนอและส่งมอบ",
-    "subtitle": "โครงงานและการอธิบายรายบุคคล",
+    "subtitle": "บทที่ 10 อธิบายการออกแบบและแก้โจทย์รายบุคคล",
     "clo": "CLO2, CLO3, CLO4, CLO5, CLO6",
-    "goal": "อธิบายและปรับแก้ผลงานของตนเองได้",
+    "goal": "อธิบายโค้ดและเปลี่ยนนโยบายยืมพร้อมทดสอบได้",
     "body": [
-      "นำเสนอปัญหา แบบจำลอง การสาธิต และผลทดสอบ อธิบายเหตุผลในการเลือกใช้ composition, interface หรือ inheritance ให้ตรงกับสิ่งที่ใช้จริง",
-      "สมาชิกแต่ละคนตอบคำถามและแก้โจทย์สั้นโดยไม่ใช้ AI เพื่อยืนยันความเข้าใจ ใช้ AI เตรียมคำถามซ้อมหรือทบทวนเอกสารได้ แต่ต้องเปิดเผยการใช้"
+      "สาธิต React → API → Service → Repository โดยชี้ว่า OOP อยู่ส่วนใด และเหตุใดบางส่วนใช้ฟังก์ชัน อธิบายว่าจะเปลี่ยนจากข้อมูลในหน่วยความจำเป็นฐานข้อมูลผ่าน repository อย่างไร",
+      "ส่งซอร์สโค้ด ชุดทดสอบ README และ AI log สมาชิกแต่ละคนอธิบายและแก้เงื่อนไขสั้นโดยไม่ใช้ AI คะแนนพิจารณาความถูกต้องและเหตุผล ไม่ใช่จำนวนคลาส"
     ],
-    "code": "// โครงเรื่องการนำเสนอ\n// ปัญหา → ข้อกำหนด → แบบจำลอง\n// → สาธิต → หลักฐานทดสอบ → ข้อจำกัด\n// เตรียมอธิบายโค้ดที่ตนรับผิดชอบ",
-    "lab": "ส่งซอร์สโค้ด README ชุดทดสอบและบันทึก AI แล้วสาธิตพร้อมตอบรายบุคคล",
-    "ai": "ช่วยตั้งคำถามซ้อมอธิบายโครงงาน OOP จากรายละเอียดนี้ ให้ถามทีละข้อโดยยังไม่เฉลย",
+    "code": "// โครงเรื่องนำเสนอ\n// ข้อกำหนด → แบบจำลอง → สาธิต\n// → ผลทดสอบ → ข้อจำกัด → สิ่งที่ตรวจแก้จาก AI",
+    "lab": "สาธิตยืมคืนและเปลี่ยนระยะเวลาสูงสุดจาก 7 เป็น 5 วัน พร้อมแก้ tests และอธิบายรายบุคคล",
+    "ai": "ถามคำถามซ้อมอธิบายระบบทีละข้อ โดยยังไม่เฉลยและให้ฉันชี้หลักฐานจากโค้ด",
     "evidence": "ใบงาน 10 ส่วนที่ 2 และโครงงานฉบับสมบูรณ์",
     "question": "ช่วงใดต้องทำโดยไม่ใช้ AI?",
     "options": [
-      "การซ้อมก่อนนำเสนอ",
-      "การตอบและแก้โจทย์สดรายบุคคล",
-      "การตรวจคำสะกด README ก่อนส่ง"
+      "ซ้อมนำเสนอ",
+      "อธิบายและแก้โจทย์สดรายบุคคล",
+      "ตรวจคำสะกดก่อนส่ง"
     ],
     "answer": 1,
-    "explain": "ช่วงรายบุคคลใช้ยืนยันความสามารถของผู้เรียนโดยตรง",
+    "explain": "ใช้ประเมินความเข้าใจของผู้เรียนโดยตรง",
     "exam": false
   },
   {
     "week": 17,
     "title": "สอบปลายภาค",
-    "subtitle": "บทที่ 6–10: ความสัมพันธ์ การพ้องรูป Interface Collections การทดสอบ และ GUI โดยบูรณาการพื้นฐาน",
+    "subtitle": "บทที่ 6–10 ความสัมพันธ์ Interface Collections การทดสอบ และเส้นทาง React/API โดยบูรณาการพื้นฐาน",
     "clo": "CLO2–CLO5",
     "exam": true,
     "weight": 30

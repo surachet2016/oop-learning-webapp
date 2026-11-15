@@ -6,10 +6,11 @@ const SLIDES = [
     "clo": "CLO1–CLO6",
     "kind": "intro",
     "points": [
-      "Java • ธุรกิจ • การทดสอบ • AI อย่างรับผิดชอบ",
+      "Python เบื้องต้น → TypeScript OOP → React / NestJS / React Native",
+      "TypeScript • ระบบยืม–คืน • React + NestJS • AI",
       "07-034-206 | ชั้นปีที่ 2 | ภาคปลาย 2569"
     ],
-    "note": "ชุดภาพรวมและแกนหลัก 30 หน้า ใช้เลือกประกอบการสอนตามสัปดาห์ ไม่ใช่การแทนทุกชั่วโมงในรายวิชา เริ่มด้วยถามว่านักศึกษาเคยพบโปรแกรมที่แก้ไขยากอย่างไร"
+    "note": "ชี้ให้เห็นว่า Python มี OOP แต่ใช้ในวิชาพื้นฐานเพียงสะพานเชื่อม class/object ส่วนรายวิชานี้ใช้ TypeScript ศึกษาการออกแบบอย่างเป็นระบบ ชุดภาพรวม 30 หน้าใช้เลือกประกอบการสอน ไม่ใช่แทนทุกชั่วโมง"
   },
   {
     "title": "วันนี้เราจะทำอะไรได้",
@@ -18,14 +19,14 @@ const SLIDES = [
     "clo": "CLO1–CLO6",
     "kind": "reveal",
     "points": [
-      "อธิบายคลาส วัตถุ และการทำงานของ Java",
-      "ออกแบบและพัฒนาระบบจากโจทย์ธุรกิจ",
-      "ทดสอบ ตรวจคำตอบ AI และอธิบายงานของตนเอง"
+      "อธิบายคลาส วัตถุ และ TypeScript",
+      "ออกแบบกฎการยืม–คืนและเชื่อม API",
+      "ทดสอบ ตรวจข้อเสนอ AI และอธิบายงาน"
     ],
     "details": [
-      "CLO1: อธิบายหลักการและวิเคราะห์ผลลัพธ์",
-      "CLO2–3: วิเคราะห์ความต้องการ ออกแบบและพัฒนา Java พร้อม GUI",
-      "CLO4–6: ทดสอบ สื่อสาร ทำงานซื่อสัตย์และเปิดเผย AI"
+      "CLO1: วิเคราะห์โค้ด TypeScript/JavaScript",
+      "CLO2–3: ออกแบบ OOP เชื่อม React กับ NestJS",
+      "CLO4–6: ทดสอบ สื่อสาร และใช้ AI อย่างรับผิดชอบ"
     ],
     "note": "ให้ผู้เรียนเลือกเป้าหมายที่ยังไม่มั่นใจ เป็นการสำรวจพื้นฐาน ไม่ให้คะแนน"
   },
@@ -36,7 +37,7 @@ const SLIDES = [
     "clo": "CLO1",
     "kind": "quiz",
     "points": [
-      "Product เป็นคลาส ส่วน book เป็นวัตถุ ข้อใดอธิบายได้ถูกต้อง?"
+      "Equipment เป็นคลาส ส่วน camera เป็นวัตถุ ข้อใดถูกต้อง?"
     ],
     "options": [
       "คลาสกำหนดข้อมูลและพฤติกรรม วัตถุมีสถานะของตนเอง",
@@ -45,61 +46,61 @@ const SLIDES = [
     ],
     "answer": 0,
     "explain": "คลาสเป็นแบบกำหนดโครงสร้างและพฤติกรรม วัตถุแต่ละตัวสร้างจากคลาสและมีสถานะต่างกันได้",
-    "hint": "คิดถึงแบบสินค้าเทียบกับสินค้าสองรายการ",
+    "hint": "คิดถึงแบบอุปกรณ์เทียบกับอุปกรณ์สองชิ้น",
     "note": "ให้ตอบก่อนอธิบาย รับคำตอบผิดเป็นจุดเริ่มการสนทนา"
   },
   {
-    "title": "ร้านค้าคณะต้องจัดการคำสั่งซื้อ",
+    "title": "ระบบยืม–คืนอุปกรณ์ของคณะ",
     "subtitle": "กรณีศึกษาสมมติสำหรับการเรียน",
     "week": 6,
     "clo": "CLO2",
     "kind": "scenario",
     "points": [
-      "สินค้า 2 ชนิด มีราคาและจำนวนคงเหลือ",
-      "คำสั่งซื้อมีหลายรายการ ลูกค้าสมาชิกได้รับส่วนลด",
-      "ต้องป้องกันจำนวนติดลบและอธิบายยอดรวมได้"
+      "อุปกรณ์มีรหัสและสถานะพร้อมยืม",
+      "นโยบายกำหนดระยะเวลายืมตามประเภทผู้ใช้",
+      "ป้องกันยืมซ้ำและคืนซ้ำ"
     ],
     "options": [
-      "เริ่มเขียนทุกอย่างใน main ทันที",
-      "ระบุข้อมูล กฎธุรกิจ และความรับผิดชอบก่อน"
+      "เขียนกฎทั้งหมดใน React ทันที",
+      "ระบุข้อมูล กฎ และความรับผิดชอบก่อน"
     ],
     "answer": 1,
-    "explain": "แยก Product, OrderItem, Order และ DiscountPolicy ก่อนลงรายละเอียด จะช่วยตรวจข้อกำหนดและออกแบบการทดสอบ",
-    "hint": "อะไรบ้างที่ต้องรู้ก่อนเขียนสูตร?",
+    "explain": "แยก Equipment, Loan, LoanService และ LoanPolicy เพื่อออกแบบและทดสอบกฎ",
+    "hint": "ใครรับผิดชอบสถานะ และใครตรวจนโยบาย?",
     "note": "กรณีสมมติ ไม่ใช่ระบบจริงของมหาวิทยาลัย ให้กลุ่มเขียนข้อกำหนด 3 ข้อใน 3 นาที"
   },
   {
-    "title": "Java ทำงานผ่านขั้นตอนใด",
-    "subtitle": "Source → Bytecode → Runtime",
+    "title": "TypeScript ทำงานอย่างไร",
+    "subtitle": "Source → Type check → JavaScript runtime",
     "week": 1,
     "clo": "CLO1",
     "kind": "flow",
     "points": [
-      "Main.java: โค้ดที่มนุษย์อ่าน",
-      "javac: คอมไพล์เป็น Main.class",
-      "JVM: ประมวลผล bytecode"
+      "ไฟล์ .ts: ระบุชนิดข้อมูลและพฤติกรรม",
+      "tsc: ตรวจชนิดและแปลงเป็น JavaScript",
+      "Node.js: รัน JavaScript ของ Backend"
     ],
-    "note": "กดแต่ละขั้นเพื่อไล่การทำงาน เน้นว่า JDK คือชุดเครื่องมือ ส่วน JVM คือส่วนรันโปรแกรม"
+    "note": "Type annotations และ interface ไม่คงอยู่ขณะรัน ต้อง validate ข้อมูลภายนอกอีกครั้ง"
   },
   {
-    "title": "ชนิดข้อมูลเปลี่ยนผลคำนวณ",
-    "subtitle": "Types & integer division",
+    "title": "การหารของ number",
+    "subtitle": "JavaScript และ TypeScript",
     "week": 2,
     "clo": "CLO1, CLO3",
     "kind": "quiz",
     "points": [
-      "ผลของ 5 / 2 ใน Java คืออะไร?"
+      "5 / 2 ให้ผลใด?"
     ],
-    "code": "System.out.println(5 / 2);\nSystem.out.println(5 / 2.0);",
+    "code": "console.log(5 / 2); // ?",
     "options": [
-      "2 และ 2.5",
-      "2.5 และ 2.5",
-      "3 และ 2"
+      "2",
+      "2.5",
+      "3"
     ],
-    "answer": 0,
-    "explain": "นิพจน์แรกใช้จำนวนเต็มทั้งคู่จึงได้ 2 นิพจน์ที่สองมี double จึงได้ 2.5 งานเงินจริงควรเลือกชนิดและกฎการปัดเศษที่เหมาะสม",
-    "hint": "ตรวจชนิดของตัวหารก่อนคำนวณ",
-    "note": "อย่าสรุปว่า double แทนจำนวนเงินจริงได้แม่นยำเสมอ แนะนำ BigDecimal เป็นหัวข้อศึกษาต่อ"
+    "answer": 1,
+    "explain": "number หารได้ 2.5 ไม่ตัดทศนิยมอัตโนมัติ",
+    "hint": "อย่านำกฎการหารจำนวนเต็มของภาษาอื่นมาใช้",
+    "note": "ต่อยอด Number.isInteger และ NaN เมื่อโจทย์ต้องการจำนวนเต็ม"
   },
   {
     "title": "ลูปต้องมีขอบเขตชัดเจน",
@@ -112,29 +113,29 @@ const SLIDES = [
       "ตรวจ i < 3 ก่อนทำงาน",
       "ทำงานที่ i = 0, 1, 2 แล้วหยุดเมื่อ i = 3"
     ],
-    "code": "for (int i = 0; i < 3; i++) {\n    System.out.println(i);\n}",
+    "code": "for (let i = 0; i < 3; i++) {\n  console.log(i);\n}",
     "note": "ให้ทำนายจำนวนรอบก่อนกดขั้นต่อไป ถามผลเมื่อเปลี่ยน < เป็น <="
   },
   {
-    "title": "ข้อความเท่ากัน ไม่จำเป็นต้องอ้างวัตถุเดียวกัน",
+    "title": "เทียบข้อความและค้นอุปกรณ์",
     "subtitle": "Array & String",
     "week": 4,
     "clo": "CLO1, CLO3, CLO4",
     "kind": "reveal",
     "points": [
-      "Array เริ่มดัชนีจาก 0",
-      "equals เปรียบเทียบเนื้อหา String",
-      "== เปรียบเทียบการอ้างอิงสำหรับวัตถุ"
+      "Array เริ่มที่ 0 และขยายขนาดได้",
+      "string primitive ใช้ === เทียบค่า",
+      "find ไม่พบคืน undefined"
     ],
     "details": [
-      "String[] names = {\"Book\", \"Pen\"}; ดัชนีที่ใช้ได้คือ 0 และ 1",
-      "\"Book\".equals(new String(\"Book\")) ให้ true",
-      "new String(\"Book\") == new String(\"Book\") ให้ false"
+      "const ids = [\"EQ01\", \"EQ02\"];",
+      "\"EQ01\" === String(\"EQ01\") ให้ true",
+      "วัตถุสองตัวที่ข้อมูลเท่ากัน อาจไม่เท่ากันด้วย ==="
     ],
-    "note": "อย่าใช้ตัวอย่าง String literal เพียงอย่างเดียว เพราะ string pool ทำให้เกิดความเข้าใจผิด"
+    "note": "แยก primitive กับ reference และทดลองค้นไม่พบก่อนอ่านคุณสมบัติ"
   },
   {
-    "title": "เมธอดหนึ่งหน้าที่ ทดสอบได้ง่าย",
+    "title": "ฟังก์ชันที่ทดสอบได้",
     "subtitle": "Methods & testable design",
     "week": 5,
     "clo": "CLO1, CLO3, CLO4",
@@ -145,12 +146,12 @@ const SLIDES = [
       "กำหนดค่าที่คาดหวังก่อนรัน"
     ],
     "details": [
-      "total(price, quantity) รับราคาและจำนวน คืนยอดรวม",
-      "อย่าให้เมธอดคำนวณต้องรอ Scanner หรือกดปุ่ม GUI",
-      "price=100, quantity=3 → expected=300"
+      "canBorrowDays(days, limit) คืน boolean",
+      "แยกกฎออกจาก UI และการรับ request",
+      "days=7, limit=7 → true; days=8 → false"
     ],
-    "code": "static int total(int price, int quantity) {\n    return price * quantity;\n}",
-    "note": "ตัวอย่างใช้หน่วยบาทจำนวนเต็มเพื่อให้เห็นเมธอด กฎค่าติดลบจะเพิ่มในกิจกรรมทดสอบ"
+    "code": "function canBorrowDays(days: number, limit: number): boolean {\n  return Number.isInteger(days) && days > 0 && days <= limit;\n}\nconsole.log(canBorrowDays(7, 7)); // true\nconsole.log(canBorrowDays(8, 7)); // false",
+    "note": "ไม่จำเป็นต้องใช้คลาสกับกฎที่ไม่เก็บสถานะ"
   },
   {
     "title": "คลาสกำหนดขอบเขตความรับผิดชอบ",
@@ -159,16 +160,16 @@ const SLIDES = [
     "clo": "CLO1, CLO2, CLO3",
     "kind": "reveal",
     "points": [
-      "ข้อมูล: name, stock",
-      "พฤติกรรม: addStock(quantity)",
-      "เงื่อนไข: stock ต้องไม่ติดลบ"
+      "ข้อมูล: id, สถานะการยืม",
+      "พฤติกรรม: borrow(), giveBack()",
+      "เงื่อนไข: ห้ามยืมซ้ำและคืนซ้ำ"
     ],
     "details": [
-      "ข้อมูล instance เป็นของแต่ละวัตถุ ส่วน static เป็นของคลาส",
-      "คอนสตรักเตอร์ใช้กำหนดสถานะเริ่มต้นที่ถูกต้อง",
-      "private จำกัดการเข้าถึง แต่ต้องตรวจเงื่อนไขในเมธอดด้วย"
+      "แต่ละ instance มีสถานะของตนเอง",
+      "constructor ตรวจข้อมูลเริ่มต้น",
+      "#field จำกัดการเข้าถึงขณะรัน"
     ],
-    "note": "ให้ผู้เรียนแยกการพิมพ์ใบเสร็จออกจาก Product เพื่อไม่รวมหลายหน้าที่"
+    "note": "แยก Equipment ออกจากหน้าจอและการเก็บข้อมูล"
   },
   {
     "title": "คลาสเดียว สร้างหลายวัตถุ",
@@ -190,11 +191,11 @@ const SLIDES = [
     "clo": "CLO1, CLO3",
     "kind": "three",
     "points": [
-      "bookA และ bookB มี stock ของตนเอง",
-      "ถ้าตัวแปรสองตัวอ้างวัตถุเดียวกัน การเปลี่ยนสถานะจะเห็นร่วมกัน"
+      "cameraA และ cameraB มีสถานะของตนเอง",
+      "ถ้าสองตัวแปรอ้างวัตถุเดียวกันจะเห็นสถานะร่วมกัน"
     ],
     "model": "state",
-    "note": "เลือก bookA แล้วเพิ่ม stock เปรียบเทียบกับ bookB อธิบายว่ากรณีนี้สร้างสองวัตถุ ไม่ใช่ alias"
+    "note": "แบบจำลองนี้ใช้ stock แทนจำนวนคงเหลือของชุดอุปกรณ์ เลือก cameraA แล้วเพิ่มจำนวนเพื่อเปรียบเทียบ"
   },
   {
     "title": "Encapsulation ปกป้องเงื่อนไขของข้อมูล",
@@ -203,24 +204,24 @@ const SLIDES = [
     "clo": "CLO2, CLO3",
     "kind": "three",
     "points": [
-      "เปิดมุมมองแยกชั้น: ข้อมูล / เมธอด / กฎ",
-      "ทุกเส้นทางที่แก้ stock ต้องรักษาเงื่อนไข"
+      "แยกข้อมูล เมธอด และกฎ",
+      "ทุกเส้นทางที่แก้จำนวนคงเหลือต้องตรวจเงื่อนไข"
     ],
     "model": "encapsulation",
-    "note": "สามชั้นเป็นภาพเปรียบเทียบ ไม่ใช่การจัดวาง Java runtime ให้ยกตัวอย่าง setter ที่ปล่อยค่าติดลบ"
+    "note": "ภาพเชิงแนวคิด ไม่ใช่ผัง runtime; เชื่อมกับ #borrowed ในชุดโค้ดที่นับรายชิ้น"
   },
   {
-    "title": "Order ประกอบด้วย OrderItem",
+    "title": "Loan ประกอบด้วย Equipment",
     "subtitle": "Composition · has-a",
     "week": 9,
     "clo": "CLO2, CLO3",
     "kind": "three",
     "points": [
-      "คำสั่งซื้อมีหลายรายการสินค้า",
-      "Order ไม่ใช่ OrderItem ชนิดย่อย"
+      "รายการยืมอ้างอุปกรณ์",
+      "Loan ไม่ใช่อุปกรณ์ชนิดย่อย"
     ],
     "model": "composition",
-    "note": "เลือกโหนด Order และ OrderItem ให้ผู้เรียนอธิบาย has-a เทียบกับ is-a"
+    "note": "อภิปราย has-a เทียบกับ is-a และอายุการใช้งานของวัตถุ"
   },
   {
     "title": "ผู้เรียกใช้ข้อตกลงเดียวกันได้",
@@ -229,67 +230,67 @@ const SLIDES = [
     "clo": "CLO1, CLO2, CLO3",
     "kind": "three",
     "points": [
-      "DiscountPolicy กำหนดข้อตกลง",
-      "RegularDiscount และ MemberDiscount ให้พฤติกรรมต่างกัน"
+      "LoanPolicy กำหนด maxDays()",
+      "StudentPolicy และ StaffPolicy ให้ 7 และ 14 วัน"
     ],
     "model": "polymorphism",
-    "note": "เชื่อมสัปดาห์ 10–11 ภาพแสดงความสัมพันธ์ทางแนวคิด ไม่ใช่เวลาการทำงานจริง"
+    "note": "นโยบายสมมติ ไม่ใช่ระเบียบยืมจริงของมหาวิทยาลัย"
   },
   {
-    "title": "ใช้ interface แยกกฎธุรกิจ",
-    "subtitle": "Java example · สัปดาห์ 11",
+    "title": "ส่งนโยบายผ่าน constructor",
+    "subtitle": "TypeScript · Interface และ DI",
     "week": 11,
     "clo": "CLO2, CLO3, CLO4",
     "kind": "reveal",
     "points": [
-      "ผู้เรียกพึ่งพา DiscountPolicy",
-      "implementation เลือกอัตราตามประเภทลูกค้า",
-      "ตรวจผลก่อนและหลังปรับโครงสร้าง"
+      "ผู้เรียกพึ่งพา LoanPolicy",
+      "สลับ policy เพื่อทดสอบ",
+      "interface ไม่มีตัวตนที่ runtime"
     ],
     "details": [
-      "interface DiscountPolicy { int percent(); }",
-      "RegularDiscount ให้ 0; MemberDiscount ให้ 10",
-      "ข้อตกลงต้องชัดเจน เช่น percent อยู่ในช่วง 0–100"
+      "interface LoanPolicy { maxDays(): number; }",
+      "StudentPolicy ให้ 7; StaffPolicy ให้ 14",
+      "NestJS ใช้ class/token สำหรับ dependency ที่ runtime"
     ],
-    "code": "DiscountPolicy policy = new MemberDiscount();\nint percent = policy.percent(); // 10",
-    "note": "snippet นี้ต้องมี interface และ implementation ในโปรเจกต์ก่อน ไม่ใช่โปรแกรมสมบูรณ์"
+    "code": "const service = new LoanService(new StudentPolicy());\nconsole.log(service.canBorrow(8)); // false",
+    "note": "snippet อ้างคลาสจากบทเรียนสัปดาห์ 11 ไม่ใช่ไฟล์สมบูรณ์"
   },
   {
     "title": "เลือก Collection ตามการใช้งาน",
-    "subtitle": "List & Map",
+    "subtitle": "Array & Map",
     "week": 12,
     "clo": "CLO3, CLO4",
     "kind": "scenario",
     "points": [
-      "ต้องค้นหาสินค้าจากรหัสที่ไม่ซ้ำ ควรเริ่มพิจารณาโครงสร้างใด?"
+      "ค้นอุปกรณ์ด้วยรหัสไม่ซ้ำ ควรเริ่มจากโครงสร้างใด?"
     ],
     "options": [
-      "Map<String, Product>",
-      "List ที่ยอมรับรหัสซ้ำโดยไม่ตรวจ"
+      "Map<string, Equipment>",
+      "Array ที่รับรหัสซ้ำโดยไม่ตรวจ"
     ],
     "answer": 0,
-    "explain": "Map เหมาะกับการค้นด้วย key แต่ put key เดิมจะแทนค่า จึงยังต้องกำหนดกฎว่าจะปฏิเสธหรือแก้ไขข้อมูลซ้ำ",
+    "explain": "Map เหมาะกับ key แต่ set key เดิมจะแทนค่า ต้องตรวจ has เพื่อปฏิเสธรหัสซ้ำ",
     "hint": "โจทย์ต้องการค้นด้วย key",
-    "note": "หลีกเลี่ยงการสรุปว่า List ใช้ไม่ได้ เพียง Map สื่อเจตนาในโจทย์นี้ชัดกว่า"
+    "note": "Repository แยกที่เก็บข้อมูล; รุ่นเรียนใช้หน่วยความจำ"
   },
   {
-    "title": "จัดการข้อยกเว้นให้ผู้ใช้แก้ไขได้",
+    "title": "ตรวจข้อมูลที่ runtime",
     "subtitle": "Exception handling",
     "week": 13,
     "clo": "CLO3, CLO4",
     "kind": "reveal",
     "points": [
-      "รับข้อความ abc แทนจำนวน",
-      "จับ NumberFormatException",
-      "แจ้งข้อผิดพลาดและให้กรอกใหม่"
+      "request อาจผิดชนิด",
+      "Number(\"abc\") ให้ NaN",
+      "ตรวจข้อมูลก่อนเปลี่ยนสถานะ"
     ],
     "details": [
-      "Integer.parseInt(\"abc\") ไม่ได้คืน 0 แต่เกิดข้อยกเว้น",
-      "จับเฉพาะชนิดที่สัมพันธ์กับปัญหาที่คาดหมาย",
-      "ไม่ปล่อย catch ว่างจนผู้ใช้เข้าใจว่าระบบทำงานสำเร็จ"
+      "type assertion ไม่ใช่ validation",
+      "ตรวจชนิด จำนวนเต็ม และขอบเขต",
+      "แจ้งข้อผิดพลาดโดยไม่เปิดเผยข้อมูลลับ"
     ],
-    "code": "try {\n    int qty = Integer.parseInt(input);\n} catch (NumberFormatException e) {\n    // แจ้งให้กรอกจำนวนเต็ม\n}",
-    "note": "ให้แยกการแจ้งผู้ใช้ออกจากการเขียน log ภายใน ไม่แสดงข้อมูลลับใน error"
+    "code": "// ส่วนประกอบใน NestJS project ที่ตั้งค่าแล้ว\nimport { Controller, Get, Injectable } from \"@nestjs/common\";\n@Injectable()\nexport class EquipmentService {\n  list() { return [{ id: \"EQ01\", name: \"Camera\" }]; }\n}\n@Controller(\"equipment\")\nexport class EquipmentController {\n  constructor(private readonly service: EquipmentService) {}\n  @Get() list() { return this.service.list(); }\n}",
+    "note": "เพิ่ม tests ของ null string NaN และจำนวนติดลบ"
   },
   {
     "title": "AI ให้ข้อเสนอ เราต้องหาหลักฐาน",
@@ -305,41 +306,41 @@ const SLIDES = [
     "note": "เปิดผู้ช่วยสาธิตเพื่อย้ำว่าไม่ได้เรียกโมเดลจริง ห้ามใช้ AI ในแบบทดสอบย่อยและสอบจริง"
   },
   {
-    "title": "GUI เรียกตรรกะธุรกิจที่ทดสอบได้",
-    "subtitle": "JavaFX event flow",
+    "title": "React เรียก API ที่ใช้ OOP",
+    "subtitle": "React → NestJS → Repository",
     "week": 14,
     "clo": "CLO2, CLO3, CLO4",
     "kind": "flow",
     "points": [
-      "ผู้ใช้กรอกข้อมูลแล้วกดปุ่ม",
-      "ตรวจรูปแบบและส่งค่าให้ส่วนประมวลผล",
-      "แสดงผลหรือข้อความให้แก้ไขข้อมูล"
+      "Function Component ส่ง request",
+      "Controller → Service ตรวจนโยบายและสถานะ",
+      "Repository อ่าน/เขียนข้อมูล แล้วส่งผลให้ UI"
     ],
-    "note": "JavaFX ต้องตั้งค่า dependencies ทดสอบส่วนคำนวณด้วย JUnit และหน้าจอด้วย checklist"
+    "note": "ใช้ template บนเครื่องเรียน ฐานข้อมูลเป็นส่วนต่อยอด; เว็บสไลด์ไม่เปิด Backend จริง"
   },
   {
-    "title": "ทดลองราคาตามประเภทลูกค้า",
-    "subtitle": "Business simulation · จำนวนเต็มบาท",
+    "title": "ทดลองนโยบายระยะเวลายืม",
+    "subtitle": "Loan policy simulation",
     "week": 11,
     "clo": "CLO3, CLO4",
-    "kind": "pricing",
+    "kind": "loanpolicy",
     "points": [
-      "ปรับจำนวน ราคา และประเภทลูกค้า",
-      "เปรียบเทียบยอดก่อนส่วนลดกับยอดชำระ"
+      "เลือกนักศึกษาหรือบุคลากร",
+      "ทดลองจำนวนวันที่ขอบเขตและเกินสิทธิ์"
     ],
-    "note": "นี่คือแบบจำลอง JavaScript ของกฎธุรกิจ ไม่ใช่การรัน Java อัตราส่วนลด 10% เป็นกฎสมมติสำหรับกิจกรรม"
+    "note": "กฎสมมติ นักศึกษา 7 วัน บุคลากร 14 วัน ไม่ใช่ระเบียบมหาวิทยาลัย"
   },
   {
-    "title": "ป้องกันจำนวนสินค้าติดลบ",
+    "title": "ป้องกันจำนวนอุปกรณ์ติดลบ",
     "subtitle": "Invariant simulation",
     "week": 7,
     "clo": "CLO3, CLO4",
     "kind": "stock",
     "points": [
-      "เริ่ม stock = 5",
-      "ถอนสินค้าได้เมื่อ quantity > 0 และ quantity ≤ stock"
+      "เริ่มอุปกรณ์พร้อมยืม 5 ชิ้น",
+      "จำนวนขอยืมต้องเป็นจำนวนเต็มบวกไม่เกินคงเหลือ"
     ],
-    "note": "ให้ทดสอบ -1, 0, 5, 6 ก่อนกด สังเกตว่าการปฏิเสธไม่เปลี่ยนสถานะ"
+    "note": "แบบจำลองนับจำนวนเพื่อฝึก invariant; โครงงานหลักติดตามอุปกรณ์รายรหัส"
   },
   {
     "title": "จับคู่แนวคิดกับความหมาย",
@@ -374,10 +375,10 @@ const SLIDES = [
     "clo": "CLO4",
     "kind": "testcases",
     "points": [
-      "ข้อกำหนด: quantity ต้องมากกว่า 0",
-      "เลือกชุดข้อมูลที่ครอบคลุมทั้งปกติและค่าขอบเขต"
+      "ข้อกำหนด: ยืมได้ 1–7 วัน",
+      "ทดสอบปกติ ขอบเขต และเกินสิทธิ์"
     ],
-    "note": "กดทดสอบเพื่อดู expected result ตามข้อกำหนด ตัวอย่างนี้เป็นการจำลอง ไม่ใช่ JUnit runner"
+    "note": "ผลจำลองสำหรับฝึกคาดการณ์ ไม่ใช่การรันชุดทดสอบ TypeScript จริง"
   },
   {
     "title": "ตรวจโครงงานก่อนส่งมอบ",
@@ -418,15 +419,15 @@ const SLIDES = [
     "clo": "CLO3, CLO4",
     "kind": "quiz",
     "points": [
-      "put(\"P01\", \"Book\") แล้ว put(\"P01\", \"Pen\") จะได้ค่าใดเมื่อ get(\"P01\")?"
+      "set(\"EQ01\", \"Camera\") แล้ว set(\"EQ01\", \"Mic\") จะ get ได้ค่าใด?"
     ],
     "options": [
-      "Book",
-      "Pen",
+      "Camera",
+      "Mic",
       "เกิดข้อยกเว้นเสมอ"
     ],
     "answer": 1,
-    "explain": "key เดิมจะผูกกับค่าใหม่ Pen โปรแกรมต้องตรวจรหัสซ้ำเองหากข้อกำหนดไม่อนุญาตให้แทนค่า",
+    "explain": "key เดิมผูกกับค่าใหม่ Mic ต้องตรวจ has หากห้ามแทนค่า",
     "hint": "Map มี key ไม่ซ้ำ",
     "note": "ถามต่อว่าจะป้องกันการทับค่าโดยไม่ตั้งใจอย่างไร"
   },
@@ -456,9 +457,9 @@ const SLIDES = [
     "clo": "CLO1–CLO6",
     "kind": "map",
     "points": [
-      "โจทย์ธุรกิจ → คลาสและความสัมพันธ์",
-      "Java + GUI → โปรแกรมตามข้อกำหนด",
-      "การทดสอบ + การสื่อสาร + จริยธรรม → ผลงานที่ตรวจสอบได้"
+      "โจทย์ยืม–คืน → คลาสและความสัมพันธ์",
+      "TypeScript + NestJS API + React Function Components",
+      "ทดสอบ + สื่อสาร + จริยธรรม → ผลงานตรวจสอบได้"
     ],
     "note": "ให้ผู้เรียนเลือกโหนดหนึ่งแล้วอธิบายความเชื่อมโยงกับโครงงานของตน"
   },
