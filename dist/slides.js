@@ -1,69 +1,352 @@
 'use strict';
-const q=s=>document.querySelector(s),h=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let data={answers:{},reflection:'',checks:[],matches:[]};try{const d=JSON.parse(localStorage.getItem('oop-slides-ts-v2'));if(d&&typeof d.answers==='object'&&d.answers&&!Array.isArray(d.answers)&&typeof d.reflection==='string')data={answers:d.answers,reflection:d.reflection,checks:Array.isArray(d.checks)?d.checks:[],matches:Array.isArray(d.matches)?d.matches:[]}}catch{}
-let index=0,showAnswers=false,notesOpen=false,assistantOpen=false,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,cleanup=()=>{},remaining=300,ticking=false,step=0;
-function notice(s){q('#notice').textContent=s;q('#notice').style.display='block';setTimeout(()=>q('#notice').style.display='none',3000)}
-function persist(){try{localStorage.setItem('oop-slides-ts-v2',JSON.stringify(data));return true}catch{notice('บันทึกในเบราว์เซอร์ไม่ได้ กรุณาส่งออกข้อความ');return false}}
-function score(){return SLIDES.reduce((n,s,i)=>n+(s.kind==='quiz'&&data.answers[i]===s.answer?1:0),0)}
-function setIndex(n){location.hash='slide-'+Math.max(1,Math.min(SLIDES.length,n+1))}
-function button(text,action){const b=document.createElement('button');b.textContent=text;b.onclick=action;return b}
-function render(){cleanup();cleanup=()=>{};const s=SLIDES[index];step=0;document.title=`${index+1}. ${s.title.replace('\n',' ')} · Object Lab`;q('#position').textContent=`${index+1} / ${SLIDES.length}`;q('#bar').style.width=(index+1)/SLIDES.length*100+'%';q('#prev').disabled=index===0;q('#next').disabled=index===SLIDES.length-1;
- q('#stage').innerHTML=`<div class="meta"><span class="eyebrow">OBJECT LAB / ${String(index+1).padStart(2,'0')}</span><span>สัปดาห์ ${s.week} · ${h(s.clo)} · อิง มคอ.3 ภาคปลาย 2569</span></div><h1>${h(s.title)}</h1><p class="subtitle">${h(s.subtitle)}</p><div class="content ${['exit','match','map'].includes(s.kind)?'single':''}"><div id="left"><ul class="points">${s.points.map(p=>`<li>${h(p)}</li>`).join('')}</ul>${s.code?`<pre><code>${h(s.code)}</code></pre>`:''}</div><div id="activity" aria-label="กิจกรรมสไลด์"></div></div>`;
- const a=q('#activity');
- if(s.kind==='intro')a.innerHTML='<div class="big-object"><div class="object-box">class Equipment<small>state + behavior</small><small>คิด · เขียน · ทดสอบ · อธิบาย</small></div></div><span class="pill">ชุดภาพรวม 30 หน้า · เลือกใช้ตามแผนรายสัปดาห์</span>';
- if(s.kind==='reveal'){
- a.className='cards';s.points.forEach((p,i)=>{const wrap=document.createElement('div'),b=button('＋ '+p,()=>{ex.hidden=!ex.hidden;b.setAttribute('aria-expanded',String(!ex.hidden))}),ex=document.createElement('p');b.className='reveal';b.setAttribute('aria-expanded',String(showAnswers));ex.className='revealed';ex.textContent=s.details[i];ex.hidden=!showAnswers;wrap.append(b,ex);a.append(wrap)});q('#left .points').innerHTML='<li>เลือกแต่ละแนวคิดเพื่อเปิดตัวอย่างและคำอธิบาย</li>';
- }
- if(s.kind==='flow'){
- const descriptions={4:['แก้ไขซอร์สด้วย editor แล้วบันทึกชื่อไฟล์ให้ตรง public class','ใช้ javac Main.java หาก syntax ผิดต้องแก้ก่อนรัน','ใช้ java Main โดย JVM เรียก main ของโปรแกรม'],6:['i เริ่มที่ 0 เพียงครั้งเดียว','ก่อนแต่ละรอบ ตรวจ i < 3 ถ้า false จบลูป','เมื่อจบรอบเพิ่ม i หนึ่งครั้ง ผลคือพิมพ์ 0, 1, 2'],18:['กำหนด expected result โดยยังไม่ถาม AI','ขอเหตุผลและกรณีขอบเขต อย่าส่งข้อมูลลับ','หากคำตอบไม่ตรงข้อกำหนด ให้แก้และอธิบายหลักฐาน'],19:['รับข้อมูลจาก UI โดยยังไม่เชื่อว่ารูปแบบถูกต้อง','แยกกฎธุรกิจออกจาก event handler เพื่อทดสอบได้','แสดงข้อความที่ผู้ใช้แก้ไขได้และทดสอบเส้นทางผิดพลาด']};
- const text=document.createElement('div');text.className='feedback';const nodes=s.points.map((p,i)=>{const b=button(`${i+1}  ${p}`,()=>select(i));b.className='flow-node';a.append(b);return b});a.append(text);function select(i){step=i;nodes.forEach((b,j)=>b.classList.toggle('selected',i===j));text.textContent=(descriptions[index]||s.points)[i]}select(0);a.append(button('ขั้นถัดไป →',()=>select((step+1)%nodes.length)));
- }
- if(s.kind==='quiz'||s.kind==='scenario'){
- a.innerHTML='<div class="options"></div><div class="row"><button id="hint">ขอคำใบ้</button></div><div id="hint-text" class="small"></div><div id="feedback" role="status"></div><div class="badge" id="score"></div>';
- const opts=a.querySelector('.options');s.options.forEach((o,i)=>opts.append(button(`${String.fromCharCode(65+i)} · ${o}`,()=>{data.answers[index]=i;persist();update()})));
- q('#hint').onclick=()=>q('#hint-text').textContent=s.hint;function update(){const chosen=data.answers[index],answered=Number.isInteger(chosen);[...opts.children].forEach((b,i)=>{b.classList.toggle('correct',(answered||showAnswers)&&i===s.answer);b.classList.toggle('wrong',answered&&i===chosen&&i!==s.answer);b.setAttribute('aria-pressed',String(i===chosen))});q('#feedback').className=answered||showAnswers?'feedback':'';q('#feedback').textContent=answered||showAnswers?(answered?(chosen===s.answer?'✓ ถูกต้อง — ':'ลองทบทวน — '):'เฉลย — ')+s.explain:'';q('#score').textContent=`คะแนนทบทวน ${score()} / 5 · ${score()===5?'★ นักตรวจสอบเหตุผล':'ฝึกได้หลายครั้ง ไม่มีผลต่อเกรด'}`;}update();
- }
- if(s.kind==='three'){cleanup=createObjectModel(a,s.model,()=>paused)}
- if(s.kind==='loanpolicy'){
- a.innerHTML='<div class="glass"><label>ประเภทผู้ยืม <select id="borrower"><option value="7">นักศึกษา · ไม่เกิน 7 วัน</option><option value="14">บุคลากร · ไม่เกิน 14 วัน</option></select></label><label>จำนวนวันที่ขอยืม <input id="days" type="number" value="8" step="1"></label><div id="policy-result" class="result" role="status"></div><small>กฎสมมติสำหรับฝึก ไม่ใช่ระเบียบมหาวิทยาลัย</small></div>';
- const calc=()=>{const raw=q('#days').value,n=Number(raw),limit=Number(q('#borrower').value);q('#policy-result').textContent=raw!==''&&Number.isInteger(n)&&n>0&&n<=limit?'อนุญาต: '+n+' วัน':'ปฏิเสธ: ต้องเป็นจำนวนเต็ม 1–'+limit+' วัน';};q('#days').oninput=calc;q('#borrower').onchange=calc;calc();
- }
- if(s.kind==='stock'){
- let stock=5;a.innerHTML='<div class="glass"><div class="result" id="stock">stock = 5</div><label>จำนวนที่ต้องการยืม <input id="withdraw" type="number" step="1" value="2"></label><div class="row"><button id="apply-stock">ยืมอุปกรณ์</button><button id="restart-stock">ตั้ง stock = 5</button></div><p id="stock-result" role="status"></p></div>';
- q('#apply-stock').onclick=()=>{const raw=q('#withdraw').value,n=Number(raw);if(raw===''||!Number.isInteger(n)||n<=0||n>stock){q('#stock-result').textContent='ปฏิเสธ: จำนวนต้องเป็นจำนวนเต็มบวกและไม่เกินคงเหลือ สถานะไม่เปลี่ยน';return}stock-=n;q('#stock').textContent='stock = '+stock;q('#stock-result').textContent='ยอมรับ: ตรวจเงื่อนไขก่อนเปลี่ยนสถานะแล้ว'};q('#restart-stock').onclick=()=>{stock=5;q('#stock').textContent='stock = 5';q('#stock-result').textContent='เริ่มสถานะใหม่แล้ว'};
- }
- if(s.kind==='match'){
- a.innerHTML='<div class="row" id="chips"></div><div id="drops"></div><button id="check-match">ตรวจการจับคู่</button><p id="match-result" role="status"></p>';
- s.pairs.forEach((p,i)=>{const b=button(p[0],()=>notice('ลากไปยังคำอธิบาย หรือเลือกชื่อแนวคิดในช่องด้านล่าง'));b.draggable=true;b.className='drag-chip';b.ondragstart=e=>e.dataTransfer.setData('text/plain',String(i));q('#chips').append(b)});
- [2,0,1].forEach((correct,j)=>{const box=document.createElement('div');box.className='drop';box.innerHTML=`<label>${h(s.pairs[correct][1])}<select aria-label="จับคู่ ${j+1}"><option value="">เลือกแนวคิด</option>${s.pairs.map((p,i)=>`<option value="${i}">${h(p[0])}</option>`).join('')}</select></label>`;const sel=box.querySelector('select');sel.value=String(data.matches[j]??'');sel.onchange=()=>{data.matches[j]=sel.value;persist()};box.ondragover=e=>e.preventDefault();box.ondrop=e=>{e.preventDefault();const val=e.dataTransfer.getData('text/plain');if(!['0','1','2'].includes(val))return;sel.value=val;data.matches[j]=val;persist()};q('#drops').append(box)});
- const check=()=>{const n=[2,0,1].filter((c,j)=>String(c)===String(data.matches[j])).length;q('#match-result').textContent=`ถูก ${n}/3 คู่`+(n===3?' · ★ เชื่อมโยงแนวคิดได้ถูกต้อง':' · ทบทวนความหมายแล้วลองใหม่')+(showAnswers?' | เฉลยตามลำดับ: Polymorphism, Encapsulation, Composition':'')};q('#check-match').onclick=check;if(showAnswers)check();
- }
- if(s.kind==='testcases'){
- a.innerHTML='<div class="glass"><p>เลือกจำนวนวันเพื่อทำนายผล</p><div class="row" id="test-values"></div><div id="test-result" role="status" class="feedback">เลือกข้อมูลหนึ่งค่า</div><p class="small">นโยบายสมมติ: จำนวนวันยืมเป็นจำนวนเต็ม 1–7 วัน</p></div>';
- [0,1,7,8].forEach(n=>q('#test-values').append(button(String(n),()=>q('#test-result').textContent=n<=0||n>7?`days=${n}: คาดหวังปฏิเสธโดยไม่เปลี่ยนสถานะ`:`days=${n}: คาดหวังอนุญาตยืม`)));
- }
- if(s.kind==='checklist'){
- a.innerHTML='<div class="glass" id="check-items"></div><div id="check-count" class="badge" role="status"></div>';s.points.forEach((p,i)=>{const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.checked=data.checks.includes(i);input.onchange=()=>{data.checks=input.checked?[...new Set([...data.checks,i])]:data.checks.filter(x=>x!==i);persist();count()};label.append(input,document.createTextNode(' '+p));q('#check-items').append(label)});function count(){q('#check-count').textContent=`ตรวจแล้ว ${data.checks.length}/4 ประเด็น`}count();q('#left .points').innerHTML='<li>ตรวจงานร่วมกับเพื่อน พร้อมชี้หลักฐานในโปรแกรมและเอกสาร</li>';
- }
- if(s.kind==='map'){
- a.innerHTML='<div class="map-buttons"></div><div id="map-detail" class="feedback" role="status">เลือกโหนดเพื่อดูความสัมพันธ์</div>';[['โจทย์ธุรกิจ','CLO2: ระบุผู้ใช้ ข้อมูล กฎ และขอบเขต ก่อนออกแบบคลาส'],['คลาสและความสัมพันธ์','CLO1–3: จัดข้อมูลและพฤติกรรม ใช้ has-a/is-a ตามความหมาย'],['โปรแกรมและ GUI','CLO3: เชื่อมส่วนแสดงผลกับตรรกะที่แยกทดสอบได้'],['ทดสอบและส่งมอบ','CLO4–6: ใช้หลักฐานทดสอบ อธิบายรายบุคคล และเปิดเผย AI']].forEach(([t,d])=>a.querySelector('.map-buttons').append(button(t,()=>q('#map-detail').textContent=d)));
- }
- if(s.kind==='exit'){
- a.innerHTML=`<label for="reflection">บันทึกสะท้อนคิด (เฉพาะเบราว์เซอร์นี้)</label><textarea id="reflection" rows="4" placeholder="สิ่งที่เข้าใจ…\nสิ่งที่ตรวจสอบ…\nสิ่งที่จะปรับปรุง…">${h(data.reflection)}</textarea><div class="row"><button id="save-reflection">บันทึก</button><button id="export-reflection">ส่งออก Exit ticket</button><span class="badge">${score()===5?'★ นักตรวจสอบเหตุผล':'ผลทบทวน'} · ${score()}/5</span></div><p class="small" id="saved" role="status">ไม่ส่งข้อมูลถึงผู้สอนอัตโนมัติ ให้ส่งไฟล์ตามช่องทางที่ผู้สอนกำหนด</p>`;q('#reflection').oninput=()=>{data.reflection=q('#reflection').value;persist()};q('#save-reflection').onclick=()=>{data.reflection=q('#reflection').value;if(persist())q('#saved').textContent='บันทึกในเบราว์เซอร์แล้ว'};q('#export-reflection').onclick=()=>{const blob=new Blob([`Object Lab — Exit ticket\nรายวิชา 07-034-206 ภาคปลาย 2569\nคะแนนทบทวน ${score()}/5 (ไม่ใช่คะแนนรายวิชา)\n\n${q('#reflection').value}`],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='oop-exit-ticket.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
- }
- updatePanels();q('#stage').focus({preventScroll:true});
+
+const q = selector => document.querySelector(selector);
+const h = value => String(value).replace(/[&<>"']/g, char => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+}[char]));
+
+const storageKey = 'oop-slides-stepwise-v3';
+const quizTotal = SLIDES.filter(slide => slide.kind === 'quiz').length;
+let data = { answers: {}, practice: {} };
+try {
+  const saved = JSON.parse(localStorage.getItem(storageKey));
+  if (saved && typeof saved.answers === 'object' && typeof saved.practice === 'object') data = saved;
+} catch {}
+
+let index = 0;
+let showAnswers = false;
+let notesOpen = false;
+let assistantOpen = false;
+let paused = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let remaining = 300;
+let ticking = false;
+let lastTick = Date.now();
+
+function notice(message) {
+  q('#notice').textContent = message;
+  q('#notice').style.display = 'block';
+  setTimeout(() => { q('#notice').style.display = 'none'; }, 2800);
 }
-function updatePanels(){const s=SLIDES[index];q('#notes-panel').hidden=!notesOpen;q('#assistant-panel').hidden=!assistantOpen;q('#notes').setAttribute('aria-pressed',String(notesOpen));q('#assistant').setAttribute('aria-pressed',String(assistantOpen));q('#answers').setAttribute('aria-pressed',String(showAnswers));q('#answers').textContent=showAnswers?'ซ่อนเฉลย':'แสดงเฉลย';q('#notes-panel').innerHTML=`<h2>บันทึกผู้สอน · หน้า ${index+1}</h2><p>${h(s.note)}</p><p class="small">เมื่อเปิดส่วนนี้ ผู้ชมบนจอเดียวกันจะมองเห็นด้วย ปิดก่อนฉายหากไม่ต้องการแสดง</p><button id="hide-notes">ปิดบันทึกผู้สอน</button>`;q('#hide-notes').onclick=()=>{notesOpen=false;updatePanels()};
- q('#assistant-panel').innerHTML='<h2>ผู้ช่วยการเรียนรู้ · โหมดสาธิต</h2><p class="small">คำตอบเตรียมจากเนื้อหาสไลด์ ไม่ได้เชื่อม AI API และไม่ส่งข้อมูลออกจากเครื่อง</p><label>ระดับคำอธิบาย <select id="level"><option value="simple">เริ่มต้น</option><option value="practice">เชื่อมกับการปฏิบัติ</option></select></label><div class="row"><button id="explain">อธิบายหัวข้อนี้</button><button id="practice">คำถามฝึกคิด</button><button id="ai-hint">คำใบ้</button></div><div id="ai-output" class="feedback" role="status">เลือกสิ่งที่ต้องการทบทวน</div><button id="hide-ai">ปิดผู้ช่วย</button>';
- q('#explain').onclick=()=>q('#ai-output').textContent=q('#level').value==='simple'?s.points.join(' • '):`${s.title.replace('\n',' ')}: ${s.explain||s.note} ลองนำไปตรวจโค้ดระบบยืม–คืนอุปกรณ์ของตนเอง`;q('#practice').onclick=()=>q('#ai-output').textContent=s.options?`${s.points[0]} ลองอธิบายเหตุผลก่อนเปิดเฉลย`:`หากนำ “${s.title.replace('\n',' ')}” ไปใช้กับระบบยืม–คืนอุปกรณ์ จะเปลี่ยนแบบจำลองหรือการทดสอบอย่างไร?`;q('#ai-hint').onclick=()=>q('#ai-output').textContent=s.hint||'เริ่มจากข้อมูลนำเข้า กฎที่ต้องรักษา และหลักฐานที่ใช้ตรวจว่าผลลัพธ์ถูกต้อง';q('#hide-ai').onclick=()=>{assistantOpen=false;updatePanels()};
+
+function persist() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(data));
+    return true;
+  } catch {
+    notice('บันทึกในเบราว์เซอร์ไม่ได้');
+    return false;
+  }
 }
-function motion(){document.body.classList.toggle('paused',paused);q('#motion').textContent=paused?'เล่นภาพเคลื่อนไหว':'หยุดภาพเคลื่อนไหว';q('#motion').setAttribute('aria-pressed',String(paused))}
-q('#prev').onclick=()=>setIndex(index-1);q('#next').onclick=()=>setIndex(index+1);q('#overview-grid').innerHTML=SLIDES.map((s,i)=>`<button data-slide="${i}">${String(i+1).padStart(2,'0')} · ${h(s.title.replace('\n',' '))}<small>สัปดาห์ ${s.week} · ${h(s.clo)}</small></button>`).join('');q('#overview-grid').onclick=e=>{const b=e.target.closest('[data-slide]');if(b){q('#overview-dialog').close();setIndex(Number(b.dataset.slide))}};q('#overview').onclick=()=>q('#overview-dialog').showModal();q('#close-overview').onclick=()=>q('#overview-dialog').close();
-q('#fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{notice('เบราว์เซอร์นี้ไม่รองรับเต็มจอ ใช้คำสั่งเต็มจอของเบราว์เซอร์ได้')}};
-q('#motion').onclick=()=>{paused=!paused;motion()};q('#replay').onclick=()=>{render();q('#stage').style.animation='none';void q('#stage').offsetWidth;q('#stage').style.animation='';notice('เริ่มภาพและแบบจำลองหน้านี้ใหม่แล้ว คะแนนและบันทึกยังอยู่')};q('#answers').onclick=()=>{showAnswers=!showAnswers;render()};q('#notes').onclick=()=>{notesOpen=!notesOpen;if(notesOpen)assistantOpen=false;updatePanels()};q('#assistant').onclick=()=>{assistantOpen=!assistantOpen;if(assistantOpen)notesOpen=false;updatePanels()};
-let lastTick=Date.now();q('#timer').onclick=()=>{if(remaining===0)remaining=300;ticking=!ticking;lastTick=Date.now();updateTimer()};function updateTimer(){q('#timer').textContent=`${ticking?'หยุดเวลา':'เริ่มเวลา'} ${String(Math.floor(remaining/60)).padStart(2,'0')}:${String(remaining%60).padStart(2,'0')}`;q('#timer').setAttribute('aria-pressed',String(ticking))}setInterval(()=>{if(!ticking)return;const now=Date.now(),elapsed=Math.floor((now-lastTick)/1000);if(elapsed){remaining=Math.max(0,remaining-elapsed);lastTick+=elapsed*1000;if(!remaining){ticking=false;notice('ครบเวลากิจกรรม 5 นาที')}updateTimer()}},250);
-q('#reset').onclick=()=>q('#reset-dialog').showModal();q('#cancel-reset').onclick=()=>q('#reset-dialog').close();q('#confirm-reset').onclick=()=>{data={answers:{},reflection:'',checks:[],matches:[]};persist();showAnswers=false;remaining=300;ticking=false;updateTimer();q('#reset-dialog').close();render()};
-function makePrint(){q('#print-deck').innerHTML=SLIDES.map((s,i)=>`<section class="print-slide"><p>OBJECT LAB · 07-034-206 · หน้า ${i+1}/30 · สัปดาห์ ${s.week} · ${h(s.clo)}</p><h1>${h(s.title)}</h1><p>${h(s.subtitle)}</p><ul>${s.points.map(p=>`<li>${h(p)}</li>`).join('')}</ul>${s.code?`<pre>${h(s.code)}</pre>`:''}${s.details?`<ul>${s.details.map(d=>`<li>${h(d)}</li>`).join('')}</ul>`:''}${s.options?`<ol type="A">${s.options.map(o=>`<li>${h(o)}</li>`).join('')}</ol>${showAnswers?`<p class="print-answer">เฉลย: ${h(s.options[s.answer])} — ${h(s.explain)}</p>`:''}`:''}${s.kind==='three'?`<p>แบบจำลอง 2D: ${h(s.points.join(' → '))}</p>`:''}${s.pairs?`<ul>${s.pairs.map(p=>`<li>${h(p[1])} → ${showAnswers?h(p[0]):'________________'}</li>`).join('')}</ul>`:''}${['loanpolicy','stock','testcases'].includes(s.kind)?'<p>กิจกรรม: เขียนข้อมูลนำเข้า ผลที่คาดหวัง และเหตุผล แล้วตรวจตามข้อกำหนด<br>_______________________________________________________________<br>_______________________________________________________________</p>':''}${s.kind==='exit'?'<p>สิ่งที่เข้าใจ: _________________________________________________<br>หลักฐานที่ตรวจสอบ: ___________________________________________<br>แผนปรับปรุง: _________________________________________________</p>':''}${notesOpen?`<p>บันทึกผู้สอน: ${h(s.note)}</p>`:''}<p>อ้างอิงแผน มคอ.3 การเขียนโปรแกรมเชิงวัตถุ ฉบับปรับปรุง AI ภาคปลาย 2569 · แหล่งเทคนิค: TypeScript Handbook, NestJS docs และ React docs</p></section>`).join('')}
-q('#print').onclick=()=>{makePrint();document.body.classList.add('print-preview');if(!q('#print-toolbar')){const t=document.createElement('div');t.id='print-toolbar';t.append(button('← กลับสไลด์',()=>document.body.classList.remove('print-preview')),button('พิมพ์ / บันทึก PDF',()=>window.print()));const note=document.createElement('span');note.textContent='ฉบับพิมพ์ 30 หน้า · เลือก Save as PDF ในหน้าต่างพิมพ์ของเบราว์เซอร์';t.append(note);document.body.prepend(t)}window.scrollTo(0,0)};window.addEventListener('beforeprint',makePrint);
-window.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.target.closest('input,textarea,select,button')||document.querySelector('dialog[open]'))return;if(['ArrowRight','PageDown','ArrowLeft','PageUp','Home','End'].includes(e.key)){e.preventDefault();if(['ArrowRight','PageDown'].includes(e.key))setIndex(index+1);else if(['ArrowLeft','PageUp'].includes(e.key))setIndex(index-1);else setIndex(e.key==='Home'?0:29)}});
-function route(){const match=location.hash.match(/^#slide-(\d+)$/);index=match?Math.max(0,Math.min(29,Number(match[1])-1)):0;render()}window.addEventListener('hashchange',route);motion();updateTimer();route();
+
+function score() {
+  return SLIDES.reduce((total, slide, slideIndex) =>
+    total + (slide.kind === 'quiz' && data.answers[slideIndex] === slide.answer ? 1 : 0), 0);
+}
+
+function setIndex(nextIndex) {
+  const safe = Math.max(0, Math.min(SLIDES.length - 1, nextIndex));
+  location.hash = `slide-${safe + 1}`;
+}
+
+function makeButton(text, action, className = '') {
+  const button = document.createElement('button');
+  button.textContent = text;
+  button.className = className;
+  button.onclick = action;
+  return button;
+}
+
+function resourceLinks(slide) {
+  return `<div class="slide-resources">
+    <a href="${h(slide.codeLink)}" target="_blank" rel="noopener">⌘ เปิดโค้ดตัวอย่าง</a>
+    <a href="${h(slide.worksheet)}" target="_blank" rel="noopener">▤ เปิดใบงานบทนี้</a>
+  </div>`;
+}
+
+function jigsawPieces(currentChapter) {
+  return CHAPTERS.map(chapter => {
+    const state = chapter.id < currentChapter ? 'done' : chapter.id === currentChapter ? 'current' : '';
+    return `<div class="jigsaw-piece ${state}"><strong>${chapter.id}</strong><span>${h(chapter.piece.replace(/^ชิ้นที่ \d+ · /, ''))}</span></div>`;
+  }).join('');
+}
+
+function renderChapter(slide, activity) {
+  activity.innerHTML = `<div class="chapter-card">
+    <span class="chapter-number">บท ${slide.chapter}/10</span>
+    <strong>${slide.chapter === 1 ? 'Quick Win: ทำตัวอย่างสำเร็จก่อน' : 'ต่อยอดจากชิ้นส่วนที่ทำได้แล้ว'}</strong>
+    <p>${h(slide.piece)}</p>
+    <div class="mini-roadmap">ดูผลลัพธ์ → เข้าใจแนวคิด → อ่านโค้ด → ฝึก → ตรวจ → ต่อ Jigsaw</div>
+  </div>`;
+}
+
+function renderReveal(slide, activity) {
+  activity.className = 'cards';
+  slide.points.forEach((point, itemIndex) => {
+    const wrapper = document.createElement('div');
+    const explanation = document.createElement('p');
+    explanation.className = 'revealed';
+    explanation.textContent = slide.details[itemIndex];
+    explanation.hidden = !showAnswers;
+    const button = makeButton(`＋ ${point}`, () => {
+      explanation.hidden = !explanation.hidden;
+      button.setAttribute('aria-expanded', String(!explanation.hidden));
+    }, 'reveal');
+    button.setAttribute('aria-expanded', String(showAnswers));
+    wrapper.append(button, explanation);
+    activity.append(wrapper);
+  });
+  q('#left .points').innerHTML = '<li>เปิดทีละแนวคิด แล้วอธิบายด้วยคำของตนเอง</li>';
+}
+
+function renderCodeWalk(slide, activity) {
+  activity.innerHTML = '<div class="code-steps"></div><div id="code-detail" class="feedback" role="status"></div>';
+  const detail = q('#code-detail');
+  slide.details.forEach((description, itemIndex) => {
+    const button = makeButton(`${itemIndex + 1} · ${description}`, () => {
+      [...activity.querySelectorAll('.code-step')].forEach(node => node.classList.remove('selected'));
+      button.classList.add('selected');
+      detail.textContent = `ขั้น ${itemIndex + 1}: ${description}`;
+    }, 'code-step');
+    activity.querySelector('.code-steps').append(button);
+    if (itemIndex === 0) button.click();
+  });
+}
+
+function renderPractice(slide, activity) {
+  const completed = Array.isArray(data.practice[index]) ? data.practice[index] : [];
+  activity.innerHTML = '<div class="practice-list"></div><div id="practice-status" class="badge"></div>';
+  slide.points.forEach((step, itemIndex) => {
+    const label = document.createElement('label');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = completed.includes(itemIndex);
+    checkbox.onchange = () => {
+      const current = new Set(data.practice[index] || []);
+      checkbox.checked ? current.add(itemIndex) : current.delete(itemIndex);
+      data.practice[index] = [...current];
+      persist();
+      update();
+    };
+    label.append(checkbox, document.createTextNode(` ขั้น ${itemIndex + 1} · ${step}`));
+    activity.querySelector('.practice-list').append(label);
+  });
+  activity.append(makeButton('ขอคำใบ้ทีละขั้น', () => notice(slide.hint)));
+  function update() {
+    const count = (data.practice[index] || []).length;
+    q('#practice-status').textContent = `ทำแล้ว ${count}/${slide.points.length} ขั้น${count === slide.points.length ? ' · ✓ พร้อมต่อ Jigsaw' : ''}`;
+  }
+  update();
+}
+
+function renderQuiz(slide, activity) {
+  activity.innerHTML = '<div class="options"></div><div class="row"><button id="hint">ขอคำใบ้</button></div><div id="hint-text" class="small"></div><div id="feedback" role="status"></div><div class="badge" id="score"></div>';
+  const options = activity.querySelector('.options');
+  slide.options.forEach((option, optionIndex) => {
+    options.append(makeButton(`${String.fromCharCode(65 + optionIndex)} · ${option}`, () => {
+      data.answers[index] = optionIndex;
+      persist();
+      update();
+    }));
+  });
+  q('#hint').onclick = () => { q('#hint-text').textContent = slide.hint; };
+  function update() {
+    const chosen = data.answers[index];
+    const answered = Number.isInteger(chosen);
+    [...options.children].forEach((button, optionIndex) => {
+      button.classList.toggle('correct', (answered || showAnswers) && optionIndex === slide.answer);
+      button.classList.toggle('wrong', answered && optionIndex === chosen && optionIndex !== slide.answer);
+      button.setAttribute('aria-pressed', String(optionIndex === chosen));
+    });
+    q('#feedback').className = answered || showAnswers ? 'feedback' : '';
+    q('#feedback').textContent = answered || showAnswers
+      ? `${answered ? (chosen === slide.answer ? '✓ ถูกต้อง — ' : 'ลองทบทวน — ') : 'เฉลย — '}${slide.explain}` : '';
+    q('#score').textContent = `ผ่านแบบตรวจ ${score()} / ${quizTotal} บท · ฝึกซ้ำได้ ไม่คิดคะแนนรายวิชา`;
+  }
+  update();
+}
+
+function renderJigsaw(slide, activity) {
+  activity.innerHTML = `<div class="jigsaw-board">${jigsawPieces(slide.chapter)}</div>
+    <div class="deliverable"><strong>หลักฐานชิ้นนี้</strong><p>${h(slide.deliverable)}</p></div>`;
+}
+
+function render() {
+  const slide = SLIDES[index];
+  document.title = `${index + 1}. ${slide.title.replace('\n', ' ')} · Object Lab`;
+  q('#position').textContent = `${index + 1} / ${SLIDES.length}`;
+  q('#bar').style.width = `${(index + 1) / SLIDES.length * 100}%`;
+  q('#prev').disabled = index === 0;
+  q('#next').disabled = index === SLIDES.length - 1;
+  q('#chapter-rail').querySelectorAll('button').forEach(button => button.classList.toggle('active', Number(button.dataset.chapter) === slide.chapter));
+
+  q('#stage').innerHTML = `<div class="meta">
+      <span class="eyebrow">บท ${slide.chapter}/10 · หน้า ${String(index + 1).padStart(2, '0')}</span>
+      <span>สัปดาห์ ${h(slide.week)} · ${h(slide.clo)} · ภาคปลาย 2569</span>
+    </div>
+    <h1>${h(slide.title)}</h1>
+    <p class="subtitle">${h(slide.subtitle)}</p>
+    <div class="content">
+      <div id="left">
+        <ul class="points">${slide.points.map(point => `<li>${h(point)}</li>`).join('')}</ul>
+        ${slide.code ? `<pre><code>${h(slide.code)}</code></pre>` : ''}
+        ${resourceLinks(slide)}
+      </div>
+      <div id="activity" aria-label="กิจกรรมสไลด์"></div>
+    </div>`;
+
+  const activity = q('#activity');
+  if (slide.kind === 'chapter') renderChapter(slide, activity);
+  if (slide.kind === 'reveal') renderReveal(slide, activity);
+  if (slide.kind === 'codewalk') renderCodeWalk(slide, activity);
+  if (slide.kind === 'practice') renderPractice(slide, activity);
+  if (slide.kind === 'quiz') renderQuiz(slide, activity);
+  if (slide.kind === 'jigsaw') renderJigsaw(slide, activity);
+  updatePanels();
+  q('#stage').focus({ preventScroll: true });
+}
+
+function updatePanels() {
+  const slide = SLIDES[index];
+  q('#notes-panel').hidden = !notesOpen;
+  q('#assistant-panel').hidden = !assistantOpen;
+  q('#notes').setAttribute('aria-pressed', String(notesOpen));
+  q('#assistant').setAttribute('aria-pressed', String(assistantOpen));
+  q('#answers').setAttribute('aria-pressed', String(showAnswers));
+  q('#answers').textContent = showAnswers ? 'ซ่อนเฉลย' : 'แสดงเฉลย';
+  q('#notes-panel').innerHTML = `<h2>บันทึกผู้สอน · บท ${slide.chapter} หน้า ${index + 1}</h2><p>${h(slide.note)}</p><button id="hide-notes">ปิด</button>`;
+  q('#hide-notes').onclick = () => { notesOpen = false; updatePanels(); };
+  q('#assistant-panel').innerHTML = `<h2>ผู้ช่วยการเรียนรู้ · โหมดสาธิต</h2>
+    <p class="small">ไม่เชื่อม AI API และไม่ส่งข้อมูลออกจากเครื่อง</p>
+    <button id="explain">อธิบายแบบเริ่มต้น</button>
+    <button id="practice-question">ตั้งคำถามฝึกคิด</button>
+    <div id="ai-output" class="feedback" role="status">เลือกสิ่งที่ต้องการทบทวน</div>
+    <button id="hide-ai">ปิด</button>`;
+  q('#explain').onclick = () => { q('#ai-output').textContent = slide.points.join(' • '); };
+  q('#practice-question').onclick = () => { q('#ai-output').textContent = `ชิ้นส่วนบท ${slide.chapter} ต่อกับบทก่อนหน้าอย่างไร และมีผลทดสอบใดใช้ยืนยัน?`; };
+  q('#hide-ai').onclick = () => { assistantOpen = false; updatePanels(); };
+}
+
+function buildNavigation() {
+  q('#chapter-rail').innerHTML = CHAPTERS.map(chapter => `<button data-chapter="${chapter.id}" title="${h(chapter.title)}">${chapter.id}</button>`).join('');
+  q('#chapter-rail').onclick = event => {
+    const button = event.target.closest('[data-chapter]');
+    if (button) setIndex((Number(button.dataset.chapter) - 1) * 6);
+  };
+  q('#chapter-grid').innerHTML = CHAPTERS.map(chapter => `<button data-chapter="${chapter.id}">
+    <strong>บท ${chapter.id} · ${h(chapter.title)}</strong>
+    <small>${h(chapter.subtitle)}</small>
+    <span>${h(chapter.piece)}</span>
+  </button>`).join('');
+  q('#chapter-grid').onclick = event => {
+    const button = event.target.closest('[data-chapter]');
+    if (!button) return;
+    q('#chapter-dialog').close();
+    setIndex((Number(button.dataset.chapter) - 1) * 6);
+  };
+  q('#overview-grid').innerHTML = CHAPTERS.map(chapter => `<section class="overview-chapter">
+    <h3>บท ${chapter.id} · ${h(chapter.title)}</h3>
+    ${SLIDES.map((slide, slideIndex) => ({ slide, slideIndex })).filter(item => item.slide.chapter === chapter.id).map(item => `<button data-slide="${item.slideIndex}">${String(item.slideIndex + 1).padStart(2, '0')} · ${h(item.slide.title.replace('\n', ' '))}<small>${h(item.slide.clo)}</small></button>`).join('')}
+  </section>`).join('');
+  q('#overview-grid').onclick = event => {
+    const button = event.target.closest('[data-slide]');
+    if (!button) return;
+    q('#overview-dialog').close();
+    setIndex(Number(button.dataset.slide));
+  };
+}
+
+function makePrint() {
+  q('#print-deck').innerHTML = SLIDES.map((slide, slideIndex) => `<section class="print-slide">
+    <p>OBJECT LAB · บท ${slide.chapter}/10 · หน้า ${slideIndex + 1}/${SLIDES.length} · ${h(slide.clo)}</p>
+    <h1>${h(slide.title)}</h1><p>${h(slide.subtitle)}</p>
+    <ul>${slide.points.map(point => `<li>${h(point)}</li>`).join('')}</ul>
+    ${slide.code ? `<pre>${h(slide.code)}</pre>` : ''}
+    ${slide.options ? `<ol type="A">${slide.options.map(option => `<li>${h(option)}</li>`).join('')}</ol>${showAnswers ? `<p><strong>เฉลย:</strong> ${h(slide.options[slide.answer])} — ${h(slide.explain)}</p>` : ''}` : ''}
+    <p><strong>โค้ด:</strong> ${h(slide.codeLink)} · <strong>ใบงาน:</strong> ${h(slide.worksheet)}</p>
+    ${notesOpen ? `<p><strong>บันทึกผู้สอน:</strong> ${h(slide.note)}</p>` : ''}
+  </section>`).join('');
+}
+
+q('#prev').onclick = () => setIndex(index - 1);
+q('#next').onclick = () => setIndex(index + 1);
+q('#chapters').onclick = () => q('#chapter-dialog').showModal();
+q('#close-chapters').onclick = () => q('#chapter-dialog').close();
+q('#overview').onclick = () => q('#overview-dialog').showModal();
+q('#close-overview').onclick = () => q('#overview-dialog').close();
+q('#fullscreen').onclick = async () => {
+  try { document.fullscreenElement ? await document.exitFullscreen() : await document.documentElement.requestFullscreen(); }
+  catch { notice('ใช้คำสั่งเต็มจอของเบราว์เซอร์แทนได้'); }
+};
+q('#motion').onclick = () => {
+  paused = !paused;
+  document.body.classList.toggle('paused', paused);
+  q('#motion').textContent = paused ? 'เล่นภาพเคลื่อนไหว' : 'หยุดภาพเคลื่อนไหว';
+};
+q('#replay').onclick = () => { render(); notice('เริ่มกิจกรรมหน้านี้ใหม่แล้ว'); };
+q('#answers').onclick = () => { showAnswers = !showAnswers; render(); };
+q('#notes').onclick = () => { notesOpen = !notesOpen; if (notesOpen) assistantOpen = false; updatePanels(); };
+q('#assistant').onclick = () => { assistantOpen = !assistantOpen; if (assistantOpen) notesOpen = false; updatePanels(); };
+q('#timer').onclick = () => { if (remaining === 0) remaining = 300; ticking = !ticking; lastTick = Date.now(); updateTimer(); };
+q('#reset').onclick = () => q('#reset-dialog').showModal();
+q('#cancel-reset').onclick = () => q('#reset-dialog').close();
+q('#confirm-reset').onclick = () => {
+  data = { answers: {}, practice: {} };
+  persist();
+  showAnswers = false;
+  q('#reset-dialog').close();
+  render();
+};
+q('#print').onclick = () => {
+  makePrint();
+  document.body.classList.add('print-preview');
+  if (!q('#print-toolbar')) {
+    const toolbar = document.createElement('div');
+    toolbar.id = 'print-toolbar';
+    toolbar.append(
+      makeButton('← กลับสไลด์', () => document.body.classList.remove('print-preview')),
+      makeButton('พิมพ์ / บันทึก PDF', () => window.print())
+    );
+    const note = document.createElement('span');
+    note.textContent = `ฉบับพิมพ์ ${SLIDES.length} หน้า · เลือก Save as PDF`;
+    toolbar.append(note);
+    document.body.prepend(toolbar);
+  }
+  window.scrollTo(0, 0);
+};
+
+function updateTimer() {
+  q('#timer').textContent = `${ticking ? 'หยุดเวลา' : 'เริ่มเวลา'} ${String(Math.floor(remaining / 60)).padStart(2, '0')}:${String(remaining % 60).padStart(2, '0')}`;
+}
+
+setInterval(() => {
+  if (!ticking) return;
+  const now = Date.now();
+  const elapsed = Math.floor((now - lastTick) / 1000);
+  if (!elapsed) return;
+  remaining = Math.max(0, remaining - elapsed);
+  lastTick += elapsed * 1000;
+  if (remaining === 0) { ticking = false; notice('ครบเวลา 5 นาที'); }
+  updateTimer();
+}, 250);
+
+window.addEventListener('beforeprint', makePrint);
+window.addEventListener('keydown', event => {
+  if (event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input,textarea,select,button') || document.querySelector('dialog[open]')) return;
+  if (!['ArrowRight', 'PageDown', 'ArrowLeft', 'PageUp', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  if (['ArrowRight', 'PageDown'].includes(event.key)) setIndex(index + 1);
+  else if (['ArrowLeft', 'PageUp'].includes(event.key)) setIndex(index - 1);
+  else setIndex(event.key === 'Home' ? 0 : SLIDES.length - 1);
+});
+
+function route() {
+  const match = location.hash.match(/^#slide-(\d+)$/);
+  index = match ? Math.max(0, Math.min(SLIDES.length - 1, Number(match[1]) - 1)) : 0;
+  render();
+}
+
+buildNavigation();
+document.body.classList.toggle('paused', paused);
+updateTimer();
+window.addEventListener('hashchange', route);
+route();

@@ -1,479 +1,1265 @@
+const CHAPTERS = [
+  {
+    "id": 1,
+    "weeks": "1",
+    "clo": "CLO1, CLO6",
+    "title": "เริ่มจากความสำเร็จเล็ก ๆ",
+    "subtitle": "Mini Equipment Catalog: ดูผลลัพธ์ก่อน แล้วค่อยแกะโครงสร้าง",
+    "codeFile": "ch01-mini-equipment-catalog.ts",
+    "piece": "ชิ้นที่ 1 · ข้อมูลอุปกรณ์และผลลัพธ์ที่ต้องการ"
+  },
+  {
+    "id": 2,
+    "weeks": "2–3",
+    "clo": "CLO1, CLO3, CLO4",
+    "title": "ข้อมูลและกฎเงื่อนไข",
+    "subtitle": "สร้างรหัส สถานะ จำนวนวัน และเงื่อนไขที่ตรวจสอบได้",
+    "codeFile": "ch02-loan-rules.ts",
+    "piece": "ชิ้นที่ 2 · กฎสิทธิ์และจำนวนวันยืม"
+  },
+  {
+    "id": 3,
+    "weeks": "4–5",
+    "clo": "CLO1, CLO3, CLO4",
+    "title": "ฟังก์ชันบริสุทธิ์และการทดสอบ",
+    "subtitle": "เปลี่ยนข้อกำหนดให้เป็นตัวอย่างที่พิสูจน์ได้",
+    "codeFile": "ch03-pure-function.test.ts",
+    "piece": "ชิ้นที่ 3 · ชุดทดสอบกฎธุรกิจ"
+  },
+  {
+    "id": 4,
+    "weeks": "6",
+    "clo": "CLO1, CLO2, CLO3",
+    "title": "คลาสและวัตถุ",
+    "subtitle": "ให้ Equipment ดูแลข้อมูลและพฤติกรรมของตนเอง",
+    "codeFile": "ch04-equipment-class.ts",
+    "piece": "ชิ้นที่ 4 · Equipment class"
+  },
+  {
+    "id": 5,
+    "weeks": "7",
+    "clo": "CLO2, CLO3, CLO4, CLO6",
+    "title": "Encapsulation และ Invariant",
+    "subtitle": "ป้องกันสถานะผิดด้วยเมธอดที่ตรวจเงื่อนไข",
+    "codeFile": "ch05-equipment-invariant.ts",
+    "piece": "ชิ้นที่ 5 · สถานะและกฎที่ละเมิดไม่ได้"
+  },
+  {
+    "id": 6,
+    "weeks": "9",
+    "clo": "CLO2, CLO3",
+    "title": "Composition ก่อน Inheritance",
+    "subtitle": "ประกอบ Loan จาก Equipment และข้อมูลผู้ยืม",
+    "codeFile": "ch06-loan-composition.ts",
+    "piece": "ชิ้นที่ 6 · Loan และความสัมพันธ์ของวัตถุ"
+  },
+  {
+    "id": 7,
+    "weeks": "10–11",
+    "clo": "CLO1, CLO2, CLO3, CLO4",
+    "title": "Polymorphism, Interface และ DI",
+    "subtitle": "เปลี่ยนนโยบายได้โดยไม่แก้ LoanService",
+    "codeFile": "ch07-loan-policy.ts",
+    "piece": "ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้"
+  },
+  {
+    "id": 8,
+    "weeks": "12–13",
+    "clo": "CLO3, CLO4, CLO5",
+    "title": "Repository และ Runtime Validation",
+    "subtitle": "แยกแหล่งข้อมูลและไม่เชื่อข้อมูลจากภายนอกทันที",
+    "codeFile": "ch08-repository-validation.ts",
+    "piece": "ชิ้นที่ 8 · แหล่งข้อมูลและด่านตรวจ input"
+  },
+  {
+    "id": 9,
+    "weeks": "14",
+    "clo": "CLO2, CLO3, CLO4",
+    "title": "เชื่อม NestJS API กับ React",
+    "subtitle": "React แสดงผล · Controller รับคำขอ · Service บังคับกฎ",
+    "codeFile": "ch09-nest-react-flow.tsx",
+    "piece": "ชิ้นที่ 9 · เส้นทาง UI ถึงกฎธุรกิจ"
+  },
+  {
+    "id": 10,
+    "weeks": "15–16",
+    "clo": "CLO2–CLO6",
+    "title": "ประกอบ Jigsaw เป็น Mini Project",
+    "subtitle": "รวมชิ้นส่วน ตรวจคุณภาพ แล้วออกแบบโครงงานของตนเอง",
+    "codeFile": "ch10-mini-project-blueprint.ts",
+    "piece": "ชิ้นที่ 10 · ระบบสมบูรณ์และแนวคิดของตนเอง"
+  }
+];
+
 const SLIDES = [
   {
-    "title": "ออกแบบความคิด\nให้กลายเป็นโปรแกรม",
-    "subtitle": "การเขียนโปรแกรมเชิงวัตถุ · Object Oriented Programming",
-    "week": 1,
-    "clo": "CLO1–CLO6",
-    "kind": "intro",
+    "chapter": 1,
+    "week": "1",
+    "clo": "CLO1, CLO6",
+    "codeLink": "resource.html?type=code&chapter=1",
+    "worksheet": "resource.html?type=worksheet&chapter=1",
+    "kind": "chapter",
+    "title": "บทที่ 1\nเริ่มจากความสำเร็จเล็ก ๆ",
+    "subtitle": "Mini Equipment Catalog: ดูผลลัพธ์ก่อน แล้วค่อยแกะโครงสร้าง",
     "points": [
-      "Python เบื้องต้น → TypeScript OOP → React / NestJS / React Native",
-      "TypeScript • ระบบยืม–คืน • React + NestJS • AI",
-      "07-034-206 | ชั้นปีที่ 2 | ภาคปลาย 2569"
+      "รันตัวอย่างสำเร็จและเห็นผลลัพธ์ทันที",
+      "แยกข้อมูล ฟังก์ชัน และผลลัพธ์ออกจากกัน",
+      "อธิบายเส้นทาง Python พื้นฐาน → TypeScript ได้"
     ],
-    "note": "ชี้ให้เห็นว่า Python มี OOP แต่ใช้ในวิชาพื้นฐานเพียงสะพานเชื่อม class/object ส่วนรายวิชานี้ใช้ TypeScript ศึกษาการออกแบบอย่างเป็นระบบ ชุดภาพรวม 30 หน้าใช้เลือกประกอบการสอน ไม่ใช่แทนทุกชั่วโมง"
+    "piece": "ชิ้นที่ 1 · ข้อมูลอุปกรณ์และผลลัพธ์ที่ต้องการ",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
   },
   {
-    "title": "วันนี้เราจะทำอะไรได้",
-    "subtitle": "Learning outcomes",
-    "week": 1,
-    "clo": "CLO1–CLO6",
+    "chapter": 1,
+    "week": "1",
+    "clo": "CLO1, CLO6",
+    "codeLink": "resource.html?type=code&chapter=1",
+    "worksheet": "resource.html?type=worksheet&chapter=1",
     "kind": "reveal",
+    "title": "เริ่มจากความสำเร็จเล็ก ๆ: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
     "points": [
-      "อธิบายคลาส วัตถุ และ TypeScript",
-      "ออกแบบกฎการยืม–คืนและเชื่อม API",
-      "ทดสอบ ตรวจข้อเสนอ AI และอธิบายงาน"
+      "โปรแกรมเล็กที่สมบูรณ์ช่วยให้เห็นภาพปลายทาง",
+      "TypeScript ตรวจชนิดก่อนรันเป็น JavaScript",
+      "เริ่มจากทำตามให้สำเร็จ แล้วเปลี่ยนข้อมูลหนึ่งจุดด้วยตนเอง"
     ],
     "details": [
-      "CLO1: วิเคราะห์โค้ด TypeScript/JavaScript",
-      "CLO2–3: ออกแบบ OOP เชื่อม React กับ NestJS",
-      "CLO4–6: ทดสอบ สื่อสาร และใช้ AI อย่างรับผิดชอบ"
+      "แนวคิด 1: โปรแกรมเล็กที่สมบูรณ์ช่วยให้เห็นภาพปลายทาง",
+      "แนวคิด 2: TypeScript ตรวจชนิดก่อนรันเป็น JavaScript",
+      "แนวคิด 3: เริ่มจากทำตามให้สำเร็จ แล้วเปลี่ยนข้อมูลหนึ่งจุดด้วยตนเอง"
     ],
-    "note": "ให้ผู้เรียนเลือกเป้าหมายที่ยังไม่มั่นใจ เป็นการสำรวจพื้นฐาน ไม่ให้คะแนน"
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
   },
   {
-    "title": "ก่อนเรียน: คลาสกับวัตถุ",
-    "subtitle": "Pre-test · ไม่คิดคะแนนรายวิชา",
-    "week": 1,
-    "clo": "CLO1",
+    "chapter": 1,
+    "week": "1",
+    "clo": "CLO1, CLO6",
+    "codeLink": "resource.html?type=code&chapter=1",
+    "worksheet": "resource.html?type=worksheet&chapter=1",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch01-mini-equipment-catalog.ts",
+    "points": [
+      "type กำหนดรูปแบบข้อมูลอุปกรณ์",
+      "items คือข้อมูลตัวอย่างที่ควบคุมได้",
+      "listAvailable รับข้อมูล คืนผลใหม่ และทดสอบแยกได้"
+    ],
+    "details": [
+      "type กำหนดรูปแบบข้อมูลอุปกรณ์",
+      "items คือข้อมูลตัวอย่างที่ควบคุมได้",
+      "listAvailable รับข้อมูล คืนผลใหม่ และทดสอบแยกได้"
+    ],
+    "code": "type EquipmentItem = { id: string; name: string; available: boolean };\n\nconst items: EquipmentItem[] = [\n  { id: \"EQ01\", name: \"Camera\", available: true },\n  { id: \"EQ02\", name: \"Tripod\", available: false }\n];\n\nfunction listAvailable(data: EquipmentItem[]): EquipmentItem[] {\n  return data.filter(item => item.available);\n}\n\nconsole.log(listAvailable(items));",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
+  },
+  {
+    "chapter": 1,
+    "week": "1",
+    "clo": "CLO1, CLO6",
+    "codeLink": "resource.html?type=code&chapter=1",
+    "worksheet": "resource.html?type=worksheet&chapter=1",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
+    "points": [
+      "รันตัวอย่างและบันทึกผลลัพธ์",
+      "เพิ่ม Microphone ที่พร้อมยืม แล้วทำนายผลก่อนรัน",
+      "เปลี่ยนสถานะ Camera และอธิบายว่าผลเปลี่ยนเพราะอะไร"
+    ],
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 1 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
+  },
+  {
+    "chapter": 1,
+    "week": "1",
+    "clo": "CLO1, CLO6",
+    "codeLink": "resource.html?type=code&chapter=1",
+    "worksheet": "resource.html?type=worksheet&chapter=1",
     "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 1",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
     "points": [
-      "Equipment เป็นคลาส ส่วน camera เป็นวัตถุ ข้อใดถูกต้อง?"
+      "ส่วนใดทำหน้าที่คัดเฉพาะอุปกรณ์พร้อมยืม?"
     ],
     "options": [
-      "คลาสกำหนดข้อมูลและพฤติกรรม วัตถุมีสถานะของตนเอง",
-      "ทุกวัตถุต้องมีสถานะเหมือนกัน",
-      "คลาสเป็นเพียงชื่อไฟล์"
-    ],
-    "answer": 0,
-    "explain": "คลาสเป็นแบบกำหนดโครงสร้างและพฤติกรรม วัตถุแต่ละตัวสร้างจากคลาสและมีสถานะต่างกันได้",
-    "hint": "คิดถึงแบบอุปกรณ์เทียบกับอุปกรณ์สองชิ้น",
-    "note": "ให้ตอบก่อนอธิบาย รับคำตอบผิดเป็นจุดเริ่มการสนทนา"
-  },
-  {
-    "title": "ระบบยืม–คืนอุปกรณ์ของคณะ",
-    "subtitle": "กรณีศึกษาสมมติสำหรับการเรียน",
-    "week": 6,
-    "clo": "CLO2",
-    "kind": "scenario",
-    "points": [
-      "อุปกรณ์มีรหัสและสถานะพร้อมยืม",
-      "นโยบายกำหนดระยะเวลายืมตามประเภทผู้ใช้",
-      "ป้องกันยืมซ้ำและคืนซ้ำ"
-    ],
-    "options": [
-      "เขียนกฎทั้งหมดใน React ทันที",
-      "ระบุข้อมูล กฎ และความรับผิดชอบก่อน"
+      "type EquipmentItem",
+      "listAvailable",
+      "console.log เพียงอย่างเดียว"
     ],
     "answer": 1,
-    "explain": "แยก Equipment, Loan, LoanService และ LoanPolicy เพื่อออกแบบและทดสอบกฎ",
-    "hint": "ใครรับผิดชอบสถานะ และใครตรวจนโยบาย?",
-    "note": "กรณีสมมติ ไม่ใช่ระบบจริงของมหาวิทยาลัย ให้กลุ่มเขียนข้อกำหนด 3 ข้อใน 3 นาที"
+    "explain": "ฟังก์ชัน listAvailable รับรายการและคืนเฉพาะรายการที่ available เป็น true",
+    "hint": "มองหาส่วนที่ใช้ filter",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
   },
   {
-    "title": "TypeScript ทำงานอย่างไร",
-    "subtitle": "Source → Type check → JavaScript runtime",
-    "week": 1,
-    "clo": "CLO1",
-    "kind": "flow",
+    "chapter": 1,
+    "week": "1",
+    "clo": "CLO1, CLO6",
+    "codeLink": "resource.html?type=code&chapter=1",
+    "worksheet": "resource.html?type=worksheet&chapter=1",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 1/10",
+    "subtitle": "ชิ้นที่ 1 · ข้อมูลอุปกรณ์และผลลัพธ์ที่ต้องการ",
     "points": [
-      "ไฟล์ .ts: ระบุชนิดข้อมูลและพฤติกรรม",
-      "tsc: ตรวจชนิดและแปลงเป็น JavaScript",
-      "Node.js: รัน JavaScript ของ Backend"
+      "ภาพผลการรัน + ข้อมูลที่เพิ่มเอง 1 รายการ + คำอธิบาย 3 บรรทัด",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
     ],
-    "note": "Type annotations และ interface ไม่คงอยู่ขณะรัน ต้อง validate ข้อมูลภายนอกอีกครั้ง"
+    "piece": "ชิ้นที่ 1 · ข้อมูลอุปกรณ์และผลลัพธ์ที่ต้องการ",
+    "deliverable": "ภาพผลการรัน + ข้อมูลที่เพิ่มเอง 1 รายการ + คำอธิบาย 3 บรรทัด",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
   },
   {
-    "title": "การหารของ number",
-    "subtitle": "JavaScript และ TypeScript",
-    "week": 2,
-    "clo": "CLO1, CLO3",
+    "chapter": 2,
+    "week": "2–3",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=2",
+    "worksheet": "resource.html?type=worksheet&chapter=2",
+    "kind": "chapter",
+    "title": "บทที่ 2\nข้อมูลและกฎเงื่อนไข",
+    "subtitle": "สร้างรหัส สถานะ จำนวนวัน และเงื่อนไขที่ตรวจสอบได้",
+    "points": [
+      "เลือกชนิดข้อมูลได้เหมาะกับโจทย์",
+      "เขียนกฎอนุญาตยืมโดยไม่เปลี่ยนสถานะก่อนตรวจ",
+      "สร้างตารางกรณีปกติและกรณีขอบเขต"
+    ],
+    "piece": "ชิ้นที่ 2 · กฎสิทธิ์และจำนวนวันยืม",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
+  },
+  {
+    "chapter": 2,
+    "week": "2–3",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=2",
+    "worksheet": "resource.html?type=worksheet&chapter=2",
+    "kind": "reveal",
+    "title": "ข้อมูลและกฎเงื่อนไข: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
+    "points": [
+      "number ต้องตรวจจำนวนเต็มและขอบเขต",
+      "union type ลดค่าข้อความที่สะกดผิด",
+      "กฎสำคัญต้องตรวจที่ Backend ไม่ใช่เฉพาะหน้าจอ"
+    ],
+    "details": [
+      "แนวคิด 1: number ต้องตรวจจำนวนเต็มและขอบเขต",
+      "แนวคิด 2: union type ลดค่าข้อความที่สะกดผิด",
+      "แนวคิด 3: กฎสำคัญต้องตรวจที่ Backend ไม่ใช่เฉพาะหน้าจอ"
+    ],
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
+  },
+  {
+    "chapter": 2,
+    "week": "2–3",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=2",
+    "worksheet": "resource.html?type=worksheet&chapter=2",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch02-loan-rules.ts",
+    "points": [
+      "union type จำกัดสถานะให้เหลือค่าที่กำหนด",
+      "validDays รวมเงื่อนไขจำนวนเต็มและช่วง 1–7",
+      "return รวมกฎสถานะและจำนวนวันโดยยังไม่แก้ข้อมูล"
+    ],
+    "details": [
+      "union type จำกัดสถานะให้เหลือค่าที่กำหนด",
+      "validDays รวมเงื่อนไขจำนวนเต็มและช่วง 1–7",
+      "return รวมกฎสถานะและจำนวนวันโดยยังไม่แก้ข้อมูล"
+    ],
+    "code": "type EquipmentStatus = \"available\" | \"borrowed\";\n\nfunction canBorrow(status: EquipmentStatus, days: number): boolean {\n  const validDays = Number.isInteger(days) && days >= 1 && days <= 7;\n  return status === \"available\" && validDays;\n}\n\nconsole.log(canBorrow(\"available\", 7)); // true\nconsole.log(canBorrow(\"borrowed\", 7));  // false\nconsole.log(canBorrow(\"available\", 8)); // false",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
+  },
+  {
+    "chapter": 2,
+    "week": "2–3",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=2",
+    "worksheet": "resource.html?type=worksheet&chapter=2",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
+    "points": [
+      "ทำตาราง status 2 ค่า × days 0, 1, 7, 8",
+      "ทำนาย true/false ก่อนรัน",
+      "เพิ่มกรณี NaN และ 1.5 พร้อมเหตุผล"
+    ],
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 2 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
+  },
+  {
+    "chapter": 2,
+    "week": "2–3",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=2",
+    "worksheet": "resource.html?type=worksheet&chapter=2",
     "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 2",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
     "points": [
-      "5 / 2 ให้ผลใด?"
+      "เหตุใดจึงตรวจ Number.isInteger(days)?"
     ],
-    "code": "console.log(5 / 2); // ?",
     "options": [
-      "2",
-      "2.5",
-      "3"
+      "เพื่อเปลี่ยน string เป็น number",
+      "เพื่อปฏิเสธทศนิยมเมื่อโจทย์ต้องการจำนวนวันเต็ม",
+      "เพื่อทำให้ทุกค่ากลายเป็น 7"
     ],
     "answer": 1,
-    "explain": "number หารได้ 2.5 ไม่ตัดทศนิยมอัตโนมัติ",
-    "hint": "อย่านำกฎการหารจำนวนเต็มของภาษาอื่นมาใช้",
-    "note": "ต่อยอด Number.isInteger และ NaN เมื่อโจทย์ต้องการจำนวนเต็ม"
+    "explain": "ชนิด number รวมค่าทศนิยม จึงต้องตรวจจำนวนเต็มตามกฎธุรกิจ",
+    "hint": "TypeScript number ไม่ได้หมายถึงจำนวนเต็มเท่านั้น",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
   },
   {
-    "title": "ลูปต้องมีขอบเขตชัดเจน",
-    "subtitle": "Conditions & loops",
-    "week": 3,
+    "chapter": 2,
+    "week": "2–3",
     "clo": "CLO1, CLO3, CLO4",
-    "kind": "flow",
+    "codeLink": "resource.html?type=code&chapter=2",
+    "worksheet": "resource.html?type=worksheet&chapter=2",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 2/10",
+    "subtitle": "ชิ้นที่ 2 · กฎสิทธิ์และจำนวนวันยืม",
     "points": [
-      "เริ่ม i = 0",
-      "ตรวจ i < 3 ก่อนทำงาน",
-      "ทำงานที่ i = 0, 1, 2 แล้วหยุดเมื่อ i = 3"
+      "ตารางทดสอบอย่างน้อย 6 กรณี พร้อม expected result",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
     ],
-    "code": "for (let i = 0; i < 3; i++) {\n  console.log(i);\n}",
-    "note": "ให้ทำนายจำนวนรอบก่อนกดขั้นต่อไป ถามผลเมื่อเปลี่ยน < เป็น <="
+    "piece": "ชิ้นที่ 2 · กฎสิทธิ์และจำนวนวันยืม",
+    "deliverable": "ตารางทดสอบอย่างน้อย 6 กรณี พร้อม expected result",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
   },
   {
-    "title": "เทียบข้อความและค้นอุปกรณ์",
-    "subtitle": "Array & String",
-    "week": 4,
+    "chapter": 3,
+    "week": "4–5",
     "clo": "CLO1, CLO3, CLO4",
-    "kind": "reveal",
+    "codeLink": "resource.html?type=code&chapter=3",
+    "worksheet": "resource.html?type=worksheet&chapter=3",
+    "kind": "chapter",
+    "title": "บทที่ 3\nฟังก์ชันบริสุทธิ์และการทดสอบ",
+    "subtitle": "เปลี่ยนข้อกำหนดให้เป็นตัวอย่างที่พิสูจน์ได้",
     "points": [
-      "Array เริ่มที่ 0 และขยายขนาดได้",
-      "string primitive ใช้ === เทียบค่า",
-      "find ไม่พบคืน undefined"
+      "แยกฟังก์ชันที่ไม่มีผลข้างเคียง",
+      "เขียน automated test ด้วย node:test",
+      "ใช้ผลทดสอบตรวจคำตอบจาก AI"
     ],
-    "details": [
-      "const ids = [\"EQ01\", \"EQ02\"];",
-      "\"EQ01\" === String(\"EQ01\") ให้ true",
-      "วัตถุสองตัวที่ข้อมูลเท่ากัน อาจไม่เท่ากันด้วย ==="
-    ],
-    "note": "แยก primitive กับ reference และทดลองค้นไม่พบก่อนอ่านคุณสมบัติ"
+    "piece": "ชิ้นที่ 3 · ชุดทดสอบกฎธุรกิจ",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
   },
   {
-    "title": "ฟังก์ชันที่ทดสอบได้",
-    "subtitle": "Methods & testable design",
-    "week": 5,
+    "chapter": 3,
+    "week": "4–5",
     "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=3",
+    "worksheet": "resource.html?type=worksheet&chapter=3",
     "kind": "reveal",
+    "title": "ฟังก์ชันบริสุทธิ์และการทดสอบ: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
     "points": [
-      "กำหนด input และ output",
-      "แยกการคำนวณจากการรับข้อมูล",
-      "กำหนดค่าที่คาดหวังก่อนรัน"
+      "เริ่มจาก input และ expected result",
+      "pure function ให้ผลเหมือนเดิมเมื่อ input เหมือนเดิม",
+      "แก้โค้ดแล้วต้องรัน regression tests ซ้ำ"
     ],
     "details": [
-      "canBorrowDays(days, limit) คืน boolean",
-      "แยกกฎออกจาก UI และการรับ request",
-      "days=7, limit=7 → true; days=8 → false"
+      "แนวคิด 1: เริ่มจาก input และ expected result",
+      "แนวคิด 2: pure function ให้ผลเหมือนเดิมเมื่อ input เหมือนเดิม",
+      "แนวคิด 3: แก้โค้ดแล้วต้องรัน regression tests ซ้ำ"
     ],
-    "code": "function canBorrowDays(days: number, limit: number): boolean {\n  return Number.isInteger(days) && days > 0 && days <= limit;\n}\nconsole.log(canBorrowDays(7, 7)); // true\nconsole.log(canBorrowDays(8, 7)); // false",
-    "note": "ไม่จำเป็นต้องใช้คลาสกับกฎที่ไม่เก็บสถานะ"
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
   },
   {
-    "title": "คลาสกำหนดขอบเขตความรับผิดชอบ",
-    "subtitle": "Class, constructor & encapsulation",
-    "week": 6,
-    "clo": "CLO1, CLO2, CLO3",
-    "kind": "reveal",
+    "chapter": 3,
+    "week": "4–5",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=3",
+    "worksheet": "resource.html?type=worksheet&chapter=3",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch03-pure-function.test.ts",
     "points": [
-      "ข้อมูล: id, สถานะการยืม",
-      "พฤติกรรม: borrow(), giveBack()",
-      "เงื่อนไข: ห้ามยืมซ้ำและคืนซ้ำ"
+      "ฟังก์ชันแยกกฎออกจาก UI และฐานข้อมูล",
+      "test ตั้งชื่อเป็นพฤติกรรมที่อ่านเข้าใจได้",
+      "assert เปรียบเทียบผลจริงกับผลที่คาดหวัง"
     ],
     "details": [
-      "แต่ละ instance มีสถานะของตนเอง",
-      "constructor ตรวจข้อมูลเริ่มต้น",
-      "#field จำกัดการเข้าถึงขณะรัน"
+      "ฟังก์ชันแยกกฎออกจาก UI และฐานข้อมูล",
+      "test ตั้งชื่อเป็นพฤติกรรมที่อ่านเข้าใจได้",
+      "assert เปรียบเทียบผลจริงกับผลที่คาดหวัง"
     ],
-    "note": "แยก Equipment ออกจากหน้าจอและการเก็บข้อมูล"
+    "code": "import test from \"node:test\";\nimport assert from \"node:assert/strict\";\n\nexport function maxLoanDays(role: \"student\" | \"staff\"): number {\n  return role === \"student\" ? 7 : 14;\n}\n\ntest(\"นักศึกษายืมได้ไม่เกิน 7 วัน\", () => {\n  assert.equal(maxLoanDays(\"student\"), 7);\n});\n\ntest(\"บุคลากรยืมได้ไม่เกิน 14 วัน\", () => {\n  assert.equal(maxLoanDays(\"staff\"), 14);\n});",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
-    "title": "คลาสเดียว สร้างหลายวัตถุ",
-    "subtitle": "Object explorer · แบบจำลองเชิงแนวคิด",
-    "week": 6,
-    "clo": "CLO1, CLO3",
-    "kind": "three",
+    "chapter": 3,
+    "week": "4–5",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=3",
+    "worksheet": "resource.html?type=worksheet&chapter=3",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
     "points": [
-      "แต่ละกล่องแทนวัตถุ ไม่ใช่ผังหน่วยความจำจริง",
-      "เลือกวัตถุเพื่อดูข้อมูลเฉพาะตัว"
+      "รัน tests ให้ผ่านก่อนแก้",
+      "เพิ่ม role guest ที่ยืมได้ 3 วันโดยเขียน test ก่อน",
+      "ให้ AI เสนอกรณีที่ขาด แล้วเลือกเพิ่มเฉพาะกรณีที่มีเหตุผล"
     ],
-    "model": "instances",
-    "note": "หมุนแบบจำลองเพื่อเปรียบเทียบวัตถุจากคลาสเดียวกัน ย้ำว่าตำแหน่งและขนาดเป็นภาพสื่อ ไม่ใช่ตำแหน่ง RAM"
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 3 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
   },
   {
-    "title": "เปลี่ยนวัตถุหนึ่ง ไม่เปลี่ยนอีกวัตถุโดยอัตโนมัติ",
-    "subtitle": "Instance state",
-    "week": 6,
-    "clo": "CLO1, CLO3",
-    "kind": "three",
+    "chapter": 3,
+    "week": "4–5",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=3",
+    "worksheet": "resource.html?type=worksheet&chapter=3",
+    "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 3",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
     "points": [
-      "cameraA และ cameraB มีสถานะของตนเอง",
-      "ถ้าสองตัวแปรอ้างวัตถุเดียวกันจะเห็นสถานะร่วมกัน"
-    ],
-    "model": "state",
-    "note": "แบบจำลองนี้ใช้ stock แทนจำนวนคงเหลือของชุดอุปกรณ์ เลือก cameraA แล้วเพิ่มจำนวนเพื่อเปรียบเทียบ"
-  },
-  {
-    "title": "Encapsulation ปกป้องเงื่อนไขของข้อมูล",
-    "subtitle": "State + behavior + rules",
-    "week": 7,
-    "clo": "CLO2, CLO3",
-    "kind": "three",
-    "points": [
-      "แยกข้อมูล เมธอด และกฎ",
-      "ทุกเส้นทางที่แก้จำนวนคงเหลือต้องตรวจเงื่อนไข"
-    ],
-    "model": "encapsulation",
-    "note": "ภาพเชิงแนวคิด ไม่ใช่ผัง runtime; เชื่อมกับ #borrowed ในชุดโค้ดที่นับรายชิ้น"
-  },
-  {
-    "title": "Loan ประกอบด้วย Equipment",
-    "subtitle": "Composition · has-a",
-    "week": 9,
-    "clo": "CLO2, CLO3",
-    "kind": "three",
-    "points": [
-      "รายการยืมอ้างอุปกรณ์",
-      "Loan ไม่ใช่อุปกรณ์ชนิดย่อย"
-    ],
-    "model": "composition",
-    "note": "อภิปราย has-a เทียบกับ is-a และอายุการใช้งานของวัตถุ"
-  },
-  {
-    "title": "ผู้เรียกใช้ข้อตกลงเดียวกันได้",
-    "subtitle": "Polymorphism & interface",
-    "week": 10,
-    "clo": "CLO1, CLO2, CLO3",
-    "kind": "three",
-    "points": [
-      "LoanPolicy กำหนด maxDays()",
-      "StudentPolicy และ StaffPolicy ให้ 7 และ 14 วัน"
-    ],
-    "model": "polymorphism",
-    "note": "นโยบายสมมติ ไม่ใช่ระเบียบยืมจริงของมหาวิทยาลัย"
-  },
-  {
-    "title": "ส่งนโยบายผ่าน constructor",
-    "subtitle": "TypeScript · Interface และ DI",
-    "week": 11,
-    "clo": "CLO2, CLO3, CLO4",
-    "kind": "reveal",
-    "points": [
-      "ผู้เรียกพึ่งพา LoanPolicy",
-      "สลับ policy เพื่อทดสอบ",
-      "interface ไม่มีตัวตนที่ runtime"
-    ],
-    "details": [
-      "interface LoanPolicy { maxDays(): number; }",
-      "StudentPolicy ให้ 7; StaffPolicy ให้ 14",
-      "NestJS ใช้ class/token สำหรับ dependency ที่ runtime"
-    ],
-    "code": "const service = new LoanService(new StudentPolicy());\nconsole.log(service.canBorrow(8)); // false",
-    "note": "snippet อ้างคลาสจากบทเรียนสัปดาห์ 11 ไม่ใช่ไฟล์สมบูรณ์"
-  },
-  {
-    "title": "เลือก Collection ตามการใช้งาน",
-    "subtitle": "Array & Map",
-    "week": 12,
-    "clo": "CLO3, CLO4",
-    "kind": "scenario",
-    "points": [
-      "ค้นอุปกรณ์ด้วยรหัสไม่ซ้ำ ควรเริ่มจากโครงสร้างใด?"
+      "ลำดับใดเหมาะกับการพัฒนาแบบ test-first?"
     ],
     "options": [
-      "Map<string, Equipment>",
-      "Array ที่รับรหัสซ้ำโดยไม่ตรวจ"
+      "เขียน implementation → ลบ test",
+      "กำหนด expected result → เขียน test → เขียนโค้ดให้ผ่าน",
+      "ถาม AI แล้วไม่ต้องรัน"
     ],
-    "answer": 0,
-    "explain": "Map เหมาะกับ key แต่ set key เดิมจะแทนค่า ต้องตรวจ has เพื่อปฏิเสธรหัสซ้ำ",
-    "hint": "โจทย์ต้องการค้นด้วย key",
-    "note": "Repository แยกที่เก็บข้อมูล; รุ่นเรียนใช้หน่วยความจำ"
+    "answer": 1,
+    "explain": "เริ่มจากผลที่คาดหวัง ทำให้เกณฑ์ความสำเร็จชัดก่อนแก้โค้ด",
+    "hint": "เริ่มจากสิ่งที่โปรแกรมควรทำ",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
   },
   {
-    "title": "ตรวจข้อมูลที่ runtime",
-    "subtitle": "Exception handling",
-    "week": 13,
-    "clo": "CLO3, CLO4",
-    "kind": "reveal",
+    "chapter": 3,
+    "week": "4–5",
+    "clo": "CLO1, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=3",
+    "worksheet": "resource.html?type=worksheet&chapter=3",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 3/10",
+    "subtitle": "ชิ้นที่ 3 · ชุดทดสอบกฎธุรกิจ",
     "points": [
-      "request อาจผิดชนิด",
-      "Number(\"abc\") ให้ NaN",
-      "ตรวจข้อมูลก่อนเปลี่ยนสถานะ"
+      "ไฟล์ test ที่ผ่านอย่างน้อย 3 กรณี + ภาพผล npm test",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
+    ],
+    "piece": "ชิ้นที่ 3 · ชุดทดสอบกฎธุรกิจ",
+    "deliverable": "ไฟล์ test ที่ผ่านอย่างน้อย 3 กรณี + ภาพผล npm test",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
+  },
+  {
+    "chapter": 4,
+    "week": "6",
+    "clo": "CLO1, CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=4",
+    "worksheet": "resource.html?type=worksheet&chapter=4",
+    "kind": "chapter",
+    "title": "บทที่ 4\nคลาสและวัตถุ",
+    "subtitle": "ให้ Equipment ดูแลข้อมูลและพฤติกรรมของตนเอง",
+    "points": [
+      "อธิบาย class, instance และ constructor",
+      "วางข้อมูลกับพฤติกรรมที่เกี่ยวข้องไว้ด้วยกัน",
+      "สร้างวัตถุสองตัวที่มีสถานะแยกกัน"
+    ],
+    "piece": "ชิ้นที่ 4 · Equipment class",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
+  },
+  {
+    "chapter": 4,
+    "week": "6",
+    "clo": "CLO1, CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=4",
+    "worksheet": "resource.html?type=worksheet&chapter=4",
+    "kind": "reveal",
+    "title": "คลาสและวัตถุ: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
+    "points": [
+      "class เป็นแบบกำหนดโครงสร้างและพฤติกรรม",
+      "instance แต่ละตัวมีสถานะของตนเอง",
+      "constructor รับข้อมูลเริ่มต้นที่จำเป็น"
     ],
     "details": [
-      "type assertion ไม่ใช่ validation",
-      "ตรวจชนิด จำนวนเต็ม และขอบเขต",
-      "แจ้งข้อผิดพลาดโดยไม่เปิดเผยข้อมูลลับ"
+      "แนวคิด 1: class เป็นแบบกำหนดโครงสร้างและพฤติกรรม",
+      "แนวคิด 2: instance แต่ละตัวมีสถานะของตนเอง",
+      "แนวคิด 3: constructor รับข้อมูลเริ่มต้นที่จำเป็น"
     ],
-    "code": "// ส่วนประกอบใน NestJS project ที่ตั้งค่าแล้ว\nimport { Controller, Get, Injectable } from \"@nestjs/common\";\n@Injectable()\nexport class EquipmentService {\n  list() { return [{ id: \"EQ01\", name: \"Camera\" }]; }\n}\n@Controller(\"equipment\")\nexport class EquipmentController {\n  constructor(private readonly service: EquipmentService) {}\n  @Get() list() { return this.service.list(); }\n}",
-    "note": "เพิ่ม tests ของ null string NaN และจำนวนติดลบ"
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
   },
   {
-    "title": "AI ให้ข้อเสนอ เราต้องหาหลักฐาน",
-    "subtitle": "AI-assisted learning",
-    "week": 13,
-    "clo": "CLO4, CLO6",
-    "kind": "flow",
+    "chapter": 4,
+    "week": "6",
+    "clo": "CLO1, CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=4",
+    "worksheet": "resource.html?type=worksheet&chapter=4",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch04-equipment-class.ts",
     "points": [
-      "เขียนวิธีคิดและผลคาดหวังด้วยตนเอง",
-      "ขอคำใบ้หรือกรณีทดสอบจาก AI",
-      "รัน ทดสอบ แก้ไข และบันทึกสิ่งที่ใช้"
+      "constructor บังคับ id และ name ตอนสร้างวัตถุ",
+      "readonly ป้องกันการเปลี่ยนรหัสหลังสร้าง",
+      "private borrowed ซ่อนสถานะภายในและเปิดอ่านผ่านเมธอด"
     ],
-    "note": "เปิดผู้ช่วยสาธิตเพื่อย้ำว่าไม่ได้เรียกโมเดลจริง ห้ามใช้ AI ในแบบทดสอบย่อยและสอบจริง"
+    "details": [
+      "constructor บังคับ id และ name ตอนสร้างวัตถุ",
+      "readonly ป้องกันการเปลี่ยนรหัสหลังสร้าง",
+      "private borrowed ซ่อนสถานะภายในและเปิดอ่านผ่านเมธอด"
+    ],
+    "code": "export class Equipment {\n  constructor(\n    public readonly id: string,\n    public readonly name: string,\n    private borrowed = false\n  ) {}\n\n  isAvailable(): boolean {\n    return !this.borrowed;\n  }\n}\n\nconst camera = new Equipment(\"EQ01\", \"Camera\");\nconst tripod = new Equipment(\"EQ02\", \"Tripod\");\nconsole.log(camera.isAvailable(), tripod.isAvailable());",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
-    "title": "React เรียก API ที่ใช้ OOP",
-    "subtitle": "React → NestJS → Repository",
-    "week": 14,
+    "chapter": 4,
+    "week": "6",
+    "clo": "CLO1, CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=4",
+    "worksheet": "resource.html?type=worksheet&chapter=4",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
+    "points": [
+      "วาดกล่อง class ก่อนเขียนโค้ด",
+      "สร้างอุปกรณ์ 2 ชิ้นและพิมพ์สถานะ",
+      "อธิบายความต่างระหว่าง class กับ camera instance"
+    ],
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 4 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
+  },
+  {
+    "chapter": 4,
+    "week": "6",
+    "clo": "CLO1, CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=4",
+    "worksheet": "resource.html?type=worksheet&chapter=4",
+    "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 4",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
+    "points": [
+      "camera ในตัวอย่างคืออะไร?"
+    ],
+    "options": [
+      "คลาส",
+      "อินสแตนซ์ของ Equipment",
+      "ชนิดข้อมูล boolean"
+    ],
+    "answer": 1,
+    "explain": "camera เป็นวัตถุที่สร้างจากคลาส Equipment และมีสถานะของตนเอง",
+    "hint": "ดูคำสั่ง new Equipment",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
+  },
+  {
+    "chapter": 4,
+    "week": "6",
+    "clo": "CLO1, CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=4",
+    "worksheet": "resource.html?type=worksheet&chapter=4",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 4/10",
+    "subtitle": "ชิ้นที่ 4 · Equipment class",
+    "points": [
+      "Class diagram 1 คลาส + โค้ดสร้างอุปกรณ์ 2 ชิ้น",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
+    ],
+    "piece": "ชิ้นที่ 4 · Equipment class",
+    "deliverable": "Class diagram 1 คลาส + โค้ดสร้างอุปกรณ์ 2 ชิ้น",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
+  },
+  {
+    "chapter": 5,
+    "week": "7",
+    "clo": "CLO2, CLO3, CLO4, CLO6",
+    "codeLink": "resource.html?type=code&chapter=5",
+    "worksheet": "resource.html?type=worksheet&chapter=5",
+    "kind": "chapter",
+    "title": "บทที่ 5\nEncapsulation และ Invariant",
+    "subtitle": "ป้องกันสถานะผิดด้วยเมธอดที่ตรวจเงื่อนไข",
+    "points": [
+      "อธิบาย invariant ของอุปกรณ์",
+      "ป้องกันยืมซ้ำและคืนซ้ำ",
+      "ทดสอบว่ากรณีผิดไม่เปลี่ยนสถานะ"
+    ],
+    "piece": "ชิ้นที่ 5 · สถานะและกฎที่ละเมิดไม่ได้",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
+  },
+  {
+    "chapter": 5,
+    "week": "7",
+    "clo": "CLO2, CLO3, CLO4, CLO6",
+    "codeLink": "resource.html?type=code&chapter=5",
+    "worksheet": "resource.html?type=worksheet&chapter=5",
+    "kind": "reveal",
+    "title": "Encapsulation และ Invariant: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
+    "points": [
+      "ข้อมูล private ไม่ควรถูกแก้จากภายนอกโดยตรง",
+      "เมธอดตรวจเงื่อนไขก่อนเปลี่ยนสถานะ",
+      "ข้อผิดพลาดต้องชัดเจนและทดสอบได้"
+    ],
+    "details": [
+      "แนวคิด 1: ข้อมูล private ไม่ควรถูกแก้จากภายนอกโดยตรง",
+      "แนวคิด 2: เมธอดตรวจเงื่อนไขก่อนเปลี่ยนสถานะ",
+      "แนวคิด 3: ข้อผิดพลาดต้องชัดเจนและทดสอบได้"
+    ],
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
+  },
+  {
+    "chapter": 5,
+    "week": "7",
+    "clo": "CLO2, CLO3, CLO4, CLO6",
+    "codeLink": "resource.html?type=code&chapter=5",
+    "worksheet": "resource.html?type=worksheet&chapter=5",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch05-equipment-invariant.ts",
+    "points": [
+      "#borrowed ถูกบังคับความเป็นส่วนตัวขณะรัน",
+      "borrow ตรวจ invariant ก่อนแก้ค่า",
+      "giveBack ใช้กฎตรงข้ามและคงสถานะเมื่อเกิด error"
+    ],
+    "details": [
+      "#borrowed ถูกบังคับความเป็นส่วนตัวขณะรัน",
+      "borrow ตรวจ invariant ก่อนแก้ค่า",
+      "giveBack ใช้กฎตรงข้ามและคงสถานะเมื่อเกิด error"
+    ],
+    "code": "export class Equipment {\n  #borrowed = false;\n\n  borrow(): void {\n    if (this.#borrowed) throw new Error(\"ยืมซ้ำไม่ได้\");\n    this.#borrowed = true;\n  }\n\n  giveBack(): void {\n    if (!this.#borrowed) throw new Error(\"คืนซ้ำไม่ได้\");\n    this.#borrowed = false;\n  }\n\n  isAvailable(): boolean { return !this.#borrowed; }\n}",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
+  },
+  {
+    "chapter": 5,
+    "week": "7",
+    "clo": "CLO2, CLO3, CLO4, CLO6",
+    "codeLink": "resource.html?type=code&chapter=5",
+    "worksheet": "resource.html?type=worksheet&chapter=5",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
+    "points": [
+      "ทดสอบยืมครั้งแรกและยืมซ้ำ",
+      "ทดสอบคืนครั้งแรกและคืนซ้ำ",
+      "บันทึกสถานะก่อน–หลังกรณีผิดเงื่อนไข"
+    ],
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 5 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
+  },
+  {
+    "chapter": 5,
+    "week": "7",
+    "clo": "CLO2, CLO3, CLO4, CLO6",
+    "codeLink": "resource.html?type=code&chapter=5",
+    "worksheet": "resource.html?type=worksheet&chapter=5",
+    "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 5",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
+    "points": [
+      "เหตุใด borrowed จึงไม่ควรเป็น public?"
+    ],
+    "options": [
+      "เพื่อให้โค้ดยาวขึ้น",
+      "เพื่อบังคับให้เปลี่ยนสถานะผ่านกฎในเมธอด",
+      "เพราะ public ใช้กับ TypeScript ไม่ได้"
+    ],
+    "answer": 1,
+    "explain": "การซ่อนสถานะช่วยป้องกันภายนอกข้ามกฎยืมและคืน",
+    "hint": "ใครควรรับผิดชอบ invariant ของ Equipment",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
+  },
+  {
+    "chapter": 5,
+    "week": "7",
+    "clo": "CLO2, CLO3, CLO4, CLO6",
+    "codeLink": "resource.html?type=code&chapter=5",
+    "worksheet": "resource.html?type=worksheet&chapter=5",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 5/10",
+    "subtitle": "ชิ้นที่ 5 · สถานะและกฎที่ละเมิดไม่ได้",
+    "points": [
+      "โค้ด borrow/giveBack + tests กรณีปกติและผิดเงื่อนไข",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
+    ],
+    "piece": "ชิ้นที่ 5 · สถานะและกฎที่ละเมิดไม่ได้",
+    "deliverable": "โค้ด borrow/giveBack + tests กรณีปกติและผิดเงื่อนไข",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
+  },
+  {
+    "chapter": 6,
+    "week": "9",
+    "clo": "CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=6",
+    "worksheet": "resource.html?type=worksheet&chapter=6",
+    "kind": "chapter",
+    "title": "บทที่ 6\nComposition ก่อน Inheritance",
+    "subtitle": "ประกอบ Loan จาก Equipment และข้อมูลผู้ยืม",
+    "points": [
+      "แยกความสัมพันธ์ has-a กับ is-a",
+      "สร้าง Loan ที่อ้างถึง Equipment",
+      "เลือก composition เมื่อวัตถุร่วมงานกัน"
+    ],
+    "piece": "ชิ้นที่ 6 · Loan และความสัมพันธ์ของวัตถุ",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
+  },
+  {
+    "chapter": 6,
+    "week": "9",
+    "clo": "CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=6",
+    "worksheet": "resource.html?type=worksheet&chapter=6",
+    "kind": "reveal",
+    "title": "Composition ก่อน Inheritance: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
+    "points": [
+      "Loan has an Equipment จึงเป็น composition",
+      "inheritance ใช้เมื่อชนิดย่อยเป็นชนิดหลักจริง",
+      "อย่าสร้างคลาสย่อยเพียงเพื่อเก็บข้อมูลต่างกัน"
+    ],
+    "details": [
+      "แนวคิด 1: Loan has an Equipment จึงเป็น composition",
+      "แนวคิด 2: inheritance ใช้เมื่อชนิดย่อยเป็นชนิดหลักจริง",
+      "แนวคิด 3: อย่าสร้างคลาสย่อยเพียงเพื่อเก็บข้อมูลต่างกัน"
+    ],
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
+  },
+  {
+    "chapter": 6,
+    "week": "9",
+    "clo": "CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=6",
+    "worksheet": "resource.html?type=worksheet&chapter=6",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch06-loan-composition.ts",
+    "points": [
+      "equipment field แสดงความสัมพันธ์ has-a",
+      "borrowerId และ days เป็นข้อมูลของรายการยืม",
+      "constructor ตรวจข้อมูลที่ Loan ต้องรับผิดชอบ"
+    ],
+    "details": [
+      "equipment field แสดงความสัมพันธ์ has-a",
+      "borrowerId และ days เป็นข้อมูลของรายการยืม",
+      "constructor ตรวจข้อมูลที่ Loan ต้องรับผิดชอบ"
+    ],
+    "code": "import { Equipment } from \"./equipment.js\";\n\nexport class Loan {\n  constructor(\n    public readonly equipment: Equipment,\n    public readonly borrowerId: string,\n    public readonly days: number\n  ) {\n    if (!Number.isInteger(days) || days < 1) {\n      throw new Error(\"จำนวนวันไม่ถูกต้อง\");\n    }\n  }\n}\n\n// Loan มี Equipment เป็นส่วนประกอบ ไม่ได้สืบทอดจาก Equipment",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
+  },
+  {
+    "chapter": 6,
+    "week": "9",
+    "clo": "CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=6",
+    "worksheet": "resource.html?type=worksheet&chapter=6",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
+    "points": [
+      "วาดความสัมพันธ์ Equipment 1 — 0..* Loan",
+      "สร้าง Loan ปกติ 1 รายการ",
+      "ลอง days = 0 และยืนยันว่า object ไม่ถูกสร้าง"
+    ],
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 6 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
+  },
+  {
+    "chapter": 6,
+    "week": "9",
+    "clo": "CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=6",
+    "worksheet": "resource.html?type=worksheet&chapter=6",
+    "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 6",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
+    "points": [
+      "ความสัมพันธ์ระหว่าง Loan กับ Equipment เหมาะกับข้อใด?"
+    ],
+    "options": [
+      "Loan extends Equipment",
+      "Loan has an Equipment",
+      "Loan และ Equipment ต้องเป็นคลาสเดียวกัน"
+    ],
+    "answer": 1,
+    "explain": "Loan อ้างถึง Equipment เพื่อบอกว่ายืมชิ้นใด จึงเป็น has-a",
+    "hint": "ถามว่า Loan เป็นอุปกรณ์หรือมีอุปกรณ์",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
+  },
+  {
+    "chapter": 6,
+    "week": "9",
+    "clo": "CLO2, CLO3",
+    "codeLink": "resource.html?type=code&chapter=6",
+    "worksheet": "resource.html?type=worksheet&chapter=6",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 6/10",
+    "subtitle": "ชิ้นที่ 6 · Loan และความสัมพันธ์ของวัตถุ",
+    "points": [
+      "Class diagram 2 คลาส + โค้ด Loan + test จำนวนวันผิด",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
+    ],
+    "piece": "ชิ้นที่ 6 · Loan และความสัมพันธ์ของวัตถุ",
+    "deliverable": "Class diagram 2 คลาส + โค้ด Loan + test จำนวนวันผิด",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
+  },
+  {
+    "chapter": 7,
+    "week": "10–11",
+    "clo": "CLO1, CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=7",
+    "worksheet": "resource.html?type=worksheet&chapter=7",
+    "kind": "chapter",
+    "title": "บทที่ 7\nPolymorphism, Interface และ DI",
+    "subtitle": "เปลี่ยนนโยบายได้โดยไม่แก้ LoanService",
+    "points": [
+      "กำหนดข้อตกลงด้วย interface",
+      "สลับนโยบายผ่าน constructor injection",
+      "ทดสอบ service ด้วย fake policy"
+    ],
+    "piece": "ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
+  },
+  {
+    "chapter": 7,
+    "week": "10–11",
+    "clo": "CLO1, CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=7",
+    "worksheet": "resource.html?type=worksheet&chapter=7",
+    "kind": "reveal",
+    "title": "Polymorphism, Interface และ DI: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
+    "points": [
+      "interface อธิบายสิ่งที่ผู้เรียกต้องการ",
+      "polymorphism ให้ implementation หลายแบบใช้ผ่านข้อตกลงเดียว",
+      "dependency injection ลดการผูกกับรายละเอียด"
+    ],
+    "details": [
+      "แนวคิด 1: interface อธิบายสิ่งที่ผู้เรียกต้องการ",
+      "แนวคิด 2: polymorphism ให้ implementation หลายแบบใช้ผ่านข้อตกลงเดียว",
+      "แนวคิด 3: dependency injection ลดการผูกกับรายละเอียด"
+    ],
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
+  },
+  {
+    "chapter": 7,
+    "week": "10–11",
+    "clo": "CLO1, CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=7",
+    "worksheet": "resource.html?type=worksheet&chapter=7",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch07-loan-policy.ts",
+    "points": [
+      "LoanPolicy กำหนดเมธอดที่ service ต้องใช้",
+      "StandardLoanPolicy เป็นรายละเอียดหนึ่งแบบ",
+      "LoanService รับ dependency จากภายนอก จึงสลับ fake ใน test ได้"
+    ],
+    "details": [
+      "LoanPolicy กำหนดเมธอดที่ service ต้องใช้",
+      "StandardLoanPolicy เป็นรายละเอียดหนึ่งแบบ",
+      "LoanService รับ dependency จากภายนอก จึงสลับ fake ใน test ได้"
+    ],
+    "code": "export interface LoanPolicy {\n  maxDays(role: \"student\" | \"staff\"): number;\n}\n\nexport class StandardLoanPolicy implements LoanPolicy {\n  maxDays(role: \"student\" | \"staff\"): number {\n    return role === \"student\" ? 7 : 14;\n  }\n}\n\nexport class LoanService {\n  constructor(private readonly policy: LoanPolicy) {}\n  canBorrow(role: \"student\" | \"staff\", days: number): boolean {\n    return days >= 1 && days <= this.policy.maxDays(role);\n  }\n}",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
+  },
+  {
+    "chapter": 7,
+    "week": "10–11",
+    "clo": "CLO1, CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=7",
+    "worksheet": "resource.html?type=worksheet&chapter=7",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
+    "points": [
+      "สร้าง FakeLoanPolicy ที่คืน 2 วันเสมอ",
+      "ส่ง fake เข้า LoanService และเขียน test",
+      "เปรียบเทียบผลกับ StandardLoanPolicy"
+    ],
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 7 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
+  },
+  {
+    "chapter": 7,
+    "week": "10–11",
+    "clo": "CLO1, CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=7",
+    "worksheet": "resource.html?type=worksheet&chapter=7",
+    "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 7",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
+    "points": [
+      "ประโยชน์หลักของ constructor injection ในตัวอย่างคืออะไร?"
+    ],
+    "options": [
+      "ไม่ต้องเขียน test",
+      "สลับ policy ได้โดยไม่แก้ LoanService",
+      "ทำให้ interface อยู่ขณะรันโดยอัตโนมัติ"
+    ],
+    "answer": 1,
+    "explain": "Service พึ่งข้อตกลง จึงเปลี่ยน implementation และทดสอบแยกได้",
+    "hint": "มองหาสิ่งที่ส่งเข้าทาง constructor",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
+  },
+  {
+    "chapter": 7,
+    "week": "10–11",
+    "clo": "CLO1, CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=7",
+    "worksheet": "resource.html?type=worksheet&chapter=7",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 7/10",
+    "subtitle": "ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้",
+    "points": [
+      "Interface + policy จริง + fake policy + test เปรียบเทียบ",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
+    ],
+    "piece": "ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้",
+    "deliverable": "Interface + policy จริง + fake policy + test เปรียบเทียบ",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
+  },
+  {
+    "chapter": 8,
+    "week": "12–13",
+    "clo": "CLO3, CLO4, CLO5",
+    "codeLink": "resource.html?type=code&chapter=8",
+    "worksheet": "resource.html?type=worksheet&chapter=8",
+    "kind": "chapter",
+    "title": "บทที่ 8\nRepository และ Runtime Validation",
+    "subtitle": "แยกแหล่งข้อมูลและไม่เชื่อข้อมูลจากภายนอกทันที",
+    "points": [
+      "แยกการเก็บข้อมูลผ่าน repository",
+      "ใช้ Map ป้องกันรหัสซ้ำ",
+      "ตรวจ unknown input ก่อนเรียก domain"
+    ],
+    "piece": "ชิ้นที่ 8 · แหล่งข้อมูลและด่านตรวจ input",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
+  },
+  {
+    "chapter": 8,
+    "week": "12–13",
+    "clo": "CLO3, CLO4, CLO5",
+    "codeLink": "resource.html?type=code&chapter=8",
+    "worksheet": "resource.html?type=worksheet&chapter=8",
+    "kind": "reveal",
+    "title": "Repository และ Runtime Validation: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
+    "points": [
+      "repository ซ่อนรายละเอียดแหล่งข้อมูล",
+      "in-memory repository เหมาะกับการเรียนและการทดสอบ",
+      "TypeScript type ไม่ตรวจ JSON ขณะรัน"
+    ],
+    "details": [
+      "แนวคิด 1: repository ซ่อนรายละเอียดแหล่งข้อมูล",
+      "แนวคิด 2: in-memory repository เหมาะกับการเรียนและการทดสอบ",
+      "แนวคิด 3: TypeScript type ไม่ตรวจ JSON ขณะรัน"
+    ],
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
+  },
+  {
+    "chapter": 8,
+    "week": "12–13",
+    "clo": "CLO3, CLO4, CLO5",
+    "codeLink": "resource.html?type=code&chapter=8",
+    "worksheet": "resource.html?type=worksheet&chapter=8",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch08-repository-validation.ts",
+    "points": [
+      "Map เก็บคู่ id → item และตรวจซ้ำได้",
+      "find แสดงความเป็นไปได้ว่าไม่พบด้วย undefined",
+      "type guard ตรวจ unknown ก่อนยืนยันรูปแบบข้อมูล"
+    ],
+    "details": [
+      "Map เก็บคู่ id → item และตรวจซ้ำได้",
+      "find แสดงความเป็นไปได้ว่าไม่พบด้วย undefined",
+      "type guard ตรวจ unknown ก่อนยืนยันรูปแบบข้อมูล"
+    ],
+    "code": "type EquipmentRecord = { id: string; name: string };\n\nexport class EquipmentRepository {\n  #items = new Map<string, EquipmentRecord>();\n\n  add(item: EquipmentRecord): void {\n    if (this.#items.has(item.id)) throw new Error(\"รหัสซ้ำ\");\n    this.#items.set(item.id, item);\n  }\n\n  find(id: string): EquipmentRecord | undefined {\n    return this.#items.get(id);\n  }\n}\n\nexport function isLoanRequest(value: unknown): value is { id: string; days: number } {\n  if (typeof value !== \"object\" || value === null) return false;\n  const v = value as Record<string, unknown>;\n  return typeof v.id === \"string\" && Number.isInteger(v.days);\n}",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
+  },
+  {
+    "chapter": 8,
+    "week": "12–13",
+    "clo": "CLO3, CLO4, CLO5",
+    "codeLink": "resource.html?type=code&chapter=8",
+    "worksheet": "resource.html?type=worksheet&chapter=8",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
+    "points": [
+      "เพิ่ม EQ01 แล้วลองเพิ่มรหัสเดิม",
+      "ค้นหารหัสที่มีและไม่มี",
+      "ทดสอบ validator ด้วย null, string, days ทศนิยม และข้อมูลถูกต้อง"
+    ],
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 8 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
+  },
+  {
+    "chapter": 8,
+    "week": "12–13",
+    "clo": "CLO3, CLO4, CLO5",
+    "codeLink": "resource.html?type=code&chapter=8",
+    "worksheet": "resource.html?type=worksheet&chapter=8",
+    "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 8",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
+    "points": [
+      "เหตุใด request จาก API จึงควรเริ่มเป็น unknown?"
+    ],
+    "options": [
+      "เพราะเครือข่ายรับรองชนิด TypeScript ให้แล้ว",
+      "เพื่อบังคับให้ตรวจรูปแบบจริงก่อนใช้งาน",
+      "เพื่อให้ไม่ต้องตรวจค่า null"
+    ],
+    "answer": 1,
+    "explain": "ข้อมูลภายนอกอาจไม่ตรง type annotation จึงต้องตรวจขณะรัน",
+    "hint": "ชนิด TypeScript ถูกลบเมื่อแปลงเป็น JavaScript",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
+  },
+  {
+    "chapter": 8,
+    "week": "12–13",
+    "clo": "CLO3, CLO4, CLO5",
+    "codeLink": "resource.html?type=code&chapter=8",
+    "worksheet": "resource.html?type=worksheet&chapter=8",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 8/10",
+    "subtitle": "ชิ้นที่ 8 · แหล่งข้อมูลและด่านตรวจ input",
+    "points": [
+      "Repository + validator + tests รหัสซ้ำ/ไม่พบ/ข้อมูลผิดรูปแบบ",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
+    ],
+    "piece": "ชิ้นที่ 8 · แหล่งข้อมูลและด่านตรวจ input",
+    "deliverable": "Repository + validator + tests รหัสซ้ำ/ไม่พบ/ข้อมูลผิดรูปแบบ",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
+  },
+  {
+    "chapter": 9,
+    "week": "14",
     "clo": "CLO2, CLO3, CLO4",
-    "kind": "flow",
+    "codeLink": "resource.html?type=code&chapter=9",
+    "worksheet": "resource.html?type=worksheet&chapter=9",
+    "kind": "chapter",
+    "title": "บทที่ 9\nเชื่อม NestJS API กับ React",
+    "subtitle": "React แสดงผล · Controller รับคำขอ · Service บังคับกฎ",
     "points": [
-      "Function Component ส่ง request",
-      "Controller → Service ตรวจนโยบายและสถานะ",
-      "Repository อ่าน/เขียนข้อมูล แล้วส่งผลให้ UI"
+      "อธิบาย request flow ตั้งแต่หน้าจอถึง repository",
+      "วางกฎธุรกิจไว้ใน service/domain",
+      "ใช้ React Function Component เรียก API"
     ],
-    "note": "ใช้ template บนเครื่องเรียน ฐานข้อมูลเป็นส่วนต่อยอด; เว็บสไลด์ไม่เปิด Backend จริง"
+    "piece": "ชิ้นที่ 9 · เส้นทาง UI ถึงกฎธุรกิจ",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
   },
   {
-    "title": "ทดลองนโยบายระยะเวลายืม",
-    "subtitle": "Loan policy simulation",
-    "week": 11,
-    "clo": "CLO3, CLO4",
-    "kind": "loanpolicy",
+    "chapter": 9,
+    "week": "14",
+    "clo": "CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=9",
+    "worksheet": "resource.html?type=worksheet&chapter=9",
+    "kind": "reveal",
+    "title": "เชื่อม NestJS API กับ React: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
     "points": [
-      "เลือกนักศึกษาหรือบุคลากร",
-      "ทดลองจำนวนวันที่ขอบเขตและเกินสิทธิ์"
+      "React ไม่ควรเป็นแหล่งกฎธุรกิจเพียงแห่งเดียว",
+      "Controller แปลง HTTP เป็นการเรียกใช้ service",
+      "Service และ domain ต้องทดสอบได้โดยไม่เปิดเซิร์ฟเวอร์"
     ],
-    "note": "กฎสมมติ นักศึกษา 7 วัน บุคลากร 14 วัน ไม่ใช่ระเบียบมหาวิทยาลัย"
+    "details": [
+      "แนวคิด 1: React ไม่ควรเป็นแหล่งกฎธุรกิจเพียงแห่งเดียว",
+      "แนวคิด 2: Controller แปลง HTTP เป็นการเรียกใช้ service",
+      "แนวคิด 3: Service และ domain ต้องทดสอบได้โดยไม่เปิดเซิร์ฟเวอร์"
+    ],
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
   },
   {
-    "title": "ป้องกันจำนวนอุปกรณ์ติดลบ",
-    "subtitle": "Invariant simulation",
-    "week": 7,
-    "clo": "CLO3, CLO4",
-    "kind": "stock",
+    "chapter": 9,
+    "week": "14",
+    "clo": "CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=9",
+    "worksheet": "resource.html?type=worksheet&chapter=9",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch09-nest-react-flow.tsx",
     "points": [
-      "เริ่มอุปกรณ์พร้อมยืม 5 ชิ้น",
-      "จำนวนขอยืมต้องเป็นจำนวนเต็มบวกไม่เกินคงเหลือ"
+      "Controller รับ GET /equipment และเรียก service",
+      "Function Component เก็บ state ด้วย hook",
+      "fetch รับข้อมูลภายนอก จึงต้องจัดการ loading/error และ validate ที่ Backend"
     ],
-    "note": "แบบจำลองนับจำนวนเพื่อฝึก invariant; โครงงานหลักติดตามอุปกรณ์รายรหัส"
+    "details": [
+      "Controller รับ GET /equipment และเรียก service",
+      "Function Component เก็บ state ด้วย hook",
+      "fetch รับข้อมูลภายนอก จึงต้องจัดการ loading/error และ validate ที่ Backend"
+    ],
+    "code": "// NestJS Controller (อยู่ในโปรเจกต์ NestJS)\n@Controller(\"equipment\")\nexport class EquipmentController {\n  constructor(private readonly service: EquipmentService) {}\n  @Get() list() { return this.service.list(); }\n}\n\n// React Function Component (อยู่ในโปรเจกต์ React)\nexport function EquipmentList() {\n  const [items, setItems] = useState<EquipmentDto[]>([]);\n  useEffect(() => {\n    fetch(\"/api/equipment\").then(r => r.json()).then(setItems);\n  }, []);\n  return <ul>{items.map(x => <li key={x.id}>{x.name}</li>)}</ul>;\n}",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
-    "title": "จับคู่แนวคิดกับความหมาย",
-    "subtitle": "Matching activity · ลากหรือใช้เมนูเลือก",
-    "week": 9,
-    "clo": "CLO1, CLO2",
-    "kind": "match",
+    "chapter": 9,
+    "week": "14",
+    "clo": "CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=9",
+    "worksheet": "resource.html?type=worksheet&chapter=9",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
     "points": [
-      "จับคู่ 3 แนวคิดให้ถูกต้อง",
-      "อภิปรายเหตุผลก่อนตรวจคำตอบ"
+      "วาด React → Controller → Service → Repository",
+      "ใช้ template ผู้สอนเปิด GET /equipment",
+      "ทดสอบ success, loading และ error โดยไม่ใช้ Class Component"
     ],
-    "pairs": [
-      [
-        "Encapsulation",
-        "ควบคุมการเข้าถึงและรักษาเงื่อนไขข้อมูล"
-      ],
-      [
-        "Composition",
-        "วัตถุหนึ่งประกอบด้วยวัตถุอื่น"
-      ],
-      [
-        "Polymorphism",
-        "เรียกผ่านชนิดหลักแต่ใช้พฤติกรรมของวัตถุจริง"
-      ]
-    ],
-    "note": "ลากป้ายไปยังช่อง หรือใช้ dropdown ด้วยคีย์บอร์ด กิจกรรมนี้ไม่เก็บรายชื่อนักศึกษา"
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 9 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
   },
   {
-    "title": "ออกแบบกรณีทดสอบก่อนแก้โค้ด",
-    "subtitle": "Test cases & evidence",
-    "week": 5,
-    "clo": "CLO4",
-    "kind": "testcases",
+    "chapter": 9,
+    "week": "14",
+    "clo": "CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=9",
+    "worksheet": "resource.html?type=worksheet&chapter=9",
+    "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 9",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
     "points": [
-      "ข้อกำหนด: ยืมได้ 1–7 วัน",
-      "ทดสอบปกติ ขอบเขต และเกินสิทธิ์"
+      "กฎห้ามยืมซ้ำควรอยู่ที่ใด?"
     ],
-    "note": "ผลจำลองสำหรับฝึกคาดการณ์ ไม่ใช่การรันชุดทดสอบ TypeScript จริง"
+    "options": [
+      "เฉพาะปุ่มใน React",
+      "Service/domain ที่ API เรียกใช้",
+      "เฉพาะ CSS"
+    ],
+    "answer": 1,
+    "explain": "Backend service/domain ต้องรักษากฎแม้มีผู้เรียก API โดยตรง",
+    "hint": "หน้าจอไม่ใช่ทางเข้าเดียวของระบบ",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
   },
   {
-    "title": "ตรวจโครงงานก่อนส่งมอบ",
-    "subtitle": "Code review & team discussion",
-    "week": 15,
+    "chapter": 9,
+    "week": "14",
+    "clo": "CLO2, CLO3, CLO4",
+    "codeLink": "resource.html?type=code&chapter=9",
+    "worksheet": "resource.html?type=worksheet&chapter=9",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 9/10",
+    "subtitle": "ชิ้นที่ 9 · เส้นทาง UI ถึงกฎธุรกิจ",
+    "points": [
+      "แผนภาพ request flow + ภาพหน้าจอ 3 สถานะ + ผลทดสอบ service",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
+    ],
+    "piece": "ชิ้นที่ 9 · เส้นทาง UI ถึงกฎธุรกิจ",
+    "deliverable": "แผนภาพ request flow + ภาพหน้าจอ 3 สถานะ + ผลทดสอบ service",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
+  },
+  {
+    "chapter": 10,
+    "week": "15–16",
     "clo": "CLO2–CLO6",
-    "kind": "checklist",
+    "codeLink": "resource.html?type=code&chapter=10",
+    "worksheet": "resource.html?type=worksheet&chapter=10",
+    "kind": "chapter",
+    "title": "บทที่ 10\nประกอบ Jigsaw เป็น Mini Project",
+    "subtitle": "รวมชิ้นส่วน ตรวจคุณภาพ แล้วออกแบบโครงงานของตนเอง",
     "points": [
-      "คลาสมีหน้าที่ชัดเจนและสอดคล้องกับโจทย์",
-      "ทดสอบข้อมูลปกติและผิดเงื่อนไขแล้ว",
-      "ผู้อื่นทำตาม README แล้วรันได้",
-      "แยกหลักฐานรายบุคคลและเปิดเผย AI"
+      "ประกอบ 9 ชิ้นส่วนเป็นระบบที่อธิบายได้",
+      "สาธิตตัวอย่างระบบยืม–คืนฉบับสมบูรณ์",
+      "เสนอ mini project ของตนเองด้วยกฎและหลักฐานทดสอบ"
     ],
-    "note": "ใช้กลุ่มละ 5 นาทีตรวจงานเพื่อน รายการนี้เป็นการประเมินเพื่อพัฒนา ไม่ใช่คะแนนโครงงานอัตโนมัติ"
+    "piece": "ชิ้นที่ 10 · ระบบสมบูรณ์และแนวคิดของตนเอง",
+    "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
   },
   {
-    "title": "ภารกิจ 1: ตรวจความเข้าใจการห่อหุ้ม",
-    "subtitle": "Knowledge check",
-    "week": 7,
-    "clo": "CLO1, CLO3",
-    "kind": "quiz",
+    "chapter": 10,
+    "week": "15–16",
+    "clo": "CLO2–CLO6",
+    "codeLink": "resource.html?type=code&chapter=10",
+    "worksheet": "resource.html?type=worksheet&chapter=10",
+    "kind": "reveal",
+    "title": "ประกอบ Jigsaw เป็น Mini Project: แนวคิดสำคัญ",
+    "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
     "points": [
-      "ใช้ private แล้วไม่ต้องตรวจข้อมูลในเมธอด จริงหรือไม่?"
+      "รวมเฉพาะสิ่งที่ตอบโจทย์ ไม่เพิ่มคลาสเพื่อให้ดูซับซ้อน",
+      "ตรวจ acceptance criteria ทีละข้อ",
+      "โครงงานใหม่เปลี่ยนบริบทได้ แต่ต้องมีกฎ สถานะ และการทดสอบ"
+    ],
+    "details": [
+      "แนวคิด 1: รวมเฉพาะสิ่งที่ตอบโจทย์ ไม่เพิ่มคลาสเพื่อให้ดูซับซ้อน",
+      "แนวคิด 2: ตรวจ acceptance criteria ทีละข้อ",
+      "แนวคิด 3: โครงงานใหม่เปลี่ยนบริบทได้ แต่ต้องมีกฎ สถานะ และการทดสอบ"
+    ],
+    "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
+  },
+  {
+    "chapter": 10,
+    "week": "15–16",
+    "clo": "CLO2–CLO6",
+    "codeLink": "resource.html?type=code&chapter=10",
+    "worksheet": "resource.html?type=worksheet&chapter=10",
+    "kind": "codewalk",
+    "title": "อ่านโค้ดทีละส่วน",
+    "subtitle": "ch10-mini-project-blueprint.ts",
+    "points": [
+      "UI ส่งคำขอแต่ไม่ถือกฎทั้งหมด",
+      "Service ประสาน policy, domain และ repository",
+      "acceptance criteria เชื่อมโจทย์กับการสาธิตและ tests"
+    ],
+    "details": [
+      "UI ส่งคำขอแต่ไม่ถือกฎทั้งหมด",
+      "Service ประสาน policy, domain และ repository",
+      "acceptance criteria เชื่อมโจทย์กับการสาธิตและ tests"
+    ],
+    "code": "// โครงสร้างตัวอย่าง Mini Equipment Loan\n// React Function Component\n//   ↓ HTTP request\n// NestJS Controller\n//   ↓ validated command\n// LoanService → LoanPolicy\n//   ↓\n// Equipment + Loan (domain objects)\n//   ↓\n// EquipmentRepository (in-memory ในรายวิชา)\n\nexport const acceptanceCriteria = [\n  \"แสดงรายการอุปกรณ์\",\n  \"ยืมได้เมื่อพร้อมและจำนวนวันถูกต้อง\",\n  \"ปฏิเสธยืมซ้ำโดยไม่เปลี่ยนสถานะ\",\n  \"คืนได้หนึ่งครั้ง\",\n  \"ชุดทดสอบผ่านและอธิบายเหตุผลได้\"\n];",
+    "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
+  },
+  {
+    "chapter": 10,
+    "week": "15–16",
+    "clo": "CLO2–CLO6",
+    "codeLink": "resource.html?type=code&chapter=10",
+    "worksheet": "resource.html?type=worksheet&chapter=10",
+    "kind": "practice",
+    "title": "ฝึกตามแบบมีขั้น",
+    "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
+    "points": [
+      "เปิด starter แล้วจับคู่ไฟล์กับ Jigsaw 9 ชิ้น",
+      "รัน npm test และสาธิตเส้นทางยืมสำเร็จ/ยืมซ้ำ",
+      "ใช้ Project Canvas เลือกบริบทใหม่ เช่น จองห้อง คลังสินค้า หรือคิวบริการ"
+    ],
+    "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 10 แล้วเปลี่ยนเพียงหนึ่งจุด",
+    "note": "เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน"
+  },
+  {
+    "chapter": 10,
+    "week": "15–16",
+    "clo": "CLO2–CLO6",
+    "codeLink": "resource.html?type=code&chapter=10",
+    "worksheet": "resource.html?type=worksheet&chapter=10",
+    "kind": "quiz",
+    "title": "ตรวจความเข้าใจบทที่ 10",
+    "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
+    "points": [
+      "Mini project ของตนเองควรเริ่มจากสิ่งใด?"
     ],
     "options": [
-      "จริง",
-      "ไม่จริง"
+      "เลือก framework ให้มากที่สุด",
+      "ระบุผู้ใช้ ปัญหา กฎสำคัญ และผลที่พิสูจน์ได้",
+      "สร้างคลาสจำนวนมากก่อนรู้โจทย์"
     ],
     "answer": 1,
-    "explain": "เมธอดในคลาสยังแก้ข้อมูลได้ ต้องรักษา invariant ทุกจุดที่เปลี่ยนสถานะ",
-    "hint": "private ป้องกันใคร และเมธอดในคลาสยังทำอะไรได้?",
-    "note": "ให้ยกตัวอย่าง setter ที่ยอมรับจำนวนติดลบ"
+    "explain": "โจทย์และกฎที่ตรวจสอบได้เป็นฐานของการออกแบบ ไม่ใช่จำนวนเทคโนโลยี",
+    "hint": "เริ่มจากปัญหาและหลักฐานความสำเร็จ",
+    "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
   },
   {
-    "title": "ภารกิจ 2: Map กับข้อมูลซ้ำ",
-    "subtitle": "Knowledge check",
-    "week": 12,
-    "clo": "CLO3, CLO4",
-    "kind": "quiz",
+    "chapter": 10,
+    "week": "15–16",
+    "clo": "CLO2–CLO6",
+    "codeLink": "resource.html?type=code&chapter=10",
+    "worksheet": "resource.html?type=worksheet&chapter=10",
+    "kind": "jigsaw",
+    "title": "Jigsaw Checkpoint 10/10",
+    "subtitle": "ชิ้นที่ 10 · ระบบสมบูรณ์และแนวคิดของตนเอง",
     "points": [
-      "set(\"EQ01\", \"Camera\") แล้ว set(\"EQ01\", \"Mic\") จะ get ได้ค่าใด?"
+      "Project Canvas 1 หน้า + demo 3 นาที + tests + README + AI log",
+      "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
+      "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
     ],
-    "options": [
-      "Camera",
-      "Mic",
-      "เกิดข้อยกเว้นเสมอ"
-    ],
-    "answer": 1,
-    "explain": "key เดิมผูกกับค่าใหม่ Mic ต้องตรวจ has หากห้ามแทนค่า",
-    "hint": "Map มี key ไม่ซ้ำ",
-    "note": "ถามต่อว่าจะป้องกันการทับค่าโดยไม่ตั้งใจอย่างไร"
-  },
-  {
-    "title": "ภารกิจ 3: หลักฐานเหนือคำตอบ AI",
-    "subtitle": "Knowledge check",
-    "week": 13,
-    "clo": "CLO4, CLO6",
-    "kind": "quiz",
-    "points": [
-      "AI บอกว่าโค้ดถูกต้องแล้ว ขั้นต่อไปที่เหมาะสมคืออะไร?"
-    ],
-    "options": [
-      "ส่งงานทันที",
-      "ทดสอบตามข้อกำหนด อธิบายผล และบันทึก AI",
-      "ลบข้อผิดพลาดออกจากรายงาน"
-    ],
-    "answer": 1,
-    "explain": "คำตอบ AI ไม่ใช่หลักฐานความถูกต้อง ต้องใช้การทดสอบและความเข้าใจของผู้พัฒนา",
-    "hint": "หลักฐานใดทำซ้ำโดยผู้อื่นได้?",
-    "note": "คะแนนเกมเป็นการฝึก ไม่มีผลต่อคะแนนรายวิชา"
-  },
-  {
-    "title": "แผนที่แนวคิดของรายวิชา",
-    "subtitle": "Concept map",
-    "week": 16,
-    "clo": "CLO1–CLO6",
-    "kind": "map",
-    "points": [
-      "โจทย์ยืม–คืน → คลาสและความสัมพันธ์",
-      "TypeScript + NestJS API + React Function Components",
-      "ทดสอบ + สื่อสาร + จริยธรรม → ผลงานตรวจสอบได้"
-    ],
-    "note": "ให้ผู้เรียนเลือกโหนดหนึ่งแล้วอธิบายความเชื่อมโยงกับโครงงานของตน"
-  },
-  {
-    "title": "Exit ticket: วันนี้คุณเปลี่ยนวิธีคิดอย่างไร",
-    "subtitle": "Reflection & next step",
-    "week": 16,
-    "clo": "CLO5, CLO6",
-    "kind": "exit",
-    "points": [
-      "แนวคิดที่เข้าใจชัดขึ้นหนึ่งเรื่อง",
-      "ข้อเสนอ AI ที่ตรวจสอบหรือแก้ไข",
-      "สิ่งที่จะปรับปรุงในโครงงานครั้งถัดไป"
-    ],
-    "note": "บันทึกอยู่ใน browser ของผู้เรียนเท่านั้น ให้ส่งออกแล้วส่งผ่านช่องทางที่ผู้สอนประกาศ ไม่มีระบบส่งงานในหน้านี้"
+    "piece": "ชิ้นที่ 10 · ระบบสมบูรณ์และแนวคิดของตนเอง",
+    "deliverable": "Project Canvas 1 หน้า + demo 3 นาที + tests + README + AI log",
+    "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
   }
 ];
