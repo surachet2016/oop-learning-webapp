@@ -278,6 +278,11 @@ q('#fullscreen').onclick = async () => {
   try { document.fullscreenElement ? await document.exitFullscreen() : await document.documentElement.requestFullscreen(); }
   catch { notice('ใช้คำสั่งเต็มจอของเบราว์เซอร์แทนได้'); }
 };
+document.addEventListener('fullscreenchange', () => {
+  const active = Boolean(document.fullscreenElement);
+  q('#fullscreen').textContent = active ? 'ออกจากเต็มจอ' : 'เต็มจอสไลด์';
+  if (active) notice('โหมดเต็มจอ · ใช้ ← → เปลี่ยนหน้า และกด Esc เพื่อออก');
+});
 q('#motion').onclick = () => {
   paused = !paused;
   document.body.classList.toggle('paused', paused);

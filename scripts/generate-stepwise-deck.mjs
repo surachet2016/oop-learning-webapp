@@ -734,7 +734,7 @@ const slides = [];
 for (const c of chapters) {
   const p = worksheetPlans[c.id - 1];
   const startSlide = slides.length + 1;
-  const common = { chapter: c.id, week: c.weeks, clo: c.clo, codeLink: `resource.html?version=js-es6-4&type=code&chapter=${c.id}`, worksheet: `resource.html?version=js-es6-4&type=worksheet&chapter=${c.id}` };
+  const common = { chapter: c.id, week: c.weeks, clo: c.clo, codeLink: `resource.html?version=js-es6-5&type=code&chapter=${c.id}`, worksheet: `resource.html?version=js-es6-5&type=worksheet&chapter=${c.id}` };
   if (c.id === 1) {
     slides.push(...chapterOneSlideSpecs.map(spec => ({ ...common, ...spec })));
   } else {
@@ -766,9 +766,9 @@ ${c.outcomes.map(x => `- [ ] ${x}`).join('\n')}
 
 ## ทรัพยากรประจำบท
 
-- [สไลด์บทที่ ${c.id}](../slides.html?version=js-es6-4#slide-${startSlide})
+- [สไลด์บทที่ ${c.id}](../slides.html?version=js-es6-5#slide-${startSlide})
 - [โค้ดตัวอย่าง ${c.codeFile}](../examples/${c.codeFile})
-${c.id === 1 ? '- [บทที่ 0: เตรียมเครื่องมือ](../resource.html?version=js-es6-4&type=readiness) และตรวจว่า `node -v` ทำงานก่อนเริ่ม' : '- ชุดเริ่มต้น: ดาวน์โหลดจากหน้าหลัก แล้วรัน `npm test` และ `npm run demo`'}
+${c.id === 1 ? '- [บทที่ 0: เตรียมเครื่องมือ](../resource.html?version=js-es6-5&type=readiness) และตรวจว่า `node -v` ทำงานก่อนเริ่ม' : '- ชุดเริ่มต้น: ดาวน์โหลดจากหน้าหลัก แล้วรัน `npm test` และ `npm run demo`'}
 
 ---
 
