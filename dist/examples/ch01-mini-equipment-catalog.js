@@ -1,13 +1,22 @@
-// บทที่ 1: เริ่มจากความสำเร็จเล็ก ๆ
+// บทที่ 1: อ่านโครงสร้าง JavaScript และมองแบบ OOP
 // ตัวอย่างเพื่อการเรียนรู้รายวิชา 07-034-206
 
-const items = [
-  { id: "EQ01", name: "Camera", available: true },
-  { id: "EQ02", name: "Tripod", available: false }
-];
+// 1) ข้อมูลของวัตถุหนึ่งชิ้น
+const equipment = {
+  id: "EQ01",
+  name: "Camera",
+  available: true
+};
 
-function listAvailable(data) {
-  return data.filter(item => item.available);
+// 2) พฤติกรรมที่อ่านข้อมูลแล้วสร้างข้อความ
+function describeEquipment(item) {
+  let status = "ถูกยืม";
+  if (item.available === true) {
+    status = "พร้อมยืม";
+  }
+  return item.id + " - " + item.name + " - " + status;
 }
 
-console.log(listAvailable(items));
+// 3) เรียกใช้พฤติกรรมและแสดงผล
+const message = describeEquipment(equipment);
+console.log(message);

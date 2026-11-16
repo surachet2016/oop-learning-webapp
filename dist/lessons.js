@@ -1,27 +1,27 @@
 const LESSONS = [
   {
     "week": 1,
-    "title": "เริ่มต้น OOP ด้วย JavaScript ES6",
-    "subtitle": "บทที่ 1 จาก JavaScript ที่คุ้นเคยสู่การออกแบบเชิงวัตถุ",
+    "title": "อ่านโครงสร้าง JavaScript และมองแบบ OOP",
+    "subtitle": "บทที่ 1 จากคำสั่งทีละบรรทัด สู่ข้อมูลและพฤติกรรมของอุปกรณ์",
     "clo": "CLO1, CLO6",
-    "goal": "อธิบายคลาส วัตถุ และรัน JavaScript ด้วย Node.js ได้",
+    "goal": "อ่านโค้ดจากบนลงล่าง ใช้ object, function และ if ในโปรแกรมเล็ก และอธิบายวัตถุในมุมข้อมูล–สถานะ–พฤติกรรมได้",
     "body": [
-      "เชื่อมจากวิชาหลักการเขียนโปรแกรมที่ใช้ Python เบื้องต้น: Python และ JavaScript ES6 ต่างสร้างวัตถุได้ แต่รายวิชานี้จะศึกษาการออกแบบ OOP และการทดสอบอย่างเป็นระบบ โดยไม่สอน Python OOP ซ้ำทั้งรายวิชา",
-      "ใช้ระบบยืม–คืนอุปกรณ์เป็นกรณีศึกษาตลอดภาค คลาสกำหนดข้อมูลและพฤติกรรม ส่วนวัตถุแต่ละตัวมีสถานะของตนเอง React Function Components เป็นส่วนแสดงผล ไม่จำเป็นต้องเปลี่ยนเป็น Class Components",
-      "JavaScript ES6 ใช้ไวยากรณ์เดียวกับพื้นฐานที่เรียนใน React และรันด้วย Node.js ได้โดยตรง เริ่มจากชุดตัวอย่างที่ดาวน์โหลดบนหน้าหลัก ใช้ npm test และ npm run demo ตาม README"
+      "เริ่มจากบทที่ 0 ให้เปิด VS Code สร้างไฟล์ และรัน hello.js สำเร็จก่อน บทนี้จึงเพิ่มโครงสร้างภาษาเท่าที่จำเป็น ได้แก่ comment, const, let, string, boolean, object, function, if, return และ console.log",
+      "อ่านโปรแกรมจากบนลงล่างเป็น 3 ส่วน: ข้อมูลเริ่มต้น → พฤติกรรมหรือการประมวลผล → ผลลัพธ์ จากนั้นเปลี่ยนข้อมูลทีละจุด ทำนายผล และรันตรวจสอบ",
+      "แนวคิด OOP เริ่มจากการมองสิ่งในโลกจริงเป็นวัตถุ เช่น Equipment มีข้อมูล id/name มีสถานะ available และมีพฤติกรรมอธิบายตนเอง ยังไม่ใช้ class, private field, React, Express หรือ automated test ในบทนี้"
     ],
-    "code": "const course = \"OOP Equipment Loan\";\nconsole.log(course);",
-    "lab": "รันชุดตัวอย่าง บันทึกผลทดสอบ วาดเส้นทาง React → API → Service → Repository และแยกว่าส่วนใดทำงานในเบราว์เซอร์หรือเซิร์ฟเวอร์",
-    "ai": "อธิบาย runtime error นี้เป็นคำใบ้ แล้วให้ฉันทดลองแก้และรันเอง",
-    "evidence": "บันทึกคำสั่งที่ใช้รัน ผลลัพธ์ และสิ่งที่แก้ไข พร้อมระบุการใช้ AI",
-    "question": "ข้อมูลจากผู้ใช้หรือ API ควรถูกตรวจเมื่อใด?",
+    "code": "const equipment = { id: \"EQ01\", name: \"Camera\", available: true };\n\nfunction describeEquipment(item) {\n  let status = \"ถูกยืม\";\n  if (item.available === true) status = \"พร้อมยืม\";\n  return item.name + \" - \" + status;\n}\n\nconsole.log(describeEquipment(equipment));",
+    "lab": "แบ่งโค้ดเป็นข้อมูล–พฤติกรรม–ผลลัพธ์ เปลี่ยน name และ available โดยทำนายผลก่อนรัน เพิ่ม category และสร้าง equipment2 ที่ใช้ function เดิม",
+    "ai": "ถามฉันทีละคำถามเพื่อช่วยระบุว่าโค้ดส่วนใดเป็นข้อมูล input เงื่อนไข และ output โดยยังไม่แก้โค้ดแทน",
+    "evidence": "ไฟล์ catalog.js ที่รันได้ ภาพผลรัน และคำอธิบาย object, property, function, if และ return ด้วยภาษาของตนเอง",
+    "question": "property ใดเก็บสถานะว่ากล้องพร้อมยืมหรือไม่?",
     "options": [
-      "ไม่ต้องตรวจ เพราะมาจาก React",
-      "ตรวจที่ Backend ก่อนส่งเข้าสู่กฎธุรกิจ",
-      "ตรวจเฉพาะ CSS"
+      "id",
+      "name",
+      "available"
     ],
     "answer": 1,
-    "explain": "ข้อมูลภายนอกอาจผิดรูปแบบ จึงต้องตรวจค่าจริงก่อนเรียก domain method",
+    "explain": "available เป็น boolean true/false จึงใช้แทนสถานะพร้อมยืมของอุปกรณ์ในตัวอย่างนี้",
     "exam": false
   },
   {

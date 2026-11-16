@@ -1,22 +1,43 @@
 'use strict';
 const params = new URLSearchParams(location.search);
 const chapterNumber = Math.max(1, Math.min(10, Number(params.get('chapter')) || 1));
-const type = params.get('type') === 'worksheet' ? 'worksheet' : 'code';
+const requestedType = params.get('type');
+const type = ['worksheet', 'readiness'].includes(requestedType) ? requestedType : 'code';
+const isReadiness = type === 'readiness';
 const chapter = CHAPTERS.find(item => item.id === chapterNumber);
 const codeSlide = SLIDES.find(item => item.chapter === chapterNumber && item.kind === 'codewalk');
-const rawPath = type === 'code'
+const rawPath = isReadiness
+  ? 'readiness-guide.md'
+  : type === 'code'
   ? `examples/${chapter.codeFile}`
   : `worksheets/ch${String(chapterNumber).padStart(2, '0')}.md`;
 
-document.title = `บท ${chapterNumber} · ${type === 'code' ? 'โค้ดตัวอย่าง' : 'ใบงาน'} · Object Lab`;
-document.querySelector('#meta').textContent = `บท ${chapterNumber}/10 · ${chapter.title}`;
-document.querySelector('#title').textContent = type === 'code' ? `โค้ดตัวอย่าง · ${chapter.codeFile}` : `ใบงานบทที่ ${chapterNumber}`;
-document.querySelector('#description').textContent = chapter.subtitle;
-document.querySelector('#resource-nav').innerHTML = `
-  <a href="resource.html?version=js-es6-2&type=code&chapter=${chapterNumber}" ${type === 'code' ? 'aria-current="page"' : ''}>โค้ดตัวอย่าง</a>
-  <a href="resource.html?version=js-es6-2&type=worksheet&chapter=${chapterNumber}" ${type === 'worksheet' ? 'aria-current="page"' : ''}>ใบงาน</a>
+document.title = isReadiness
+  ? 'บทที่ 0 · เตรียมความพร้อม · Object Lab'
+  : `บท ${chapterNumber} · ${type === 'code' ? 'โค้ดตัวอย่าง' : 'ใบงาน'} · Object Lab`;
+document.querySelector('#meta').textContent = isReadiness
+  ? 'บทที่ 0 · ก่อนเริ่มใบงานที่ 1'
+  : `บท ${chapterNumber}/10 · ${chapter.title}`;
+document.querySelector('#title').textContent = isReadiness
+  ? 'เตรียมเครื่องมือและรัน JavaScript โปรแกรมแรก'
+  : type === 'code' ? `โค้ดตัวอย่าง · ${chapter.codeFile}` : `ใบงานบทที่ ${chapterNumber}`;
+document.querySelector('#description').textContent = isReadiness
+  ? 'สำหรับผู้เรียนที่ยังไม่เคยติดตั้งเครื่องมือพัฒนา · ใช้เวลาประมาณ 2 ชั่วโมง'
+  : chapter.subtitle;
+if (isReadiness) {
+  const backLink = document.querySelector('header a');
+  backLink.href = 'index.html#home';
+  backLink.textContent = '← กลับหน้าหลัก';
+}
+document.querySelector('#resource-nav').innerHTML = isReadiness ? `
+  <a href="index.html#home">กลับหน้าหลัก</a>
+  <a href="${rawPath}" download>ดาวน์โหลดเอกสาร .md</a>
+  <a href="resource.html?version=js-es6-3&type=worksheet&chapter=1">ดูใบงานที่ 1</a>
+  <button type="button" id="print-resource">พิมพ์ / บันทึก PDF</button>` : `
+  <a href="resource.html?version=js-es6-3&type=code&chapter=${chapterNumber}" ${type === 'code' ? 'aria-current="page"' : ''}>โค้ดตัวอย่าง</a>
+  <a href="resource.html?version=js-es6-3&type=worksheet&chapter=${chapterNumber}" ${type === 'worksheet' ? 'aria-current="page"' : ''}>ใบงาน</a>
   <a href="${rawPath}" download>ดาวน์โหลดไฟล์ต้นฉบับ</a>
-  <a href="slides.html?version=js-es6-2#slide-${(chapterNumber - 1) * 6 + 1}">เปิดสไลด์บทนี้</a>
+  <a href="slides.html?version=js-es6-3#slide-${(chapterNumber - 1) * 6 + 1}">เปิดสไลด์บทนี้</a>
   ${type === 'worksheet' ? '<button type="button" id="print-resource">พิมพ์ใบงาน / PDF</button>' : ''}`;
 
 document.querySelector('#print-resource')?.addEventListener('click', () => window.print());
@@ -33,7 +54,7 @@ fetch(rawPath)
   })
   .then(text => {
     const content = document.querySelector('#content');
-    if (type === 'worksheet') {
+    if (type !== 'code') {
       content.className = 'worksheet';
       content.innerHTML = renderMarkdown(text);
     } else {

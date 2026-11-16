@@ -13,24 +13,33 @@ mkdirSync(worksheetsDir, { recursive: true });
 
 const chapters = [
   {
-    id: 1, weeks: '1', clo: 'CLO1, CLO6', title: 'เริ่มจากความสำเร็จเล็ก ๆ', subtitle: 'Mini Equipment Catalog: ดูผลลัพธ์ก่อน แล้วค่อยแกะโครงสร้าง',
-    outcomes: ['รันตัวอย่าง JavaScript ES6 และเห็นผลลัพธ์ทันที', 'แยกข้อมูล ฟังก์ชัน และผลลัพธ์ออกจากกัน', 'เชื่อมพื้นฐาน Python กับ JavaScript ที่คุ้นเคยได้'],
-    concepts: ['โปรแกรมเล็กที่สมบูรณ์ช่วยให้เห็นภาพปลายทาง', 'JavaScript ES6 รันด้วย Node.js โดยไม่ต้องแปลงภาษา', 'เริ่มจากทำตามให้สำเร็จ แล้วเปลี่ยนข้อมูลหนึ่งจุดด้วยตนเอง'],
+    id: 1, weeks: '1', clo: 'CLO1, CLO6', title: 'อ่านโครงสร้าง JavaScript และมองแบบ OOP', subtitle: 'จากคำสั่งทีละบรรทัด สู่ข้อมูลและพฤติกรรมของอุปกรณ์',
+    outcomes: ['อ่านโค้ดจากบนลงล่างและแยกคำสั่งเป็นส่วนได้', 'ใช้ const, let, object, function, if และ console.log ในโปรแกรมเล็กได้', 'อธิบายแนวคิด OOP ว่าวัตถุมีข้อมูล สถานะ และพฤติกรรมได้'],
+    concepts: ['JavaScript ทำงานตามลำดับคำสั่งจากบนลงล่าง', 'object รวมข้อมูลที่เกี่ยวข้อง ส่วน function และ if สร้างพฤติกรรมตามสถานะ', 'OOP เริ่มจากการมองสิ่งในโลกจริงเป็นวัตถุ ก่อนเรียนไวยากรณ์ class'],
     codeFile: 'ch01-mini-equipment-catalog.js',
-    code: `const items = [
-  { id: "EQ01", name: "Camera", available: true },
-  { id: "EQ02", name: "Tripod", available: false }
-];
+    code: `// 1) ข้อมูลของวัตถุหนึ่งชิ้น
+const equipment = {
+  id: "EQ01",
+  name: "Camera",
+  available: true
+};
 
-function listAvailable(data) {
-  return data.filter(item => item.available);
+// 2) พฤติกรรมที่อ่านข้อมูลแล้วสร้างข้อความ
+function describeEquipment(item) {
+  let status = "ถูกยืม";
+  if (item.available === true) {
+    status = "พร้อมยืม";
+  }
+  return item.id + " - " + item.name + " - " + status;
 }
 
-console.log(listAvailable(items));`,
-    walkthrough: ['items คือข้อมูลตัวอย่างแบบ array ของ object', 'available เก็บสถานะด้วย boolean', 'listAvailable รับข้อมูล คืนผลใหม่ และทดสอบแยกได้'],
-    practice: ['รันตัวอย่างและบันทึกผลลัพธ์', 'เพิ่ม Microphone ที่พร้อมยืม แล้วทำนายผลก่อนรัน', 'เปลี่ยนสถานะ Camera และอธิบายว่าผลเปลี่ยนเพราะอะไร'],
-    quiz: ['ส่วนใดทำหน้าที่คัดเฉพาะอุปกรณ์พร้อมยืม?', ['items', 'listAvailable', 'console.log เพียงอย่างเดียว'], 1, 'ฟังก์ชัน listAvailable รับรายการและคืนเฉพาะรายการที่ available เป็น true', 'มองหาส่วนที่ใช้ filter'],
-    piece: 'ชิ้นที่ 1 · ข้อมูลอุปกรณ์และผลลัพธ์ที่ต้องการ', deliverable: 'ภาพผลการรัน + ข้อมูลที่เพิ่มเอง 1 รายการ + คำอธิบาย 3 บรรทัด'
+// 3) เรียกใช้พฤติกรรมและแสดงผล
+const message = describeEquipment(equipment);
+console.log(message);`,
+    walkthrough: ['ส่วนที่ 1 สร้าง object และกำหนด properties ที่เป็นข้อมูล/สถานะ', 'ส่วนที่ 2 ประกาศ function ใช้ if อ่านสถานะ แล้ว return output', 'ส่วนที่ 3 เรียก function แล้วส่งผลให้ console.log แสดงบน Terminal'],
+    practice: ['รันตัวอย่างและวงเล็บกำกับ 3 ส่วน: ข้อมูล–พฤติกรรม–ผลลัพธ์', 'เปลี่ยนชื่อ Camera เป็น Microphone แล้วทำนายผลก่อนรัน', 'เปลี่ยน available เป็น false และอธิบายเงื่อนไขที่ทำให้ข้อความเปลี่ยน'],
+    quiz: ['ส่วนใดของ object equipment เก็บสถานะว่าพร้อมยืมหรือไม่?', ['id', 'name', 'available'], 2, 'property available เก็บค่า boolean true/false ซึ่งแทนสถานะของอุปกรณ์', 'มองหา property ที่มีค่า true หรือ false'],
+    piece: 'ชิ้นที่ 1 · วัตถุ ข้อมูล สถานะ และพฤติกรรม', deliverable: 'ไฟล์ catalog.js ที่รันได้ + แผนภาพ object 1 ชิ้น + คำอธิบายข้อมูล–พฤติกรรม–ผลลัพธ์'
   },
   {
     id: 2, weeks: '2–3', clo: 'CLO1, CLO3, CLO4', title: 'ข้อมูลและกฎเงื่อนไข', subtitle: 'สร้างรหัส สถานะ จำนวนวัน และเงื่อนไขที่ตรวจสอบได้',
@@ -261,18 +270,18 @@ export const acceptanceCriteria = [
 
 const worksheetPlans = [
   {
-    scenario: 'ฝ่ายโสตทัศนูปกรณ์ต้องการหน้ารายการอุปกรณ์ที่แสดงเฉพาะรายการพร้อมยืม นักศึกษาจะเริ่มจากโปรแกรมเล็กที่รันสำเร็จ แล้วอธิบายข้อมูล–กระบวนการ–ผลลัพธ์ด้วยภาษาของตนเอง',
-    theoryPrompt: 'ถ้าเปลี่ยน available ของ Camera จาก true เป็น false ผลลัพธ์ควรเปลี่ยนอย่างไร และเพราะคำสั่งใด?',
+    scenario: 'หลังจากรัน hello.js สำเร็จ ฝ่ายโสตทัศนูปกรณ์ต้องการโปรแกรมเล็กที่อธิบายอุปกรณ์หนึ่งชิ้น นักศึกษาจะเรียนวิธีอ่าน JavaScript จากบนลงล่าง แยกข้อมูล–พฤติกรรม–ผลลัพธ์ และเชื่อมกับแนวคิด OOP โดยยังไม่ใช้ class หรือคำสั่งขั้นสูง',
+    theoryPrompt: 'ในโลกจริง Camera หนึ่งตัวมีข้อมูลอะไร มีสถานะอะไร และควรทำพฤติกรรมใดได้บ้าง?',
     guided: [
       'รัน `node examples/ch01-mini-equipment-catalog.js` หรือคัดลอกตัวอย่างไปยังไฟล์ `catalog.js` แล้วบันทึกผลลัพธ์จริง',
-      'วาดตาราง 3 คอลัมน์: input (`items`) → process (`filter`) → output แล้วใส่ค่าจากโปรแกรมจริง',
-      'เพิ่ม `{ id: "EQ03", name: "Microphone", available: true }` ทำนายผลก่อนรัน แล้วเปรียบเทียบผลจริง',
-      'สร้างฟังก์ชัน `listBorrowed(data)` โดยไม่แก้ `listAvailable` และแสดงผลทั้งสองรายการ',
-      'อธิบายทีละบรรทัดว่า parameter, return value และ callback ของ `filter` ทำหน้าที่อะไร'
+      'ใช้สีหรือกรอบแบ่งโค้ดเป็น 3 ส่วน: object `equipment` → function `describeEquipment` → การเรียกใช้และแสดงผล',
+      'สร้างตาราง property–value–ชนิดข้อมูล สำหรับ `id`, `name`, `available` แล้วอธิบายว่า property ใดเป็นสถานะ',
+      'เปลี่ยนข้อมูลเป็นอุปกรณ์ของตนเองและทำนาย output ก่อนรัน โดยยังไม่เปลี่ยนโครงสร้าง function',
+      'เพิ่ม property `category` แล้วแก้ function ให้แสดงหมวดหมู่ พร้อมอธิบาย parameter, local variable, if และ return value'
     ],
-    challenge: 'สร้าง `summarize(data)` ให้คืน `{ total, available, borrowed }` ห้ามพิมพ์ค่าคงที่ และต้องทำงานเมื่อเพิ่มอุปกรณ์รายการใหม่',
-    tests: ['รายการเริ่มต้น: พร้อมยืม 1 จาก 2', 'เพิ่ม Microphone: พร้อมยืม 2 จาก 3', 'array ว่าง: ทุกค่าเป็น 0', 'ห้ามแก้ข้อมูลต้นฉบับหลังเรียกฟังก์ชัน'],
-    knowledge: ['เหตุใดการคืน array ใหม่จึงทดสอบง่ายกว่าการแก้ array เดิม?', 'object หนึ่งรายการแทนสิ่งใดในโลกจริง และ property ใดคือสถานะ?', 'ความรู้จาก Python เรื่อง list/function ช่วยอ่าน JavaScript ส่วนใดได้บ้าง?']
+    challenge: 'สร้าง object `equipment2` อีกหนึ่งชิ้น เรียก `describeEquipment` ด้วย function เดิม และอธิบายว่าเหตุใดไม่ต้องคัดลอก function ใหม่',
+    tests: ['Camera และ available=true แสดง “พร้อมยืม”', 'Camera และ available=false แสดง “ถูกยืม”', 'เปลี่ยน name แล้ว output ใช้ชื่อใหม่', 'equipment2 ใช้ function เดิมและแสดงข้อมูลของตนเอง'],
+    knowledge: ['เหตุใดข้อมูลของอุปกรณ์จึงควรรวมอยู่ใน object เดียวกัน?', 'function แทนพฤติกรรมอย่างไร และ input/output อยู่ตรงไหน?', 'ตัวอย่างนี้มีแนวคิด OOP แล้วส่วนใด แม้ยังไม่ได้ใช้ class?']
   },
   {
     scenario: 'ระบบอนุญาตให้ยืมได้เมื่ออุปกรณ์มีสถานะ available และจำนวนวันเป็นจำนวนเต็ม 1–7 วัน งานนี้เปลี่ยนข้อกำหนดภาษาไทยให้เป็นกฎที่ตรวจสอบได้',
@@ -405,7 +414,7 @@ const worksheetPlans = [
 const slides = [];
 for (const c of chapters) {
   const p = worksheetPlans[c.id - 1];
-  const common = { chapter: c.id, week: c.weeks, clo: c.clo, codeLink: `resource.html?version=js-es6-2&type=code&chapter=${c.id}`, worksheet: `resource.html?version=js-es6-2&type=worksheet&chapter=${c.id}` };
+  const common = { chapter: c.id, week: c.weeks, clo: c.clo, codeLink: `resource.html?version=js-es6-3&type=code&chapter=${c.id}`, worksheet: `resource.html?version=js-es6-3&type=worksheet&chapter=${c.id}` };
   slides.push({ ...common, kind: 'chapter', title: `บทที่ ${c.id}\n${c.title}`, subtitle: c.subtitle, points: c.outcomes, piece: c.piece, note: `เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์` });
   slides.push({ ...common, kind: 'reveal', title: `${c.title}: แนวคิดสำคัญ`, subtitle: 'เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง', points: c.concepts, details: c.concepts.map((x, i) => `แนวคิด ${i + 1}: ${x}`), note: 'ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง' });
   slides.push({ ...common, kind: 'codewalk', title: `อ่านโค้ดทีละส่วน`, subtitle: c.codeFile, points: c.walkthrough, details: c.walkthrough, code: c.code, note: 'อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน' });
@@ -433,9 +442,9 @@ ${c.outcomes.map(x => `- [ ] ${x}`).join('\n')}
 
 ## ทรัพยากรประจำบท
 
-- [สไลด์บทที่ ${c.id}](../slides.html?version=js-es6-2#slide-${(c.id - 1) * 6 + 1})
+- [สไลด์บทที่ ${c.id}](../slides.html?version=js-es6-3#slide-${(c.id - 1) * 6 + 1})
 - [โค้ดตัวอย่าง ${c.codeFile}](../examples/${c.codeFile})
-- ชุดเริ่มต้น: ดาวน์โหลดจากหน้าหลัก แล้วรัน \`npm test\` และ \`npm run demo\`
+${c.id === 1 ? '- [บทที่ 0: เตรียมเครื่องมือ](../resource.html?version=js-es6-3&type=readiness) และตรวจว่า `node -v` ทำงานก่อนเริ่ม' : '- ชุดเริ่มต้น: ดาวน์โหลดจากหน้าหลัก แล้วรัน `npm test` และ `npm run demo`'}
 
 ---
 
@@ -504,8 +513,8 @@ ${c.walkthrough.map((x, i) => `${i + 1}. ${x}`).join('\n')}
 ### 0–10 นาที · เตรียมสภาพแวดล้อม
 
 - [ ] เปิดโฟลเดอร์งานของตนเอง ไม่แก้ไฟล์ต้นฉบับโดยไม่มีสำเนา
-- [ ] รันโค้ดตัวอย่างหรือ \`npm test\` ให้ผ่านก่อนเริ่มแก้
-- [ ] บันทึก commit/สำเนาเริ่มต้นเพื่อย้อนกลับได้
+- [ ] ${c.id === 1 ? 'รัน `node hello.js` จากบทที่ 0 สำเร็จ แล้วรันโค้ดตัวอย่างบทนี้' : 'รันโค้ดตัวอย่างหรือ `npm test` ให้ผ่านก่อนเริ่มแก้'}
+- [ ] ${c.id === 1 ? 'บันทึกสำเนาไฟล์เริ่มต้นเพื่อย้อนกลับได้' : 'บันทึก commit/สำเนาเริ่มต้นเพื่อย้อนกลับได้'}
 - [ ] เขียนผลที่คาดหวังก่อนแก้โค้ด
 
 ### 10–30 นาที · ทำตามตัวอย่างให้สำเร็จ
