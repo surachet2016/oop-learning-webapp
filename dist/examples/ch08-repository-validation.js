@@ -1,23 +1,20 @@
 // บทที่ 8: Repository และ Runtime Validation
 // ตัวอย่างเพื่อการเรียนรู้รายวิชา 07-034-206
 
-type EquipmentRecord = { id: string; name: string };
-
 export class EquipmentRepository {
-  #items = new Map<string, EquipmentRecord>();
+  #items = new Map();
 
-  add(item: EquipmentRecord): void {
+  add(item) {
     if (this.#items.has(item.id)) throw new Error("รหัสซ้ำ");
     this.#items.set(item.id, item);
   }
 
-  find(id: string): EquipmentRecord | undefined {
+  find(id) {
     return this.#items.get(id);
   }
 }
 
-export function isLoanRequest(value: unknown): value is { id: string; days: number } {
+export function isLoanRequest(value) {
   if (typeof value !== "object" || value === null) return false;
-  const v = value as Record<string, unknown>;
-  return typeof v.id === "string" && Number.isInteger(v.days);
+  return typeof value.id === "string" && Number.isInteger(value.days);
 }

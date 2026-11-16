@@ -1,9 +1,10 @@
 // บทที่ 2: ข้อมูลและกฎเงื่อนไข
 // ตัวอย่างเพื่อการเรียนรู้รายวิชา 07-034-206
 
-type EquipmentStatus = "available" | "borrowed";
+const VALID_STATUSES = ["available", "borrowed"];
 
-function canBorrow(status: EquipmentStatus, days: number): boolean {
+function canBorrow(status, days) {
+  if (!VALID_STATUSES.includes(status)) return false;
   const validDays = Number.isInteger(days) && days >= 1 && days <= 7;
   return status === "available" && validDays;
 }

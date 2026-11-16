@@ -4,7 +4,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-export function maxLoanDays(role: "student" | "staff"): number {
+export function maxLoanDays(role) {
   return role === "student" ? 7 : 14;
 }
 

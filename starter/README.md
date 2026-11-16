@@ -1,23 +1,22 @@
 # OOP Equipment Loan Starter
 
-ตัวอย่างแกนกลางสำหรับวิชา 07-034-206 ใช้ TypeScript และ `node:test` โดยไม่ต้องเปิดเว็บเซิร์ฟเวอร์หรือฐานข้อมูล
+ตัวอย่างแกนกลางสำหรับวิชา 07-034-206 ใช้ JavaScript ES6 และ `node:test` โดยไม่ต้องเปิดเว็บเซิร์ฟเวอร์หรือฐานข้อมูล
 
 ## เริ่มใช้งาน
 
 ติดตั้ง Node.js รุ่น LTS และ npm แล้วรันคำสั่งต่อไปนี้ในโฟลเดอร์ starter
 
 ```bash
-npm install
 npm test
 npm run demo
 ```
 
-หลังมี `package-lock.json` แล้ว ห้องเรียนควรใช้ `npm ci` เพื่อให้ติดตั้ง dependency ตามรุ่นที่บันทึกไว้
+ชุดนี้ไม่มี dependency ภายนอก จึงไม่ต้องติดตั้ง TypeScript หรือ framework ก่อนเริ่มเรียน
 
 ## สิ่งที่ตัวอย่างสาธิต
 
 - `Equipment` รักษาเงื่อนไขห้ามยืมซ้ำและคืนซ้ำ
-- `LoanPolicy` แยกนโยบายระยะเวลายืม
+- Policy objects แยกนโยบายระยะเวลายืมด้วย duck typing
 - `LoanService` ใช้ constructor injection
 - `InMemoryEquipmentRepository` แยกการเข้าถึงข้อมูล
 - ชุดทดสอบตรวจเส้นทางปกติและผิดเงื่อนไข

@@ -5,7 +5,7 @@ const CHAPTERS = [
     "clo": "CLO1, CLO6",
     "title": "เริ่มจากความสำเร็จเล็ก ๆ",
     "subtitle": "Mini Equipment Catalog: ดูผลลัพธ์ก่อน แล้วค่อยแกะโครงสร้าง",
-    "codeFile": "ch01-mini-equipment-catalog.ts",
+    "codeFile": "ch01-mini-equipment-catalog.js",
     "piece": "ชิ้นที่ 1 · ข้อมูลอุปกรณ์และผลลัพธ์ที่ต้องการ"
   },
   {
@@ -14,7 +14,7 @@ const CHAPTERS = [
     "clo": "CLO1, CLO3, CLO4",
     "title": "ข้อมูลและกฎเงื่อนไข",
     "subtitle": "สร้างรหัส สถานะ จำนวนวัน และเงื่อนไขที่ตรวจสอบได้",
-    "codeFile": "ch02-loan-rules.ts",
+    "codeFile": "ch02-loan-rules.js",
     "piece": "ชิ้นที่ 2 · กฎสิทธิ์และจำนวนวันยืม"
   },
   {
@@ -23,7 +23,7 @@ const CHAPTERS = [
     "clo": "CLO1, CLO3, CLO4",
     "title": "ฟังก์ชันบริสุทธิ์และการทดสอบ",
     "subtitle": "เปลี่ยนข้อกำหนดให้เป็นตัวอย่างที่พิสูจน์ได้",
-    "codeFile": "ch03-pure-function.test.ts",
+    "codeFile": "ch03-pure-function.test.js",
     "piece": "ชิ้นที่ 3 · ชุดทดสอบกฎธุรกิจ"
   },
   {
@@ -32,7 +32,7 @@ const CHAPTERS = [
     "clo": "CLO1, CLO2, CLO3",
     "title": "คลาสและวัตถุ",
     "subtitle": "ให้ Equipment ดูแลข้อมูลและพฤติกรรมของตนเอง",
-    "codeFile": "ch04-equipment-class.ts",
+    "codeFile": "ch04-equipment-class.js",
     "piece": "ชิ้นที่ 4 · Equipment class"
   },
   {
@@ -41,7 +41,7 @@ const CHAPTERS = [
     "clo": "CLO2, CLO3, CLO4, CLO6",
     "title": "Encapsulation และ Invariant",
     "subtitle": "ป้องกันสถานะผิดด้วยเมธอดที่ตรวจเงื่อนไข",
-    "codeFile": "ch05-equipment-invariant.ts",
+    "codeFile": "ch05-equipment-invariant.js",
     "piece": "ชิ้นที่ 5 · สถานะและกฎที่ละเมิดไม่ได้"
   },
   {
@@ -50,16 +50,16 @@ const CHAPTERS = [
     "clo": "CLO2, CLO3",
     "title": "Composition ก่อน Inheritance",
     "subtitle": "ประกอบ Loan จาก Equipment และข้อมูลผู้ยืม",
-    "codeFile": "ch06-loan-composition.ts",
+    "codeFile": "ch06-loan-composition.js",
     "piece": "ชิ้นที่ 6 · Loan และความสัมพันธ์ของวัตถุ"
   },
   {
     "id": 7,
     "weeks": "10–11",
     "clo": "CLO1, CLO2, CLO3, CLO4",
-    "title": "Polymorphism, Interface และ DI",
+    "title": "Polymorphism, Strategy และ DI",
     "subtitle": "เปลี่ยนนโยบายได้โดยไม่แก้ LoanService",
-    "codeFile": "ch07-loan-policy.ts",
+    "codeFile": "ch07-loan-policy.js",
     "piece": "ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้"
   },
   {
@@ -68,16 +68,16 @@ const CHAPTERS = [
     "clo": "CLO3, CLO4, CLO5",
     "title": "Repository และ Runtime Validation",
     "subtitle": "แยกแหล่งข้อมูลและไม่เชื่อข้อมูลจากภายนอกทันที",
-    "codeFile": "ch08-repository-validation.ts",
+    "codeFile": "ch08-repository-validation.js",
     "piece": "ชิ้นที่ 8 · แหล่งข้อมูลและด่านตรวจ input"
   },
   {
     "id": 9,
     "weeks": "14",
     "clo": "CLO2, CLO3, CLO4",
-    "title": "เชื่อม NestJS API กับ React",
-    "subtitle": "React แสดงผล · Controller รับคำขอ · Service บังคับกฎ",
-    "codeFile": "ch09-nest-react-flow.tsx",
+    "title": "เชื่อม Express API กับ React",
+    "subtitle": "React แสดงผล · Route รับคำขอ · Service บังคับกฎ",
+    "codeFile": "ch09-express-react-flow.jsx",
     "piece": "ชิ้นที่ 9 · เส้นทาง UI ถึงกฎธุรกิจ"
   },
   {
@@ -86,7 +86,7 @@ const CHAPTERS = [
     "clo": "CLO2–CLO6",
     "title": "ประกอบ Jigsaw เป็น Mini Project",
     "subtitle": "รวมชิ้นส่วน ตรวจคุณภาพ แล้วออกแบบโครงงานของตนเอง",
-    "codeFile": "ch10-mini-project-blueprint.ts",
+    "codeFile": "ch10-mini-project-blueprint.js",
     "piece": "ชิ้นที่ 10 · ระบบสมบูรณ์และแนวคิดของตนเอง"
   }
 ];
@@ -102,9 +102,9 @@ const SLIDES = [
     "title": "บทที่ 1\nเริ่มจากความสำเร็จเล็ก ๆ",
     "subtitle": "Mini Equipment Catalog: ดูผลลัพธ์ก่อน แล้วค่อยแกะโครงสร้าง",
     "points": [
-      "รันตัวอย่างสำเร็จและเห็นผลลัพธ์ทันที",
+      "รันตัวอย่าง JavaScript ES6 และเห็นผลลัพธ์ทันที",
       "แยกข้อมูล ฟังก์ชัน และผลลัพธ์ออกจากกัน",
-      "อธิบายเส้นทาง Python พื้นฐาน → TypeScript ได้"
+      "เชื่อมพื้นฐาน Python กับ JavaScript ที่คุ้นเคยได้"
     ],
     "piece": "ชิ้นที่ 1 · ข้อมูลอุปกรณ์และผลลัพธ์ที่ต้องการ",
     "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
@@ -120,12 +120,12 @@ const SLIDES = [
     "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
     "points": [
       "โปรแกรมเล็กที่สมบูรณ์ช่วยให้เห็นภาพปลายทาง",
-      "TypeScript ตรวจชนิดก่อนรันเป็น JavaScript",
+      "JavaScript ES6 รันด้วย Node.js โดยไม่ต้องแปลงภาษา",
       "เริ่มจากทำตามให้สำเร็จ แล้วเปลี่ยนข้อมูลหนึ่งจุดด้วยตนเอง"
     ],
     "details": [
       "แนวคิด 1: โปรแกรมเล็กที่สมบูรณ์ช่วยให้เห็นภาพปลายทาง",
-      "แนวคิด 2: TypeScript ตรวจชนิดก่อนรันเป็น JavaScript",
+      "แนวคิด 2: JavaScript ES6 รันด้วย Node.js โดยไม่ต้องแปลงภาษา",
       "แนวคิด 3: เริ่มจากทำตามให้สำเร็จ แล้วเปลี่ยนข้อมูลหนึ่งจุดด้วยตนเอง"
     ],
     "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
@@ -138,18 +138,18 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=1",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch01-mini-equipment-catalog.ts",
+    "subtitle": "ch01-mini-equipment-catalog.js",
     "points": [
-      "type กำหนดรูปแบบข้อมูลอุปกรณ์",
-      "items คือข้อมูลตัวอย่างที่ควบคุมได้",
+      "items คือข้อมูลตัวอย่างแบบ array ของ object",
+      "available เก็บสถานะด้วย boolean",
       "listAvailable รับข้อมูล คืนผลใหม่ และทดสอบแยกได้"
     ],
     "details": [
-      "type กำหนดรูปแบบข้อมูลอุปกรณ์",
-      "items คือข้อมูลตัวอย่างที่ควบคุมได้",
+      "items คือข้อมูลตัวอย่างแบบ array ของ object",
+      "available เก็บสถานะด้วย boolean",
       "listAvailable รับข้อมูล คืนผลใหม่ และทดสอบแยกได้"
     ],
-    "code": "type EquipmentItem = { id: string; name: string; available: boolean };\n\nconst items: EquipmentItem[] = [\n  { id: \"EQ01\", name: \"Camera\", available: true },\n  { id: \"EQ02\", name: \"Tripod\", available: false }\n];\n\nfunction listAvailable(data: EquipmentItem[]): EquipmentItem[] {\n  return data.filter(item => item.available);\n}\n\nconsole.log(listAvailable(items));",
+    "code": "const items = [\n  { id: \"EQ01\", name: \"Camera\", available: true },\n  { id: \"EQ02\", name: \"Tripod\", available: false }\n];\n\nfunction listAvailable(data) {\n  return data.filter(item => item.available);\n}\n\nconsole.log(listAvailable(items));",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -182,7 +182,7 @@ const SLIDES = [
       "ส่วนใดทำหน้าที่คัดเฉพาะอุปกรณ์พร้อมยืม?"
     ],
     "options": [
-      "type EquipmentItem",
+      "items",
       "listAvailable",
       "console.log เพียงอย่างเดียว"
     ],
@@ -237,12 +237,12 @@ const SLIDES = [
     "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
     "points": [
       "number ต้องตรวจจำนวนเต็มและขอบเขต",
-      "union type ลดค่าข้อความที่สะกดผิด",
+      "ค่าข้อความต้องตรวจเทียบกับรายการสถานะที่อนุญาต",
       "กฎสำคัญต้องตรวจที่ Backend ไม่ใช่เฉพาะหน้าจอ"
     ],
     "details": [
       "แนวคิด 1: number ต้องตรวจจำนวนเต็มและขอบเขต",
-      "แนวคิด 2: union type ลดค่าข้อความที่สะกดผิด",
+      "แนวคิด 2: ค่าข้อความต้องตรวจเทียบกับรายการสถานะที่อนุญาต",
       "แนวคิด 3: กฎสำคัญต้องตรวจที่ Backend ไม่ใช่เฉพาะหน้าจอ"
     ],
     "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
@@ -255,18 +255,18 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=2",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch02-loan-rules.ts",
+    "subtitle": "ch02-loan-rules.js",
     "points": [
-      "union type จำกัดสถานะให้เหลือค่าที่กำหนด",
+      "VALID_STATUSES ระบุสถานะที่ระบบยอมรับ",
       "validDays รวมเงื่อนไขจำนวนเต็มและช่วง 1–7",
       "return รวมกฎสถานะและจำนวนวันโดยยังไม่แก้ข้อมูล"
     ],
     "details": [
-      "union type จำกัดสถานะให้เหลือค่าที่กำหนด",
+      "VALID_STATUSES ระบุสถานะที่ระบบยอมรับ",
       "validDays รวมเงื่อนไขจำนวนเต็มและช่วง 1–7",
       "return รวมกฎสถานะและจำนวนวันโดยยังไม่แก้ข้อมูล"
     ],
-    "code": "type EquipmentStatus = \"available\" | \"borrowed\";\n\nfunction canBorrow(status: EquipmentStatus, days: number): boolean {\n  const validDays = Number.isInteger(days) && days >= 1 && days <= 7;\n  return status === \"available\" && validDays;\n}\n\nconsole.log(canBorrow(\"available\", 7)); // true\nconsole.log(canBorrow(\"borrowed\", 7));  // false\nconsole.log(canBorrow(\"available\", 8)); // false",
+    "code": "const VALID_STATUSES = [\"available\", \"borrowed\"];\n\nfunction canBorrow(status, days) {\n  if (!VALID_STATUSES.includes(status)) return false;\n  const validDays = Number.isInteger(days) && days >= 1 && days <= 7;\n  return status === \"available\" && validDays;\n}\n\nconsole.log(canBorrow(\"available\", 7)); // true\nconsole.log(canBorrow(\"borrowed\", 7));  // false\nconsole.log(canBorrow(\"available\", 8)); // false",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -304,8 +304,8 @@ const SLIDES = [
       "เพื่อทำให้ทุกค่ากลายเป็น 7"
     ],
     "answer": 1,
-    "explain": "ชนิด number รวมค่าทศนิยม จึงต้องตรวจจำนวนเต็มตามกฎธุรกิจ",
-    "hint": "TypeScript number ไม่ได้หมายถึงจำนวนเต็มเท่านั้น",
+    "explain": "JavaScript ใช้ number ทั้งจำนวนเต็มและทศนิยม จึงต้องตรวจตามกฎธุรกิจ",
+    "hint": "ชนิด number ไม่ได้หมายถึงจำนวนเต็มเท่านั้น",
     "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
   },
   {
@@ -372,7 +372,7 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=3",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch03-pure-function.test.ts",
+    "subtitle": "ch03-pure-function.test.js",
     "points": [
       "ฟังก์ชันแยกกฎออกจาก UI และฐานข้อมูล",
       "test ตั้งชื่อเป็นพฤติกรรมที่อ่านเข้าใจได้",
@@ -383,7 +383,7 @@ const SLIDES = [
       "test ตั้งชื่อเป็นพฤติกรรมที่อ่านเข้าใจได้",
       "assert เปรียบเทียบผลจริงกับผลที่คาดหวัง"
     ],
-    "code": "import test from \"node:test\";\nimport assert from \"node:assert/strict\";\n\nexport function maxLoanDays(role: \"student\" | \"staff\"): number {\n  return role === \"student\" ? 7 : 14;\n}\n\ntest(\"นักศึกษายืมได้ไม่เกิน 7 วัน\", () => {\n  assert.equal(maxLoanDays(\"student\"), 7);\n});\n\ntest(\"บุคลากรยืมได้ไม่เกิน 14 วัน\", () => {\n  assert.equal(maxLoanDays(\"staff\"), 14);\n});",
+    "code": "import test from \"node:test\";\nimport assert from \"node:assert/strict\";\n\nexport function maxLoanDays(role) {\n  return role === \"student\" ? 7 : 14;\n}\n\ntest(\"นักศึกษายืมได้ไม่เกิน 7 วัน\", () => {\n  assert.equal(maxLoanDays(\"student\"), 7);\n});\n\ntest(\"บุคลากรยืมได้ไม่เกิน 14 วัน\", () => {\n  assert.equal(maxLoanDays(\"staff\"), 14);\n});",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -489,18 +489,18 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=4",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch04-equipment-class.ts",
+    "subtitle": "ch04-equipment-class.js",
     "points": [
-      "constructor บังคับ id และ name ตอนสร้างวัตถุ",
-      "readonly ป้องกันการเปลี่ยนรหัสหลังสร้าง",
-      "private borrowed ซ่อนสถานะภายในและเปิดอ่านผ่านเมธอด"
+      "constructor รับ id และ name ตอนสร้างวัตถุ",
+      "this เก็บข้อมูลของ instance แต่ละตัว",
+      "#borrowed ซ่อนสถานะภายในและเปิดอ่านผ่านเมธอด"
     ],
     "details": [
-      "constructor บังคับ id และ name ตอนสร้างวัตถุ",
-      "readonly ป้องกันการเปลี่ยนรหัสหลังสร้าง",
-      "private borrowed ซ่อนสถานะภายในและเปิดอ่านผ่านเมธอด"
+      "constructor รับ id และ name ตอนสร้างวัตถุ",
+      "this เก็บข้อมูลของ instance แต่ละตัว",
+      "#borrowed ซ่อนสถานะภายในและเปิดอ่านผ่านเมธอด"
     ],
-    "code": "export class Equipment {\n  constructor(\n    public readonly id: string,\n    public readonly name: string,\n    private borrowed = false\n  ) {}\n\n  isAvailable(): boolean {\n    return !this.borrowed;\n  }\n}\n\nconst camera = new Equipment(\"EQ01\", \"Camera\");\nconst tripod = new Equipment(\"EQ02\", \"Tripod\");\nconsole.log(camera.isAvailable(), tripod.isAvailable());",
+    "code": "export class Equipment {\n  #borrowed = false;\n\n  constructor(id, name) {\n    this.id = id;\n    this.name = name;\n  }\n\n  isAvailable() {\n    return !this.#borrowed;\n  }\n}\n\nconst camera = new Equipment(\"EQ01\", \"Camera\");\nconst tripod = new Equipment(\"EQ02\", \"Tripod\");\nconsole.log(camera.isAvailable(), tripod.isAvailable());",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -606,7 +606,7 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=5",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch05-equipment-invariant.ts",
+    "subtitle": "ch05-equipment-invariant.js",
     "points": [
       "#borrowed ถูกบังคับความเป็นส่วนตัวขณะรัน",
       "borrow ตรวจ invariant ก่อนแก้ค่า",
@@ -617,7 +617,7 @@ const SLIDES = [
       "borrow ตรวจ invariant ก่อนแก้ค่า",
       "giveBack ใช้กฎตรงข้ามและคงสถานะเมื่อเกิด error"
     ],
-    "code": "export class Equipment {\n  #borrowed = false;\n\n  borrow(): void {\n    if (this.#borrowed) throw new Error(\"ยืมซ้ำไม่ได้\");\n    this.#borrowed = true;\n  }\n\n  giveBack(): void {\n    if (!this.#borrowed) throw new Error(\"คืนซ้ำไม่ได้\");\n    this.#borrowed = false;\n  }\n\n  isAvailable(): boolean { return !this.#borrowed; }\n}",
+    "code": "export class Equipment {\n  #borrowed = false;\n\n  borrow() {\n    if (this.#borrowed) throw new Error(\"ยืมซ้ำไม่ได้\");\n    this.#borrowed = true;\n  }\n\n  giveBack() {\n    if (!this.#borrowed) throw new Error(\"คืนซ้ำไม่ได้\");\n    this.#borrowed = false;\n  }\n\n  isAvailable() { return !this.#borrowed; }\n}",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -647,12 +647,12 @@ const SLIDES = [
     "title": "ตรวจความเข้าใจบทที่ 5",
     "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
     "points": [
-      "เหตุใด borrowed จึงไม่ควรเป็น public?"
+      "เหตุใด borrowed จึงควรเป็น private field?"
     ],
     "options": [
       "เพื่อให้โค้ดยาวขึ้น",
       "เพื่อบังคับให้เปลี่ยนสถานะผ่านกฎในเมธอด",
-      "เพราะ public ใช้กับ TypeScript ไม่ได้"
+      "เพราะ JavaScript ใช้ boolean ไม่ได้"
     ],
     "answer": 1,
     "explain": "การซ่อนสถานะช่วยป้องกันภายนอกข้ามกฎยืมและคืน",
@@ -723,7 +723,7 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=6",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch06-loan-composition.ts",
+    "subtitle": "ch06-loan-composition.js",
     "points": [
       "equipment field แสดงความสัมพันธ์ has-a",
       "borrowerId และ days เป็นข้อมูลของรายการยืม",
@@ -734,7 +734,7 @@ const SLIDES = [
       "borrowerId และ days เป็นข้อมูลของรายการยืม",
       "constructor ตรวจข้อมูลที่ Loan ต้องรับผิดชอบ"
     ],
-    "code": "import { Equipment } from \"./equipment.js\";\n\nexport class Loan {\n  constructor(\n    public readonly equipment: Equipment,\n    public readonly borrowerId: string,\n    public readonly days: number\n  ) {\n    if (!Number.isInteger(days) || days < 1) {\n      throw new Error(\"จำนวนวันไม่ถูกต้อง\");\n    }\n  }\n}\n\n// Loan มี Equipment เป็นส่วนประกอบ ไม่ได้สืบทอดจาก Equipment",
+    "code": "// รับ object ของ Equipment ที่สร้างจากบทก่อนหน้า\nexport class Loan {\n  constructor(equipment, borrowerId, days) {\n    if (!Number.isInteger(days) || days < 1) {\n      throw new Error(\"จำนวนวันไม่ถูกต้อง\");\n    }\n    this.equipment = equipment;\n    this.borrowerId = borrowerId;\n    this.days = days;\n  }\n}\n\n// Loan มี Equipment เป็นส่วนประกอบ ไม่ได้สืบทอดจาก Equipment",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -801,11 +801,11 @@ const SLIDES = [
     "codeLink": "resource.html?type=code&chapter=7",
     "worksheet": "resource.html?type=worksheet&chapter=7",
     "kind": "chapter",
-    "title": "บทที่ 7\nPolymorphism, Interface และ DI",
+    "title": "บทที่ 7\nPolymorphism, Strategy และ DI",
     "subtitle": "เปลี่ยนนโยบายได้โดยไม่แก้ LoanService",
     "points": [
-      "กำหนดข้อตกลงด้วย interface",
-      "สลับนโยบายผ่าน constructor injection",
+      "กำหนดข้อตกลงจากเมธอดที่ผู้เรียกต้องใช้",
+      "สลับ strategy ผ่าน constructor injection",
       "ทดสอบ service ด้วย fake policy"
     ],
     "piece": "ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้",
@@ -818,16 +818,16 @@ const SLIDES = [
     "codeLink": "resource.html?type=code&chapter=7",
     "worksheet": "resource.html?type=worksheet&chapter=7",
     "kind": "reveal",
-    "title": "Polymorphism, Interface และ DI: แนวคิดสำคัญ",
+    "title": "Polymorphism, Strategy และ DI: แนวคิดสำคัญ",
     "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
     "points": [
-      "interface อธิบายสิ่งที่ผู้เรียกต้องการ",
-      "polymorphism ให้ implementation หลายแบบใช้ผ่านข้อตกลงเดียว",
+      "JavaScript ใช้ duck typing: วัตถุที่มีเมธอดตามข้อตกลงทำงานร่วมกันได้",
+      "polymorphism ให้ object หลายแบบใช้ผ่านเมธอดเดียวกัน",
       "dependency injection ลดการผูกกับรายละเอียด"
     ],
     "details": [
-      "แนวคิด 1: interface อธิบายสิ่งที่ผู้เรียกต้องการ",
-      "แนวคิด 2: polymorphism ให้ implementation หลายแบบใช้ผ่านข้อตกลงเดียว",
+      "แนวคิด 1: JavaScript ใช้ duck typing: วัตถุที่มีเมธอดตามข้อตกลงทำงานร่วมกันได้",
+      "แนวคิด 2: polymorphism ให้ object หลายแบบใช้ผ่านเมธอดเดียวกัน",
       "แนวคิด 3: dependency injection ลดการผูกกับรายละเอียด"
     ],
     "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
@@ -840,18 +840,18 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=7",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch07-loan-policy.ts",
+    "subtitle": "ch07-loan-policy.js",
     "points": [
-      "LoanPolicy กำหนดเมธอดที่ service ต้องใช้",
-      "StandardLoanPolicy เป็นรายละเอียดหนึ่งแบบ",
+      "เมธอด maxDays คือข้อตกลงที่ service ต้องใช้",
+      "StandardLoanPolicy เป็น strategy หนึ่งแบบ",
       "LoanService รับ dependency จากภายนอก จึงสลับ fake ใน test ได้"
     ],
     "details": [
-      "LoanPolicy กำหนดเมธอดที่ service ต้องใช้",
-      "StandardLoanPolicy เป็นรายละเอียดหนึ่งแบบ",
+      "เมธอด maxDays คือข้อตกลงที่ service ต้องใช้",
+      "StandardLoanPolicy เป็น strategy หนึ่งแบบ",
       "LoanService รับ dependency จากภายนอก จึงสลับ fake ใน test ได้"
     ],
-    "code": "export interface LoanPolicy {\n  maxDays(role: \"student\" | \"staff\"): number;\n}\n\nexport class StandardLoanPolicy implements LoanPolicy {\n  maxDays(role: \"student\" | \"staff\"): number {\n    return role === \"student\" ? 7 : 14;\n  }\n}\n\nexport class LoanService {\n  constructor(private readonly policy: LoanPolicy) {}\n  canBorrow(role: \"student\" | \"staff\", days: number): boolean {\n    return days >= 1 && days <= this.policy.maxDays(role);\n  }\n}",
+    "code": "export class StandardLoanPolicy {\n  maxDays(role) {\n    return role === \"student\" ? 7 : 14;\n  }\n}\n\nexport class LoanService {\n  constructor(policy) {\n    if (typeof policy?.maxDays !== \"function\") {\n      throw new Error(\"policy ต้องมีเมธอด maxDays\");\n    }\n    this.policy = policy;\n  }\n\n  canBorrow(role, days) {\n    return days >= 1 && days <= this.policy.maxDays(role);\n  }\n}",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -886,10 +886,10 @@ const SLIDES = [
     "options": [
       "ไม่ต้องเขียน test",
       "สลับ policy ได้โดยไม่แก้ LoanService",
-      "ทำให้ interface อยู่ขณะรันโดยอัตโนมัติ"
+      "ทำให้ทุก policy ให้ผลเหมือนกัน"
     ],
     "answer": 1,
-    "explain": "Service พึ่งข้อตกลง จึงเปลี่ยน implementation และทดสอบแยกได้",
+    "explain": "Service พึ่งเมธอดตามข้อตกลง จึงเปลี่ยน object และทดสอบแยกได้",
     "hint": "มองหาสิ่งที่ส่งเข้าทาง constructor",
     "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
   },
@@ -903,12 +903,12 @@ const SLIDES = [
     "title": "Jigsaw Checkpoint 7/10",
     "subtitle": "ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้",
     "points": [
-      "Interface + policy จริง + fake policy + test เปรียบเทียบ",
+      "Policy จริง + fake policy + test เปรียบเทียบ",
       "นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า",
       "ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน"
     ],
     "piece": "ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้",
-    "deliverable": "Interface + policy จริง + fake policy + test เปรียบเทียบ",
+    "deliverable": "Policy จริง + fake policy + test เปรียบเทียบ",
     "note": "ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร"
   },
   {
@@ -923,7 +923,7 @@ const SLIDES = [
     "points": [
       "แยกการเก็บข้อมูลผ่าน repository",
       "ใช้ Map ป้องกันรหัสซ้ำ",
-      "ตรวจ unknown input ก่อนเรียก domain"
+      "ตรวจข้อมูล request ก่อนเรียก domain"
     ],
     "piece": "ชิ้นที่ 8 · แหล่งข้อมูลและด่านตรวจ input",
     "note": "เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์"
@@ -940,12 +940,12 @@ const SLIDES = [
     "points": [
       "repository ซ่อนรายละเอียดแหล่งข้อมูล",
       "in-memory repository เหมาะกับการเรียนและการทดสอบ",
-      "TypeScript type ไม่ตรวจ JSON ขณะรัน"
+      "ข้อมูล JSON จากภายนอกต้องตรวจที่ runtime"
     ],
     "details": [
       "แนวคิด 1: repository ซ่อนรายละเอียดแหล่งข้อมูล",
       "แนวคิด 2: in-memory repository เหมาะกับการเรียนและการทดสอบ",
-      "แนวคิด 3: TypeScript type ไม่ตรวจ JSON ขณะรัน"
+      "แนวคิด 3: ข้อมูล JSON จากภายนอกต้องตรวจที่ runtime"
     ],
     "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
   },
@@ -957,18 +957,18 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=8",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch08-repository-validation.ts",
+    "subtitle": "ch08-repository-validation.js",
     "points": [
       "Map เก็บคู่ id → item และตรวจซ้ำได้",
-      "find แสดงความเป็นไปได้ว่าไม่พบด้วย undefined",
-      "type guard ตรวจ unknown ก่อนยืนยันรูปแบบข้อมูล"
+      "find คืน undefined เมื่อไม่พบ",
+      "isLoanRequest ตรวจข้อมูลจริงก่อนส่งเข้าสู่ domain"
     ],
     "details": [
       "Map เก็บคู่ id → item และตรวจซ้ำได้",
-      "find แสดงความเป็นไปได้ว่าไม่พบด้วย undefined",
-      "type guard ตรวจ unknown ก่อนยืนยันรูปแบบข้อมูล"
+      "find คืน undefined เมื่อไม่พบ",
+      "isLoanRequest ตรวจข้อมูลจริงก่อนส่งเข้าสู่ domain"
     ],
-    "code": "type EquipmentRecord = { id: string; name: string };\n\nexport class EquipmentRepository {\n  #items = new Map<string, EquipmentRecord>();\n\n  add(item: EquipmentRecord): void {\n    if (this.#items.has(item.id)) throw new Error(\"รหัสซ้ำ\");\n    this.#items.set(item.id, item);\n  }\n\n  find(id: string): EquipmentRecord | undefined {\n    return this.#items.get(id);\n  }\n}\n\nexport function isLoanRequest(value: unknown): value is { id: string; days: number } {\n  if (typeof value !== \"object\" || value === null) return false;\n  const v = value as Record<string, unknown>;\n  return typeof v.id === \"string\" && Number.isInteger(v.days);\n}",
+    "code": "export class EquipmentRepository {\n  #items = new Map();\n\n  add(item) {\n    if (this.#items.has(item.id)) throw new Error(\"รหัสซ้ำ\");\n    this.#items.set(item.id, item);\n  }\n\n  find(id) {\n    return this.#items.get(id);\n  }\n}\n\nexport function isLoanRequest(value) {\n  if (typeof value !== \"object\" || value === null) return false;\n  return typeof value.id === \"string\" && Number.isInteger(value.days);\n}",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -998,16 +998,16 @@ const SLIDES = [
     "title": "ตรวจความเข้าใจบทที่ 8",
     "subtitle": "ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา",
     "points": [
-      "เหตุใด request จาก API จึงควรเริ่มเป็น unknown?"
+      "เหตุใด request จาก API จึงต้องตรวจที่ runtime?"
     ],
     "options": [
-      "เพราะเครือข่ายรับรองชนิด TypeScript ให้แล้ว",
-      "เพื่อบังคับให้ตรวจรูปแบบจริงก่อนใช้งาน",
-      "เพื่อให้ไม่ต้องตรวจค่า null"
+      "เพราะข้อมูลจากภายนอกอาจผิดรูปแบบ",
+      "เพื่อให้ไม่ต้องตรวจค่า null",
+      "เพราะ React รับประกันข้อมูลให้แล้ว"
     ],
-    "answer": 1,
-    "explain": "ข้อมูลภายนอกอาจไม่ตรง type annotation จึงต้องตรวจขณะรัน",
-    "hint": "ชนิด TypeScript ถูกลบเมื่อแปลงเป็น JavaScript",
+    "answer": 0,
+    "explain": "ข้อมูลภายนอกอาจหาย ผิดชนิด หรืออยู่นอกขอบเขต จึงต้องตรวจค่าจริงก่อนใช้",
+    "hint": "อย่าเชื่อข้อมูลเพียงเพราะส่งมาจากหน้าจอของเรา",
     "note": "ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย"
   },
   {
@@ -1035,8 +1035,8 @@ const SLIDES = [
     "codeLink": "resource.html?type=code&chapter=9",
     "worksheet": "resource.html?type=worksheet&chapter=9",
     "kind": "chapter",
-    "title": "บทที่ 9\nเชื่อม NestJS API กับ React",
-    "subtitle": "React แสดงผล · Controller รับคำขอ · Service บังคับกฎ",
+    "title": "บทที่ 9\nเชื่อม Express API กับ React",
+    "subtitle": "React แสดงผล · Route รับคำขอ · Service บังคับกฎ",
     "points": [
       "อธิบาย request flow ตั้งแต่หน้าจอถึง repository",
       "วางกฎธุรกิจไว้ใน service/domain",
@@ -1052,16 +1052,16 @@ const SLIDES = [
     "codeLink": "resource.html?type=code&chapter=9",
     "worksheet": "resource.html?type=worksheet&chapter=9",
     "kind": "reveal",
-    "title": "เชื่อม NestJS API กับ React: แนวคิดสำคัญ",
+    "title": "เชื่อม Express API กับ React: แนวคิดสำคัญ",
     "subtitle": "เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง",
     "points": [
       "React ไม่ควรเป็นแหล่งกฎธุรกิจเพียงแห่งเดียว",
-      "Controller แปลง HTTP เป็นการเรียกใช้ service",
+      "Express route แปลง HTTP เป็นการเรียกใช้ service",
       "Service และ domain ต้องทดสอบได้โดยไม่เปิดเซิร์ฟเวอร์"
     ],
     "details": [
       "แนวคิด 1: React ไม่ควรเป็นแหล่งกฎธุรกิจเพียงแห่งเดียว",
-      "แนวคิด 2: Controller แปลง HTTP เป็นการเรียกใช้ service",
+      "แนวคิด 2: Express route แปลง HTTP เป็นการเรียกใช้ service",
       "แนวคิด 3: Service และ domain ต้องทดสอบได้โดยไม่เปิดเซิร์ฟเวอร์"
     ],
     "note": "ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง"
@@ -1074,18 +1074,18 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=9",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch09-nest-react-flow.tsx",
+    "subtitle": "ch09-express-react-flow.jsx",
     "points": [
-      "Controller รับ GET /equipment และเรียก service",
+      "Express route รับ GET /api/equipment และเรียก service",
       "Function Component เก็บ state ด้วย hook",
-      "fetch รับข้อมูลภายนอก จึงต้องจัดการ loading/error และ validate ที่ Backend"
+      "fetch รับข้อมูลภายนอก จึงต้องจัดการ loading/error และตรวจข้อมูลที่ Backend"
     ],
     "details": [
-      "Controller รับ GET /equipment และเรียก service",
+      "Express route รับ GET /api/equipment และเรียก service",
       "Function Component เก็บ state ด้วย hook",
-      "fetch รับข้อมูลภายนอก จึงต้องจัดการ loading/error และ validate ที่ Backend"
+      "fetch รับข้อมูลภายนอก จึงต้องจัดการ loading/error และตรวจข้อมูลที่ Backend"
     ],
-    "code": "// NestJS Controller (อยู่ในโปรเจกต์ NestJS)\n@Controller(\"equipment\")\nexport class EquipmentController {\n  constructor(private readonly service: EquipmentService) {}\n  @Get() list() { return this.service.list(); }\n}\n\n// React Function Component (อยู่ในโปรเจกต์ React)\nexport function EquipmentList() {\n  const [items, setItems] = useState<EquipmentDto[]>([]);\n  useEffect(() => {\n    fetch(\"/api/equipment\").then(r => r.json()).then(setItems);\n  }, []);\n  return <ul>{items.map(x => <li key={x.id}>{x.name}</li>)}</ul>;\n}",
+    "code": "// Express route (ฝั่ง Backend)\napp.get(\"/api/equipment\", (req, res) => {\n  res.json(equipmentService.list());\n});\n\n// React Function Component (อยู่ในโปรเจกต์ React)\nexport function EquipmentList() {\n  const [items, setItems] = useState([]);\n  useEffect(() => {\n    fetch(\"/api/equipment\").then(r => r.json()).then(setItems);\n  }, []);\n  return <ul>{items.map(x => <li key={x.id}>{x.name}</li>)}</ul>;\n}",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {
@@ -1098,8 +1098,8 @@ const SLIDES = [
     "title": "ฝึกตามแบบมีขั้น",
     "subtitle": "ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก",
     "points": [
-      "วาด React → Controller → Service → Repository",
-      "ใช้ template ผู้สอนเปิด GET /equipment",
+      "วาด React → Express Route → Service → Repository",
+      "ใช้ template ผู้สอนเปิด GET /api/equipment",
       "ทดสอบ success, loading และ error โดยไม่ใช้ Class Component"
     ],
     "hint": "หากติด ให้ย้อนดูโค้ดตัวอย่างบท 9 แล้วเปลี่ยนเพียงหนึ่งจุด",
@@ -1191,7 +1191,7 @@ const SLIDES = [
     "worksheet": "resource.html?type=worksheet&chapter=10",
     "kind": "codewalk",
     "title": "อ่านโค้ดทีละส่วน",
-    "subtitle": "ch10-mini-project-blueprint.ts",
+    "subtitle": "ch10-mini-project-blueprint.js",
     "points": [
       "UI ส่งคำขอแต่ไม่ถือกฎทั้งหมด",
       "Service ประสาน policy, domain และ repository",
@@ -1202,7 +1202,7 @@ const SLIDES = [
       "Service ประสาน policy, domain และ repository",
       "acceptance criteria เชื่อมโจทย์กับการสาธิตและ tests"
     ],
-    "code": "// โครงสร้างตัวอย่าง Mini Equipment Loan\n// React Function Component\n//   ↓ HTTP request\n// NestJS Controller\n//   ↓ validated command\n// LoanService → LoanPolicy\n//   ↓\n// Equipment + Loan (domain objects)\n//   ↓\n// EquipmentRepository (in-memory ในรายวิชา)\n\nexport const acceptanceCriteria = [\n  \"แสดงรายการอุปกรณ์\",\n  \"ยืมได้เมื่อพร้อมและจำนวนวันถูกต้อง\",\n  \"ปฏิเสธยืมซ้ำโดยไม่เปลี่ยนสถานะ\",\n  \"คืนได้หนึ่งครั้ง\",\n  \"ชุดทดสอบผ่านและอธิบายเหตุผลได้\"\n];",
+    "code": "// โครงสร้างตัวอย่าง Mini Equipment Loan\n// React Function Component\n//   ↓ HTTP request\n// Express Route\n//   ↓ validated command\n// LoanService → LoanPolicy\n//   ↓\n// Equipment + Loan (domain objects)\n//   ↓\n// EquipmentRepository (in-memory ในรายวิชา)\n\nexport const acceptanceCriteria = [\n  \"แสดงรายการอุปกรณ์\",\n  \"ยืมได้เมื่อพร้อมและจำนวนวันถูกต้อง\",\n  \"ปฏิเสธยืมซ้ำโดยไม่เปลี่ยนสถานะ\",\n  \"คืนได้หนึ่งครั้ง\",\n  \"ชุดทดสอบผ่านและอธิบายเหตุผลได้\"\n];",
     "note": "อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน"
   },
   {

@@ -4,7 +4,7 @@
 // โครงสร้างตัวอย่าง Mini Equipment Loan
 // React Function Component
 //   ↓ HTTP request
-// NestJS Controller
+// Express Route
 //   ↓ validated command
 // LoanService → LoanPolicy
 //   ↓

@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,40 +6,41 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const dist = join(root, 'dist');
 const examplesDir = join(dist, 'examples');
 const worksheetsDir = join(dist, 'worksheets');
+rmSync(examplesDir, { recursive: true, force: true });
+rmSync(worksheetsDir, { recursive: true, force: true });
 mkdirSync(examplesDir, { recursive: true });
 mkdirSync(worksheetsDir, { recursive: true });
 
 const chapters = [
   {
     id: 1, weeks: '1', clo: 'CLO1, CLO6', title: 'เริ่มจากความสำเร็จเล็ก ๆ', subtitle: 'Mini Equipment Catalog: ดูผลลัพธ์ก่อน แล้วค่อยแกะโครงสร้าง',
-    outcomes: ['รันตัวอย่างสำเร็จและเห็นผลลัพธ์ทันที', 'แยกข้อมูล ฟังก์ชัน และผลลัพธ์ออกจากกัน', 'อธิบายเส้นทาง Python พื้นฐาน → TypeScript ได้'],
-    concepts: ['โปรแกรมเล็กที่สมบูรณ์ช่วยให้เห็นภาพปลายทาง', 'TypeScript ตรวจชนิดก่อนรันเป็น JavaScript', 'เริ่มจากทำตามให้สำเร็จ แล้วเปลี่ยนข้อมูลหนึ่งจุดด้วยตนเอง'],
-    codeFile: 'ch01-mini-equipment-catalog.ts',
-    code: `type EquipmentItem = { id: string; name: string; available: boolean };
-
-const items: EquipmentItem[] = [
+    outcomes: ['รันตัวอย่าง JavaScript ES6 และเห็นผลลัพธ์ทันที', 'แยกข้อมูล ฟังก์ชัน และผลลัพธ์ออกจากกัน', 'เชื่อมพื้นฐาน Python กับ JavaScript ที่คุ้นเคยได้'],
+    concepts: ['โปรแกรมเล็กที่สมบูรณ์ช่วยให้เห็นภาพปลายทาง', 'JavaScript ES6 รันด้วย Node.js โดยไม่ต้องแปลงภาษา', 'เริ่มจากทำตามให้สำเร็จ แล้วเปลี่ยนข้อมูลหนึ่งจุดด้วยตนเอง'],
+    codeFile: 'ch01-mini-equipment-catalog.js',
+    code: `const items = [
   { id: "EQ01", name: "Camera", available: true },
   { id: "EQ02", name: "Tripod", available: false }
 ];
 
-function listAvailable(data: EquipmentItem[]): EquipmentItem[] {
+function listAvailable(data) {
   return data.filter(item => item.available);
 }
 
 console.log(listAvailable(items));`,
-    walkthrough: ['type กำหนดรูปแบบข้อมูลอุปกรณ์', 'items คือข้อมูลตัวอย่างที่ควบคุมได้', 'listAvailable รับข้อมูล คืนผลใหม่ และทดสอบแยกได้'],
+    walkthrough: ['items คือข้อมูลตัวอย่างแบบ array ของ object', 'available เก็บสถานะด้วย boolean', 'listAvailable รับข้อมูล คืนผลใหม่ และทดสอบแยกได้'],
     practice: ['รันตัวอย่างและบันทึกผลลัพธ์', 'เพิ่ม Microphone ที่พร้อมยืม แล้วทำนายผลก่อนรัน', 'เปลี่ยนสถานะ Camera และอธิบายว่าผลเปลี่ยนเพราะอะไร'],
-    quiz: ['ส่วนใดทำหน้าที่คัดเฉพาะอุปกรณ์พร้อมยืม?', ['type EquipmentItem', 'listAvailable', 'console.log เพียงอย่างเดียว'], 1, 'ฟังก์ชัน listAvailable รับรายการและคืนเฉพาะรายการที่ available เป็น true', 'มองหาส่วนที่ใช้ filter'],
+    quiz: ['ส่วนใดทำหน้าที่คัดเฉพาะอุปกรณ์พร้อมยืม?', ['items', 'listAvailable', 'console.log เพียงอย่างเดียว'], 1, 'ฟังก์ชัน listAvailable รับรายการและคืนเฉพาะรายการที่ available เป็น true', 'มองหาส่วนที่ใช้ filter'],
     piece: 'ชิ้นที่ 1 · ข้อมูลอุปกรณ์และผลลัพธ์ที่ต้องการ', deliverable: 'ภาพผลการรัน + ข้อมูลที่เพิ่มเอง 1 รายการ + คำอธิบาย 3 บรรทัด'
   },
   {
     id: 2, weeks: '2–3', clo: 'CLO1, CLO3, CLO4', title: 'ข้อมูลและกฎเงื่อนไข', subtitle: 'สร้างรหัส สถานะ จำนวนวัน และเงื่อนไขที่ตรวจสอบได้',
     outcomes: ['เลือกชนิดข้อมูลได้เหมาะกับโจทย์', 'เขียนกฎอนุญาตยืมโดยไม่เปลี่ยนสถานะก่อนตรวจ', 'สร้างตารางกรณีปกติและกรณีขอบเขต'],
-    concepts: ['number ต้องตรวจจำนวนเต็มและขอบเขต', 'union type ลดค่าข้อความที่สะกดผิด', 'กฎสำคัญต้องตรวจที่ Backend ไม่ใช่เฉพาะหน้าจอ'],
-    codeFile: 'ch02-loan-rules.ts',
-    code: `type EquipmentStatus = "available" | "borrowed";
+    concepts: ['number ต้องตรวจจำนวนเต็มและขอบเขต', 'ค่าข้อความต้องตรวจเทียบกับรายการสถานะที่อนุญาต', 'กฎสำคัญต้องตรวจที่ Backend ไม่ใช่เฉพาะหน้าจอ'],
+    codeFile: 'ch02-loan-rules.js',
+    code: `const VALID_STATUSES = ["available", "borrowed"];
 
-function canBorrow(status: EquipmentStatus, days: number): boolean {
+function canBorrow(status, days) {
+  if (!VALID_STATUSES.includes(status)) return false;
   const validDays = Number.isInteger(days) && days >= 1 && days <= 7;
   return status === "available" && validDays;
 }
@@ -47,20 +48,20 @@ function canBorrow(status: EquipmentStatus, days: number): boolean {
 console.log(canBorrow("available", 7)); // true
 console.log(canBorrow("borrowed", 7));  // false
 console.log(canBorrow("available", 8)); // false`,
-    walkthrough: ['union type จำกัดสถานะให้เหลือค่าที่กำหนด', 'validDays รวมเงื่อนไขจำนวนเต็มและช่วง 1–7', 'return รวมกฎสถานะและจำนวนวันโดยยังไม่แก้ข้อมูล'],
+    walkthrough: ['VALID_STATUSES ระบุสถานะที่ระบบยอมรับ', 'validDays รวมเงื่อนไขจำนวนเต็มและช่วง 1–7', 'return รวมกฎสถานะและจำนวนวันโดยยังไม่แก้ข้อมูล'],
     practice: ['ทำตาราง status 2 ค่า × days 0, 1, 7, 8', 'ทำนาย true/false ก่อนรัน', 'เพิ่มกรณี NaN และ 1.5 พร้อมเหตุผล'],
-    quiz: ['เหตุใดจึงตรวจ Number.isInteger(days)?', ['เพื่อเปลี่ยน string เป็น number', 'เพื่อปฏิเสธทศนิยมเมื่อโจทย์ต้องการจำนวนวันเต็ม', 'เพื่อทำให้ทุกค่ากลายเป็น 7'], 1, 'ชนิด number รวมค่าทศนิยม จึงต้องตรวจจำนวนเต็มตามกฎธุรกิจ', 'TypeScript number ไม่ได้หมายถึงจำนวนเต็มเท่านั้น'],
+    quiz: ['เหตุใดจึงตรวจ Number.isInteger(days)?', ['เพื่อเปลี่ยน string เป็น number', 'เพื่อปฏิเสธทศนิยมเมื่อโจทย์ต้องการจำนวนวันเต็ม', 'เพื่อทำให้ทุกค่ากลายเป็น 7'], 1, 'JavaScript ใช้ number ทั้งจำนวนเต็มและทศนิยม จึงต้องตรวจตามกฎธุรกิจ', 'ชนิด number ไม่ได้หมายถึงจำนวนเต็มเท่านั้น'],
     piece: 'ชิ้นที่ 2 · กฎสิทธิ์และจำนวนวันยืม', deliverable: 'ตารางทดสอบอย่างน้อย 6 กรณี พร้อม expected result'
   },
   {
     id: 3, weeks: '4–5', clo: 'CLO1, CLO3, CLO4', title: 'ฟังก์ชันบริสุทธิ์และการทดสอบ', subtitle: 'เปลี่ยนข้อกำหนดให้เป็นตัวอย่างที่พิสูจน์ได้',
     outcomes: ['แยกฟังก์ชันที่ไม่มีผลข้างเคียง', 'เขียน automated test ด้วย node:test', 'ใช้ผลทดสอบตรวจคำตอบจาก AI'],
     concepts: ['เริ่มจาก input และ expected result', 'pure function ให้ผลเหมือนเดิมเมื่อ input เหมือนเดิม', 'แก้โค้ดแล้วต้องรัน regression tests ซ้ำ'],
-    codeFile: 'ch03-pure-function.test.ts',
+    codeFile: 'ch03-pure-function.test.js',
     code: `import test from "node:test";
 import assert from "node:assert/strict";
 
-export function maxLoanDays(role: "student" | "staff"): number {
+export function maxLoanDays(role) {
   return role === "student" ? 7 : 14;
 }
 
@@ -80,23 +81,24 @@ test("บุคลากรยืมได้ไม่เกิน 14 วัน"
     id: 4, weeks: '6', clo: 'CLO1, CLO2, CLO3', title: 'คลาสและวัตถุ', subtitle: 'ให้ Equipment ดูแลข้อมูลและพฤติกรรมของตนเอง',
     outcomes: ['อธิบาย class, instance และ constructor', 'วางข้อมูลกับพฤติกรรมที่เกี่ยวข้องไว้ด้วยกัน', 'สร้างวัตถุสองตัวที่มีสถานะแยกกัน'],
     concepts: ['class เป็นแบบกำหนดโครงสร้างและพฤติกรรม', 'instance แต่ละตัวมีสถานะของตนเอง', 'constructor รับข้อมูลเริ่มต้นที่จำเป็น'],
-    codeFile: 'ch04-equipment-class.ts',
+    codeFile: 'ch04-equipment-class.js',
     code: `export class Equipment {
-  constructor(
-    public readonly id: string,
-    public readonly name: string,
-    private borrowed = false
-  ) {}
+  #borrowed = false;
 
-  isAvailable(): boolean {
-    return !this.borrowed;
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
+  }
+
+  isAvailable() {
+    return !this.#borrowed;
   }
 }
 
 const camera = new Equipment("EQ01", "Camera");
 const tripod = new Equipment("EQ02", "Tripod");
 console.log(camera.isAvailable(), tripod.isAvailable());`,
-    walkthrough: ['constructor บังคับ id และ name ตอนสร้างวัตถุ', 'readonly ป้องกันการเปลี่ยนรหัสหลังสร้าง', 'private borrowed ซ่อนสถานะภายในและเปิดอ่านผ่านเมธอด'],
+    walkthrough: ['constructor รับ id และ name ตอนสร้างวัตถุ', 'this เก็บข้อมูลของ instance แต่ละตัว', '#borrowed ซ่อนสถานะภายในและเปิดอ่านผ่านเมธอด'],
     practice: ['วาดกล่อง class ก่อนเขียนโค้ด', 'สร้างอุปกรณ์ 2 ชิ้นและพิมพ์สถานะ', 'อธิบายความต่างระหว่าง class กับ camera instance'],
     quiz: ['camera ในตัวอย่างคืออะไร?', ['คลาส', 'อินสแตนซ์ของ Equipment', 'ชนิดข้อมูล boolean'], 1, 'camera เป็นวัตถุที่สร้างจากคลาส Equipment และมีสถานะของตนเอง', 'ดูคำสั่ง new Equipment'],
     piece: 'ชิ้นที่ 4 · Equipment class', deliverable: 'Class diagram 1 คลาส + โค้ดสร้างอุปกรณ์ 2 ชิ้น'
@@ -105,43 +107,41 @@ console.log(camera.isAvailable(), tripod.isAvailable());`,
     id: 5, weeks: '7', clo: 'CLO2, CLO3, CLO4, CLO6', title: 'Encapsulation และ Invariant', subtitle: 'ป้องกันสถานะผิดด้วยเมธอดที่ตรวจเงื่อนไข',
     outcomes: ['อธิบาย invariant ของอุปกรณ์', 'ป้องกันยืมซ้ำและคืนซ้ำ', 'ทดสอบว่ากรณีผิดไม่เปลี่ยนสถานะ'],
     concepts: ['ข้อมูล private ไม่ควรถูกแก้จากภายนอกโดยตรง', 'เมธอดตรวจเงื่อนไขก่อนเปลี่ยนสถานะ', 'ข้อผิดพลาดต้องชัดเจนและทดสอบได้'],
-    codeFile: 'ch05-equipment-invariant.ts',
+    codeFile: 'ch05-equipment-invariant.js',
     code: `export class Equipment {
   #borrowed = false;
 
-  borrow(): void {
+  borrow() {
     if (this.#borrowed) throw new Error("ยืมซ้ำไม่ได้");
     this.#borrowed = true;
   }
 
-  giveBack(): void {
+  giveBack() {
     if (!this.#borrowed) throw new Error("คืนซ้ำไม่ได้");
     this.#borrowed = false;
   }
 
-  isAvailable(): boolean { return !this.#borrowed; }
+  isAvailable() { return !this.#borrowed; }
 }`,
     walkthrough: ['#borrowed ถูกบังคับความเป็นส่วนตัวขณะรัน', 'borrow ตรวจ invariant ก่อนแก้ค่า', 'giveBack ใช้กฎตรงข้ามและคงสถานะเมื่อเกิด error'],
     practice: ['ทดสอบยืมครั้งแรกและยืมซ้ำ', 'ทดสอบคืนครั้งแรกและคืนซ้ำ', 'บันทึกสถานะก่อน–หลังกรณีผิดเงื่อนไข'],
-    quiz: ['เหตุใด borrowed จึงไม่ควรเป็น public?', ['เพื่อให้โค้ดยาวขึ้น', 'เพื่อบังคับให้เปลี่ยนสถานะผ่านกฎในเมธอด', 'เพราะ public ใช้กับ TypeScript ไม่ได้'], 1, 'การซ่อนสถานะช่วยป้องกันภายนอกข้ามกฎยืมและคืน', 'ใครควรรับผิดชอบ invariant ของ Equipment'],
+    quiz: ['เหตุใด borrowed จึงควรเป็น private field?', ['เพื่อให้โค้ดยาวขึ้น', 'เพื่อบังคับให้เปลี่ยนสถานะผ่านกฎในเมธอด', 'เพราะ JavaScript ใช้ boolean ไม่ได้'], 1, 'การซ่อนสถานะช่วยป้องกันภายนอกข้ามกฎยืมและคืน', 'ใครควรรับผิดชอบ invariant ของ Equipment'],
     piece: 'ชิ้นที่ 5 · สถานะและกฎที่ละเมิดไม่ได้', deliverable: 'โค้ด borrow/giveBack + tests กรณีปกติและผิดเงื่อนไข'
   },
   {
     id: 6, weeks: '9', clo: 'CLO2, CLO3', title: 'Composition ก่อน Inheritance', subtitle: 'ประกอบ Loan จาก Equipment และข้อมูลผู้ยืม',
     outcomes: ['แยกความสัมพันธ์ has-a กับ is-a', 'สร้าง Loan ที่อ้างถึง Equipment', 'เลือก composition เมื่อวัตถุร่วมงานกัน'],
     concepts: ['Loan has an Equipment จึงเป็น composition', 'inheritance ใช้เมื่อชนิดย่อยเป็นชนิดหลักจริง', 'อย่าสร้างคลาสย่อยเพียงเพื่อเก็บข้อมูลต่างกัน'],
-    codeFile: 'ch06-loan-composition.ts',
-    code: `import { Equipment } from "./equipment.js";
-
+    codeFile: 'ch06-loan-composition.js',
+    code: `// รับ object ของ Equipment ที่สร้างจากบทก่อนหน้า
 export class Loan {
-  constructor(
-    public readonly equipment: Equipment,
-    public readonly borrowerId: string,
-    public readonly days: number
-  ) {
+  constructor(equipment, borrowerId, days) {
     if (!Number.isInteger(days) || days < 1) {
       throw new Error("จำนวนวันไม่ถูกต้อง");
     }
+    this.equipment = equipment;
+    this.borrowerId = borrowerId;
+    this.days = days;
   }
 }
 
@@ -152,83 +152,80 @@ export class Loan {
     piece: 'ชิ้นที่ 6 · Loan และความสัมพันธ์ของวัตถุ', deliverable: 'Class diagram 2 คลาส + โค้ด Loan + test จำนวนวันผิด'
   },
   {
-    id: 7, weeks: '10–11', clo: 'CLO1, CLO2, CLO3, CLO4', title: 'Polymorphism, Interface และ DI', subtitle: 'เปลี่ยนนโยบายได้โดยไม่แก้ LoanService',
-    outcomes: ['กำหนดข้อตกลงด้วย interface', 'สลับนโยบายผ่าน constructor injection', 'ทดสอบ service ด้วย fake policy'],
-    concepts: ['interface อธิบายสิ่งที่ผู้เรียกต้องการ', 'polymorphism ให้ implementation หลายแบบใช้ผ่านข้อตกลงเดียว', 'dependency injection ลดการผูกกับรายละเอียด'],
-    codeFile: 'ch07-loan-policy.ts',
-    code: `export interface LoanPolicy {
-  maxDays(role: "student" | "staff"): number;
-}
-
-export class StandardLoanPolicy implements LoanPolicy {
-  maxDays(role: "student" | "staff"): number {
+    id: 7, weeks: '10–11', clo: 'CLO1, CLO2, CLO3, CLO4', title: 'Polymorphism, Strategy และ DI', subtitle: 'เปลี่ยนนโยบายได้โดยไม่แก้ LoanService',
+    outcomes: ['กำหนดข้อตกลงจากเมธอดที่ผู้เรียกต้องใช้', 'สลับ strategy ผ่าน constructor injection', 'ทดสอบ service ด้วย fake policy'],
+    concepts: ['JavaScript ใช้ duck typing: วัตถุที่มีเมธอดตามข้อตกลงทำงานร่วมกันได้', 'polymorphism ให้ object หลายแบบใช้ผ่านเมธอดเดียวกัน', 'dependency injection ลดการผูกกับรายละเอียด'],
+    codeFile: 'ch07-loan-policy.js',
+    code: `export class StandardLoanPolicy {
+  maxDays(role) {
     return role === "student" ? 7 : 14;
   }
 }
 
 export class LoanService {
-  constructor(private readonly policy: LoanPolicy) {}
-  canBorrow(role: "student" | "staff", days: number): boolean {
+  constructor(policy) {
+    if (typeof policy?.maxDays !== "function") {
+      throw new Error("policy ต้องมีเมธอด maxDays");
+    }
+    this.policy = policy;
+  }
+
+  canBorrow(role, days) {
     return days >= 1 && days <= this.policy.maxDays(role);
   }
 }`,
-    walkthrough: ['LoanPolicy กำหนดเมธอดที่ service ต้องใช้', 'StandardLoanPolicy เป็นรายละเอียดหนึ่งแบบ', 'LoanService รับ dependency จากภายนอก จึงสลับ fake ใน test ได้'],
+    walkthrough: ['เมธอด maxDays คือข้อตกลงที่ service ต้องใช้', 'StandardLoanPolicy เป็น strategy หนึ่งแบบ', 'LoanService รับ dependency จากภายนอก จึงสลับ fake ใน test ได้'],
     practice: ['สร้าง FakeLoanPolicy ที่คืน 2 วันเสมอ', 'ส่ง fake เข้า LoanService และเขียน test', 'เปรียบเทียบผลกับ StandardLoanPolicy'],
-    quiz: ['ประโยชน์หลักของ constructor injection ในตัวอย่างคืออะไร?', ['ไม่ต้องเขียน test', 'สลับ policy ได้โดยไม่แก้ LoanService', 'ทำให้ interface อยู่ขณะรันโดยอัตโนมัติ'], 1, 'Service พึ่งข้อตกลง จึงเปลี่ยน implementation และทดสอบแยกได้', 'มองหาสิ่งที่ส่งเข้าทาง constructor'],
-    piece: 'ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้', deliverable: 'Interface + policy จริง + fake policy + test เปรียบเทียบ'
+    quiz: ['ประโยชน์หลักของ constructor injection ในตัวอย่างคืออะไร?', ['ไม่ต้องเขียน test', 'สลับ policy ได้โดยไม่แก้ LoanService', 'ทำให้ทุก policy ให้ผลเหมือนกัน'], 1, 'Service พึ่งเมธอดตามข้อตกลง จึงเปลี่ยน object และทดสอบแยกได้', 'มองหาสิ่งที่ส่งเข้าทาง constructor'],
+    piece: 'ชิ้นที่ 7 · นโยบายที่เปลี่ยนได้', deliverable: 'Policy จริง + fake policy + test เปรียบเทียบ'
   },
   {
     id: 8, weeks: '12–13', clo: 'CLO3, CLO4, CLO5', title: 'Repository และ Runtime Validation', subtitle: 'แยกแหล่งข้อมูลและไม่เชื่อข้อมูลจากภายนอกทันที',
-    outcomes: ['แยกการเก็บข้อมูลผ่าน repository', 'ใช้ Map ป้องกันรหัสซ้ำ', 'ตรวจ unknown input ก่อนเรียก domain'],
-    concepts: ['repository ซ่อนรายละเอียดแหล่งข้อมูล', 'in-memory repository เหมาะกับการเรียนและการทดสอบ', 'TypeScript type ไม่ตรวจ JSON ขณะรัน'],
-    codeFile: 'ch08-repository-validation.ts',
-    code: `type EquipmentRecord = { id: string; name: string };
+    outcomes: ['แยกการเก็บข้อมูลผ่าน repository', 'ใช้ Map ป้องกันรหัสซ้ำ', 'ตรวจข้อมูล request ก่อนเรียก domain'],
+    concepts: ['repository ซ่อนรายละเอียดแหล่งข้อมูล', 'in-memory repository เหมาะกับการเรียนและการทดสอบ', 'ข้อมูล JSON จากภายนอกต้องตรวจที่ runtime'],
+    codeFile: 'ch08-repository-validation.js',
+    code: `export class EquipmentRepository {
+  #items = new Map();
 
-export class EquipmentRepository {
-  #items = new Map<string, EquipmentRecord>();
-
-  add(item: EquipmentRecord): void {
+  add(item) {
     if (this.#items.has(item.id)) throw new Error("รหัสซ้ำ");
     this.#items.set(item.id, item);
   }
 
-  find(id: string): EquipmentRecord | undefined {
+  find(id) {
     return this.#items.get(id);
   }
 }
 
-export function isLoanRequest(value: unknown): value is { id: string; days: number } {
+export function isLoanRequest(value) {
   if (typeof value !== "object" || value === null) return false;
-  const v = value as Record<string, unknown>;
-  return typeof v.id === "string" && Number.isInteger(v.days);
+  return typeof value.id === "string" && Number.isInteger(value.days);
 }`,
-    walkthrough: ['Map เก็บคู่ id → item และตรวจซ้ำได้', 'find แสดงความเป็นไปได้ว่าไม่พบด้วย undefined', 'type guard ตรวจ unknown ก่อนยืนยันรูปแบบข้อมูล'],
+    walkthrough: ['Map เก็บคู่ id → item และตรวจซ้ำได้', 'find คืน undefined เมื่อไม่พบ', 'isLoanRequest ตรวจข้อมูลจริงก่อนส่งเข้าสู่ domain'],
     practice: ['เพิ่ม EQ01 แล้วลองเพิ่มรหัสเดิม', 'ค้นหารหัสที่มีและไม่มี', 'ทดสอบ validator ด้วย null, string, days ทศนิยม และข้อมูลถูกต้อง'],
-    quiz: ['เหตุใด request จาก API จึงควรเริ่มเป็น unknown?', ['เพราะเครือข่ายรับรองชนิด TypeScript ให้แล้ว', 'เพื่อบังคับให้ตรวจรูปแบบจริงก่อนใช้งาน', 'เพื่อให้ไม่ต้องตรวจค่า null'], 1, 'ข้อมูลภายนอกอาจไม่ตรง type annotation จึงต้องตรวจขณะรัน', 'ชนิด TypeScript ถูกลบเมื่อแปลงเป็น JavaScript'],
+    quiz: ['เหตุใด request จาก API จึงต้องตรวจที่ runtime?', ['เพราะข้อมูลจากภายนอกอาจผิดรูปแบบ', 'เพื่อให้ไม่ต้องตรวจค่า null', 'เพราะ React รับประกันข้อมูลให้แล้ว'], 0, 'ข้อมูลภายนอกอาจหาย ผิดชนิด หรืออยู่นอกขอบเขต จึงต้องตรวจค่าจริงก่อนใช้', 'อย่าเชื่อข้อมูลเพียงเพราะส่งมาจากหน้าจอของเรา'],
     piece: 'ชิ้นที่ 8 · แหล่งข้อมูลและด่านตรวจ input', deliverable: 'Repository + validator + tests รหัสซ้ำ/ไม่พบ/ข้อมูลผิดรูปแบบ'
   },
   {
-    id: 9, weeks: '14', clo: 'CLO2, CLO3, CLO4', title: 'เชื่อม NestJS API กับ React', subtitle: 'React แสดงผล · Controller รับคำขอ · Service บังคับกฎ',
+    id: 9, weeks: '14', clo: 'CLO2, CLO3, CLO4', title: 'เชื่อม Express API กับ React', subtitle: 'React แสดงผล · Route รับคำขอ · Service บังคับกฎ',
     outcomes: ['อธิบาย request flow ตั้งแต่หน้าจอถึง repository', 'วางกฎธุรกิจไว้ใน service/domain', 'ใช้ React Function Component เรียก API'],
-    concepts: ['React ไม่ควรเป็นแหล่งกฎธุรกิจเพียงแห่งเดียว', 'Controller แปลง HTTP เป็นการเรียกใช้ service', 'Service และ domain ต้องทดสอบได้โดยไม่เปิดเซิร์ฟเวอร์'],
-    codeFile: 'ch09-nest-react-flow.tsx',
-    code: `// NestJS Controller (อยู่ในโปรเจกต์ NestJS)
-@Controller("equipment")
-export class EquipmentController {
-  constructor(private readonly service: EquipmentService) {}
-  @Get() list() { return this.service.list(); }
-}
+    concepts: ['React ไม่ควรเป็นแหล่งกฎธุรกิจเพียงแห่งเดียว', 'Express route แปลง HTTP เป็นการเรียกใช้ service', 'Service และ domain ต้องทดสอบได้โดยไม่เปิดเซิร์ฟเวอร์'],
+    codeFile: 'ch09-express-react-flow.jsx',
+    code: `// Express route (ฝั่ง Backend)
+app.get("/api/equipment", (req, res) => {
+  res.json(equipmentService.list());
+});
 
 // React Function Component (อยู่ในโปรเจกต์ React)
 export function EquipmentList() {
-  const [items, setItems] = useState<EquipmentDto[]>([]);
+  const [items, setItems] = useState([]);
   useEffect(() => {
     fetch("/api/equipment").then(r => r.json()).then(setItems);
   }, []);
   return <ul>{items.map(x => <li key={x.id}>{x.name}</li>)}</ul>;
 }`,
-    walkthrough: ['Controller รับ GET /equipment และเรียก service', 'Function Component เก็บ state ด้วย hook', 'fetch รับข้อมูลภายนอก จึงต้องจัดการ loading/error และ validate ที่ Backend'],
-    practice: ['วาด React → Controller → Service → Repository', 'ใช้ template ผู้สอนเปิด GET /equipment', 'ทดสอบ success, loading และ error โดยไม่ใช้ Class Component'],
+    walkthrough: ['Express route รับ GET /api/equipment และเรียก service', 'Function Component เก็บ state ด้วย hook', 'fetch รับข้อมูลภายนอก จึงต้องจัดการ loading/error และตรวจข้อมูลที่ Backend'],
+    practice: ['วาด React → Express Route → Service → Repository', 'ใช้ template ผู้สอนเปิด GET /api/equipment', 'ทดสอบ success, loading และ error โดยไม่ใช้ Class Component'],
     quiz: ['กฎห้ามยืมซ้ำควรอยู่ที่ใด?', ['เฉพาะปุ่มใน React', 'Service/domain ที่ API เรียกใช้', 'เฉพาะ CSS'], 1, 'Backend service/domain ต้องรักษากฎแม้มีผู้เรียก API โดยตรง', 'หน้าจอไม่ใช่ทางเข้าเดียวของระบบ'],
     piece: 'ชิ้นที่ 9 · เส้นทาง UI ถึงกฎธุรกิจ', deliverable: 'แผนภาพ request flow + ภาพหน้าจอ 3 สถานะ + ผลทดสอบ service'
   },
@@ -236,11 +233,11 @@ export function EquipmentList() {
     id: 10, weeks: '15–16', clo: 'CLO2–CLO6', title: 'ประกอบ Jigsaw เป็น Mini Project', subtitle: 'รวมชิ้นส่วน ตรวจคุณภาพ แล้วออกแบบโครงงานของตนเอง',
     outcomes: ['ประกอบ 9 ชิ้นส่วนเป็นระบบที่อธิบายได้', 'สาธิตตัวอย่างระบบยืม–คืนฉบับสมบูรณ์', 'เสนอ mini project ของตนเองด้วยกฎและหลักฐานทดสอบ'],
     concepts: ['รวมเฉพาะสิ่งที่ตอบโจทย์ ไม่เพิ่มคลาสเพื่อให้ดูซับซ้อน', 'ตรวจ acceptance criteria ทีละข้อ', 'โครงงานใหม่เปลี่ยนบริบทได้ แต่ต้องมีกฎ สถานะ และการทดสอบ'],
-    codeFile: 'ch10-mini-project-blueprint.ts',
+    codeFile: 'ch10-mini-project-blueprint.js',
     code: `// โครงสร้างตัวอย่าง Mini Equipment Loan
 // React Function Component
 //   ↓ HTTP request
-// NestJS Controller
+// Express Route
 //   ↓ validated command
 // LoanService → LoanPolicy
 //   ↓

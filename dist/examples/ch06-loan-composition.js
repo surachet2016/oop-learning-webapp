@@ -1,17 +1,15 @@
 // บทที่ 6: Composition ก่อน Inheritance
 // ตัวอย่างเพื่อการเรียนรู้รายวิชา 07-034-206
 
-import { Equipment } from "./equipment.js";
-
+// รับ object ของ Equipment ที่สร้างจากบทก่อนหน้า
 export class Loan {
-  constructor(
-    public readonly equipment: Equipment,
-    public readonly borrowerId: string,
-    public readonly days: number
-  ) {
+  constructor(equipment, borrowerId, days) {
     if (!Number.isInteger(days) || days < 1) {
       throw new Error("จำนวนวันไม่ถูกต้อง");
     }
+    this.equipment = equipment;
+    this.borrowerId = borrowerId;
+    this.days = days;
   }
 }
 

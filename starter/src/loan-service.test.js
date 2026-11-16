@@ -23,3 +23,12 @@ test("ปฏิเสธจำนวนวันที่เกินนโย�
   assert.throws(() => service.borrow("EQ01", 8), /1–7/);
   assert.equal(item.isBorrowed, false);
 });
+
+test("สลับ fake policy ได้โดยไม่แก้ LoanService", () => {
+  const repository = new InMemoryEquipmentRepository();
+  const item = new Equipment("EQ02", "Tripod");
+  repository.save(item);
+  const fakePolicy = { maxDays: () => 2 };
+  const service = new LoanService(repository, fakePolicy);
+  assert.throws(() => service.borrow("EQ02", 3), /1–2/);
+});

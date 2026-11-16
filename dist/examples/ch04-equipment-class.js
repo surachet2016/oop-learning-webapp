@@ -2,14 +2,15 @@
 // ตัวอย่างเพื่อการเรียนรู้รายวิชา 07-034-206
 
 export class Equipment {
-  constructor(
-    public readonly id: string,
-    public readonly name: string,
-    private borrowed = false
-  ) {}
+  #borrowed = false;
 
-  isAvailable(): boolean {
-    return !this.borrowed;
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
+  }
+
+  isAvailable() {
+    return !this.#borrowed;
   }
 }
 

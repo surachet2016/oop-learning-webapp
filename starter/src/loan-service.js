@@ -1,13 +1,16 @@
-import type { EquipmentRepository } from "./equipment-repository.js";
-import type { LoanPolicy } from "./loan-policy.js";
-
 export class LoanService {
-  constructor(
-    private readonly repository: EquipmentRepository,
-    private readonly policy: LoanPolicy,
-  ) {}
+  constructor(repository, policy) {
+    if (typeof repository?.findById !== "function") {
+      throw new Error("repository ต้องมีเมธอด findById");
+    }
+    if (typeof policy?.maxDays !== "function") {
+      throw new Error("policy ต้องมีเมธอด maxDays");
+    }
+    this.repository = repository;
+    this.policy = policy;
+  }
 
-  borrow(equipmentId: string, days: number): void {
+  borrow(equipmentId, days) {
     if (!Number.isInteger(days) || days <= 0 || days > this.policy.maxDays()) {
       throw new Error(`จำนวนวันต้องเป็นจำนวนเต็ม 1–${this.policy.maxDays()} วัน`);
     }
@@ -16,7 +19,7 @@ export class LoanService {
     item.borrow();
   }
 
-  giveBack(equipmentId: string): void {
+  giveBack(equipmentId) {
     const item = this.repository.findById(equipmentId);
     if (!item) throw new Error("ไม่พบอุปกรณ์");
     item.giveBack();

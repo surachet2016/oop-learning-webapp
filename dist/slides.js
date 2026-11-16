@@ -5,7 +5,7 @@ const h = value => String(value).replace(/[&<>"']/g, char => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 }[char]));
 
-const storageKey = 'oop-slides-stepwise-v3';
+const storageKey = 'oop-slides-javascript-v4';
 const quizTotal = SLIDES.filter(slide => slide.kind === 'quiz').length;
 let data = { answers: {}, practice: {} };
 try {

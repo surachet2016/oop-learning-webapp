@@ -4,15 +4,15 @@
 export class Equipment {
   #borrowed = false;
 
-  borrow(): void {
+  borrow() {
     if (this.#borrowed) throw new Error("ยืมซ้ำไม่ได้");
     this.#borrowed = true;
   }
 
-  giveBack(): void {
+  giveBack() {
     if (!this.#borrowed) throw new Error("คืนซ้ำไม่ได้");
     this.#borrowed = false;
   }
 
-  isAvailable(): boolean { return !this.#borrowed; }
+  isAvailable() { return !this.#borrowed; }
 }

@@ -1,44 +1,44 @@
 const LESSONS = [
   {
     "week": 1,
-    "title": "เริ่มต้น OOP ด้วย TypeScript",
-    "subtitle": "บทที่ 1 JavaScript → TypeScript → JavaScript runtime",
+    "title": "เริ่มต้น OOP ด้วย JavaScript ES6",
+    "subtitle": "บทที่ 1 จาก JavaScript ที่คุ้นเคยสู่การออกแบบเชิงวัตถุ",
     "clo": "CLO1, CLO6",
-    "goal": "อธิบายคลาส วัตถุ และเส้นทางการรัน TypeScript ได้",
+    "goal": "อธิบายคลาส วัตถุ และรัน JavaScript ด้วย Node.js ได้",
     "body": [
-      "เชื่อมจากวิชาหลักการเขียนโปรแกรมที่ใช้ Python เบื้องต้น: Python และ TypeScript ต่างมี class/object แต่รายวิชานี้จะศึกษาการออกแบบ OOP และการทดสอบอย่างเป็นระบบ โดยไม่สอน Python OOP ซ้ำทั้งรายวิชา",
+      "เชื่อมจากวิชาหลักการเขียนโปรแกรมที่ใช้ Python เบื้องต้น: Python และ JavaScript ES6 ต่างสร้างวัตถุได้ แต่รายวิชานี้จะศึกษาการออกแบบ OOP และการทดสอบอย่างเป็นระบบ โดยไม่สอน Python OOP ซ้ำทั้งรายวิชา",
       "ใช้ระบบยืม–คืนอุปกรณ์เป็นกรณีศึกษาตลอดภาค คลาสกำหนดข้อมูลและพฤติกรรม ส่วนวัตถุแต่ละตัวมีสถานะของตนเอง React Function Components เป็นส่วนแสดงผล ไม่จำเป็นต้องเปลี่ยนเป็น Class Components",
-      "TypeScript เพิ่มการตรวจชนิดให้ JavaScript ใช้ tsc ตรวจชนิดและแปลงไฟล์ .ts เป็น .js แล้วรันด้วย Node.js เริ่มจากชุดตัวอย่างที่ดาวน์โหลดบนหน้าหลัก ใช้ npm ci, npm test และ npm run demo หลังติดตั้ง Node.js และ npm ตาม README"
+      "JavaScript ES6 ใช้ไวยากรณ์เดียวกับพื้นฐานที่เรียนใน React และรันด้วย Node.js ได้โดยตรง เริ่มจากชุดตัวอย่างที่ดาวน์โหลดบนหน้าหลัก ใช้ npm test และ npm run demo ตาม README"
     ],
-    "code": "const course: string = \"OOP Equipment Loan\";\nconsole.log(course);",
+    "code": "const course = \"OOP Equipment Loan\";\nconsole.log(course);",
     "lab": "รันชุดตัวอย่าง บันทึกผลทดสอบ วาดเส้นทาง React → API → Service → Repository และแยกว่าส่วนใดทำงานในเบราว์เซอร์หรือเซิร์ฟเวอร์",
-    "ai": "อธิบาย type error นี้เป็นคำใบ้ แล้วให้ฉันทดลองแก้และรันเอง",
+    "ai": "อธิบาย runtime error นี้เป็นคำใบ้ แล้วให้ฉันทดลองแก้และรันเอง",
     "evidence": "บันทึกคำสั่งที่ใช้รัน ผลลัพธ์ และสิ่งที่แก้ไข พร้อมระบุการใช้ AI",
-    "question": "การตรวจชนิด TypeScript ช่วยรับรองข้อมูลจากผู้ใช้ขณะรันทั้งหมดหรือไม่?",
+    "question": "ข้อมูลจากผู้ใช้หรือ API ควรถูกตรวจเมื่อใด?",
     "options": [
-      "รับรองทั้งหมด",
-      "ไม่ ต้องตรวจข้อมูลขณะรันด้วย",
-      "ไม่จำเป็นต้องทดสอบ"
+      "ไม่ต้องตรวจ เพราะมาจาก React",
+      "ตรวจที่ Backend ก่อนส่งเข้าสู่กฎธุรกิจ",
+      "ตรวจเฉพาะ CSS"
     ],
     "answer": 1,
-    "explain": "ชนิดข้อมูลช่วยตอนพัฒนา แต่ข้อมูลจากเครือข่ายยังต้องตรวจขณะรัน",
+    "explain": "ข้อมูลภายนอกอาจผิดรูปแบบ จึงต้องตรวจค่าจริงก่อนเรียก domain method",
     "exam": false
   },
   {
     "week": 2,
     "title": "ข้อมูลและเงื่อนไขการยืม",
-    "subtitle": "บทที่ 2 number string boolean และ union type",
+    "subtitle": "บทที่ 2 number string boolean และค่าที่อนุญาต",
     "clo": "CLO1, CLO3",
     "goal": "กำหนดชนิดข้อมูลและตรวจค่าจำนวนวันยืมได้",
     "body": [
-      "ใช้ number สำหรับจำนวน string สำหรับรหัส และ boolean สำหรับสถานะ JavaScript และ TypeScript คำนวณ 5/2 ได้ 2.5 ไม่ตัดทศนิยมแบบการหารจำนวนเต็มบางภาษา",
-      "ชนิด number รวม NaN และ Infinity ต้องตรวจ Number.isInteger และขอบเขตเมื่อโจทย์ต้องการจำนวนเต็ม กำหนดสถานะด้วย union type เพื่อลดการสะกดผิด"
+      "ใช้ number สำหรับจำนวน string สำหรับรหัส และ boolean สำหรับสถานะ JavaScript คำนวณ 5/2 ได้ 2.5 ไม่ตัดทศนิยมแบบการหารจำนวนเต็มบางภาษา",
+      "ชนิด number รวม NaN และ Infinity ต้องตรวจ Number.isInteger และขอบเขตเมื่อโจทย์ต้องการจำนวนเต็ม ใช้รายการ VALID_STATUSES ตรวจค่าข้อความที่อนุญาต"
     ],
-    "code": "type Status = \"available\" | \"borrowed\";\nconst status: Status = \"available\";\nconst days: number = 7;\nconsole.log(Number.isInteger(days) && days > 0);\nconsole.log(5 / 2); // 2.5",
+    "code": "const VALID_STATUSES = [\"available\", \"borrowed\"];\nconst status = \"available\";\nconst days = 7;\nconsole.log(VALID_STATUSES.includes(status));\nconsole.log(Number.isInteger(days) && days > 0);\nconsole.log(5 / 2); // 2.5",
     "lab": "กำหนดรหัสอุปกรณ์และจำนวนวัน ตรวจ -1, 0, 1, 7, 1.5 และ NaN พร้อมผลที่คาดหวัง",
     "ai": "เสนอข้อมูลขอบเขตสำหรับจำนวนวันยืม โดยยังไม่บอกผลที่คาดหวัง",
     "evidence": "ใบงาน 2 ส่วนที่ 1: ค่าป้อนเข้า ผลที่คาดหวัง และผลจริง",
-    "question": "5 / 2 ใน JavaScript และ TypeScript ได้เท่าไร?",
+    "question": "5 / 2 ใน JavaScript ได้เท่าไร?",
     "options": [
       "2",
       "2.5",
@@ -106,7 +106,7 @@ const LESSONS = [
       "กฎคำนวณที่ไม่ต้องเก็บสถานะเหมาะกับ pure function ส่วนคลาสเหมาะเมื่อข้อมูลและพฤติกรรมต้องรักษาเงื่อนไขร่วมกัน ไม่บังคับทุกฟังก์ชันให้อยู่ในคลาส",
       "เริ่มจากข้อกำหนดและ expected result แล้วเขียนการทดสอบด้วย node:test ในชุดตัวอย่าง ทดสอบกรณีปกติ ขอบเขต และผิดเงื่อนไข"
     ],
-    "code": "function canBorrowDays(days: number, limit: number): boolean {\n  return Number.isInteger(days) && days > 0 && days <= limit;\n}\nconsole.log(canBorrowDays(7, 7)); // true\nconsole.log(canBorrowDays(8, 7)); // false",
+    "code": "function canBorrowDays(days, limit) {\n  return Number.isInteger(days) && days > 0 && days <= limit;\n}\nconsole.log(canBorrowDays(7, 7)); // true\nconsole.log(canBorrowDays(8, 7)); // false",
     "lab": "เขียนฟังก์ชันตรวจจำนวนวันและ tests สำหรับ 0, 1, ค่าสูงสุด และเกินค่าสูงสุด",
     "ai": "เสนอข้อผิดพลาดที่ชุดทดสอบของฉันยังตรวจไม่พบ ให้ฉันเขียน test เพิ่มก่อนแก้",
     "evidence": "ใบงาน 4 พร้อมชุดทดสอบและผลการรัน",
@@ -128,9 +128,9 @@ const LESSONS = [
     "goal": "ออกแบบคลาส Equipment และสร้างวัตถุที่มีสถานะแยกกันได้",
     "body": [
       "Equipment แทนอุปกรณ์ Loan แทนรายการยืม และ LoanService ประสานกฎการทำรายการ กำหนดความรับผิดชอบก่อนเขียนคลาส",
-      "constructor กำหนดข้อมูลเริ่มต้น readonly ช่วยป้องกันการกำหนดค่าใหม่ขณะตรวจชนิด แต่ไม่ใช่การแช่แข็งข้อมูลทั้งหมดขณะรัน"
+      "constructor กำหนดข้อมูลเริ่มต้น ส่วน this อ้างถึง instance ปัจจุบัน ใช้ #field เมื่อต้องซ่อนสถานะที่ไม่ควรถูกแก้โดยตรง"
     ],
-    "code": "class Equipment {\n  constructor(public readonly id: string, public readonly name: string) {\n    if (!id.trim() || !name.trim()) throw new Error(\"ข้อมูลไม่ครบ\");\n  }\n}\nconst camera = new Equipment(\"EQ01\", \"Camera\");\nconsole.log(camera.name);",
+    "code": "class Equipment {\n  #borrowed = false;\n  constructor(id, name) {\n    if (!id.trim() || !name.trim()) throw new Error(\"ข้อมูลไม่ครบ\");\n    this.id = id;\n    this.name = name;\n  }\n  isAvailable() { return !this.#borrowed; }\n}\nconst camera = new Equipment(\"EQ01\", \"Camera\");\nconsole.log(camera.name, camera.isAvailable());",
     "lab": "วาดคลาสและสร้างอุปกรณ์สองตัว อธิบายข้อมูล instance และความแตกต่างจาก static",
     "ai": "ทบทวนหน้าที่ของ Equipment, Loan และ LoanService โดยถามคำถามก่อนเสนอคลาสเพิ่ม",
     "evidence": "ใบงาน 5 ส่วนที่ 1 แผนภาพคลาสและโค้ด",
@@ -152,9 +152,9 @@ const LESSONS = [
     "goal": "รักษาสถานะอุปกรณ์ผ่านเมธอดยืมและคืนได้",
     "body": [
       "ใช้ #borrowed เพื่อเก็บสถานะภายในแบบ private field ขณะรัน ไม่เปิดให้ภายนอกเปลี่ยนโดยตรง เมธอด borrow และ giveBack ต้องตรวจเงื่อนไขก่อนแก้สถานะ",
-      "TypeScript private ตรวจการเข้าถึงหลัก ๆ ตอนตรวจชนิด ส่วน #field มีการบังคับที่ runtime ทั้งสองแนวทางยังต้องออกแบบกฎในเมธอดให้ถูกต้อง"
+      "JavaScript #field บังคับความเป็นส่วนตัวขณะรัน แต่ยังต้องออกแบบกฎในเมธอดให้ถูกต้องและมีชุดทดสอบยืนยันพฤติกรรม"
     ],
-    "code": "class Equipment {\n  #borrowed = false;\n  borrow(): void {\n    if (this.#borrowed) throw new Error(\"อุปกรณ์ถูกยืมแล้ว\");\n    this.#borrowed = true;\n  }\n  giveBack(): void {\n    if (!this.#borrowed) throw new Error(\"ไม่มีรายการยืม\");\n    this.#borrowed = false;\n  }\n}",
+    "code": "class Equipment {\n  #borrowed = false;\n  borrow() {\n    if (this.#borrowed) throw new Error(\"อุปกรณ์ถูกยืมแล้ว\");\n    this.#borrowed = true;\n  }\n  giveBack() {\n    if (!this.#borrowed) throw new Error(\"ไม่มีรายการยืม\");\n    this.#borrowed = false;\n  }\n}",
     "lab": "ทดสอบยืมครั้งแรก ยืมซ้ำ คืนครั้งแรก และคืนซ้ำ ส่งขอบเขตและแบบจำลองโครงงาน",
     "ai": "ตรวจว่ามีเส้นทางใดเปลี่ยนสถานะโดยไม่ตรวจเงื่อนไข แล้วเสนอ test ที่พิสูจน์ได้",
     "evidence": "ใบงาน 5 ส่วนที่ 2 โครงงานจุดตรวจที่ 1 และทดสอบย่อยครั้งที่ 2 ไม่ใช้ AI",
@@ -171,7 +171,7 @@ const LESSONS = [
   {
     "week": 8,
     "title": "สอบกลางภาค",
-    "subtitle": "บทที่ 1–5 พื้นฐาน TypeScript คลาส การห่อหุ้ม และการทดสอบ",
+    "subtitle": "บทที่ 1–5 พื้นฐาน JavaScript ES6 คลาส การห่อหุ้ม และการทดสอบ",
     "clo": "CLO1–CLO4",
     "exam": true,
     "weight": 20
@@ -186,7 +186,7 @@ const LESSONS = [
       "Loan มี Equipment เป็นองค์ประกอบ จึงเป็น has-a ไม่ใช่ Loan สืบทอดจาก Equipment ใช้ composition ประกอบหน้าที่แทนลำดับชั้นที่ซับซ้อน",
       "ฝึก extends และ super ผ่านชนิดย่อยที่มีความหมายจริง เช่น Camera เป็น Equipment ชนิดหนึ่ง แล้วเปรียบเทียบกับการเก็บชนิดอุปกรณ์เป็นข้อมูล"
     ],
-    "code": "class Equipment { constructor(public readonly id: string) {} }\nclass Camera extends Equipment {\n  constructor(id: string, public readonly lens: string) { super(id); }\n}\nclass Loan {\n  constructor(public readonly equipment: Equipment) {}\n}",
+    "code": "class Equipment { constructor(id) { this.id = id; } }\nclass Camera extends Equipment {\n  constructor(id, lens) { super(id); this.lens = lens; }\n}\nclass Loan {\n  constructor(equipment) { this.equipment = equipment; }\n}",
     "lab": "สร้าง Loan ที่อ้าง Equipment แล้วอภิปรายว่า Camera ควรเป็นคลาสย่อยหรือใช้ข้อมูลประเภทเมื่อพฤติกรรมไม่ต่าง",
     "ai": "เปรียบเทียบ composition กับ inheritance ของแบบจำลองนี้ พร้อมกรณีที่ไม่ควรสร้างคลาสย่อย",
     "evidence": "ใบงาน 6 แบบจำลอง โค้ด และผลทดสอบ",
@@ -203,18 +203,18 @@ const LESSONS = [
   {
     "week": 10,
     "title": "พฤติกรรมหลายรูปแบบ",
-    "subtitle": "บทที่ 7 Polymorphism และ Abstract Class",
+    "subtitle": "บทที่ 7 Polymorphism และ Strategy Objects",
     "clo": "CLO1, CLO2, CLO3",
     "goal": "สลับนโยบายระยะเวลายืมผ่านชนิดหลักได้",
     "body": [
       "กำหนดนโยบายระยะเวลายืมสำหรับนักศึกษาและบุคลากรเป็นกฎสมมติ ผู้เรียกใช้ maxDays โดยไม่ต้องรู้รายละเอียดของแต่ละนโยบาย",
-      "abstract class กำหนดส่วนร่วมและเมธอดที่คลาสย่อยเติมได้ การ override เปลี่ยนพฤติกรรมให้ตรงชนิดย่อย ต้องยังรักษาข้อตกลงของชนิดหลัก"
+      "JavaScript ใช้ duck typing: policy หลายแบบทำงานร่วมกับผู้เรียกเดียวกันได้เมื่อมีเมธอด maxDays ตามข้อตกลง"
     ],
-    "code": "abstract class LoanPolicy { abstract maxDays(): number; }\nclass StudentPolicy extends LoanPolicy { maxDays() { return 7; } }\nclass StaffPolicy extends LoanPolicy { maxDays() { return 14; } }\nconst policy: LoanPolicy = new StaffPolicy();\nconsole.log(policy.maxDays()); // 14",
+    "code": "class StudentPolicy { maxDays() { return 7; } }\nclass StaffPolicy { maxDays() { return 14; } }\nfunction showLimit(policy) {\n  return policy.maxDays();\n}\nconsole.log(showLimit(new StaffPolicy())); // 14",
     "lab": "สร้างนโยบาย 7 และ 14 วัน แล้วทดสอบที่ขอบเขตของแต่ละแบบโดยใช้โค้ดผู้เรียกเดียวกัน",
     "ai": "อธิบายการเลือกเมธอดจากวัตถุจริงและเสนอกรณีทดสอบการแทนที่นโยบาย",
     "evidence": "ใบงาน 7 ส่วนที่ 1 พร้อมคำอธิบายผลลัพธ์",
-    "question": "LoanPolicy ที่อ้าง new StaffPolicy() เรียก maxDays ได้เท่าไร?",
+    "question": "showLimit(new StaffPolicy()) ได้ค่าเท่าไร?",
     "options": [
       "7",
       "14",
@@ -227,25 +227,25 @@ const LESSONS = [
   {
     "week": 11,
     "title": "ข้อตกลงและการส่ง dependency",
-    "subtitle": "บทที่ 7 Interface และ Dependency Injection",
+    "subtitle": "บทที่ 7 ข้อตกลงจากพฤติกรรมและ Dependency Injection",
     "clo": "CLO2, CLO3, CLO4",
     "goal": "แยกกฎการยืมออกจากผู้เรียกและส่งผ่าน constructor ได้",
     "body": [
-      "interface กำหนดรูปแบบที่โค้ดพึ่งพา และถูกลบเมื่อแปลงเป็น JavaScript จึงใช้ interface เป็น runtime injection token โดยตรงไม่ได้",
-      "เริ่มจากส่ง policy ผ่าน constructor ด้วยตนเองก่อนเรียน container ของ NestJS ทำให้ทดสอบกฎได้โดยไม่ต้องเปิดเว็บเซิร์ฟเวอร์"
+      "JavaScript กำหนดข้อตกลงจากเมธอดที่ผู้เรียกต้องใช้ เช่น policy ต้องมี maxDays และอาจตรวจข้อตกลงนี้ที่ constructor",
+      "ส่ง policy ผ่าน constructor ด้วยตนเอง ทำให้สลับนโยบายจริงและ fake ในชุดทดสอบได้โดยไม่ต้องเปิดเว็บเซิร์ฟเวอร์"
     ],
-    "code": "interface LoanPolicy { maxDays(): number; }\nclass StudentPolicy implements LoanPolicy { maxDays() { return 7; } }\nclass LoanService {\n  constructor(private readonly policy: LoanPolicy) {}\n  canBorrow(days: number) {\n    return Number.isInteger(days) && days > 0 && days <= this.policy.maxDays();\n  }\n}\nconsole.log(new LoanService(new StudentPolicy()).canBorrow(8)); // false",
+    "code": "class StudentPolicy { maxDays() { return 7; } }\nclass LoanService {\n  constructor(policy) {\n    if (typeof policy?.maxDays !== \"function\") throw new Error(\"policy ไม่ถูกต้อง\");\n    this.policy = policy;\n  }\n  canBorrow(days) {\n    return Number.isInteger(days) && days > 0 && days <= this.policy.maxDays();\n  }\n}\nconsole.log(new LoanService(new StudentPolicy()).canBorrow(8)); // false",
     "lab": "สลับนโยบายผ่าน constructor และใช้ fake policy ทดสอบโดยไม่แก้ LoanService",
     "ai": "ตรวจว่าผู้เรียกผูกกับ implementation เกินจำเป็นหรือไม่ พร้อมเหตุผลและ test",
     "evidence": "ใบงาน 7 ส่วนที่ 2 และหลักฐานผลทดสอบ",
-    "question": "TypeScript interface ใช้เป็น NestJS runtime token โดยตรงได้หรือไม่?",
+    "question": "เหตุใดจึงส่ง policy เข้า constructor ของ LoanService?",
     "options": [
-      "ได้เสมอ",
-      "ไม่ได้ เพราะถูกลบตอนแปลงโค้ด",
-      "ไม่ต้องลงทะเบียน provider"
+      "เพื่อสลับ policy และทดสอบ service แยกได้",
+      "เพื่อไม่ต้องเขียนชุดทดสอบ",
+      "เพื่อให้ทุก policy คืนค่าเท่ากัน"
     ],
-    "answer": 1,
-    "explain": "ใช้ class หรือ explicit token เช่น Symbol/string และลงทะเบียน provider",
+    "answer": 0,
+    "explain": "Dependency injection ลดการผูกกับ implementation และเปิดทางให้ใช้ fake ในการทดสอบ",
     "exam": false
   },
   {
@@ -258,7 +258,7 @@ const LESSONS = [
       "Array เหมาะกับรายการ ส่วน Map เก็บคู่ key-value ที่ key ไม่ซ้ำ Map.set ด้วย key เดิมแทนค่า จึงต้องตรวจ has เมื่อข้อกำหนดห้ามรหัสซ้ำ",
       "Repository แยกการเข้าถึงข้อมูลออกจากกฎการยืม ใช้ข้อมูลในหน่วยความจำในรายวิชา ฐานข้อมูลเป็นภาพสถาปัตยกรรมและหัวข้อต่อยอด ข้อมูลในหน่วยความจำหายเมื่อเริ่มโปรแกรมใหม่"
     ],
-    "code": "const items = new Map<string, { name: string }>();\nfunction add(id: string, name: string) {\n  if (items.has(id)) throw new Error(\"รหัสซ้ำ\");\n  items.set(id, { name });\n}\nadd(\"EQ01\", \"Camera\");\nconsole.log(items.get(\"EQ01\")?.name);",
+    "code": "const items = new Map();\nfunction add(id, name) {\n  if (items.has(id)) throw new Error(\"รหัสซ้ำ\");\n  items.set(id, { name });\n}\nadd(\"EQ01\", \"Camera\");\nconsole.log(items.get(\"EQ01\")?.name);",
     "lab": "สร้าง InMemoryEquipmentRepository ทดสอบรหัสซ้ำ ไม่พบ และการอ่านกลับ พร้อมทดสอบย่อยครั้งที่ 3",
     "ai": "เสนอกรณีที่การแทนค่าของ Map ทำให้ข้อมูลผิด และเขียนข้อกำหนดป้องกันก่อนแก้",
     "evidence": "ใบงาน 8 ส่วนที่ 1 และทดสอบย่อยครั้งที่ 3 ไม่ใช้ AI",
@@ -282,7 +282,7 @@ const LESSONS = [
       "ข้อมูล API เริ่มเป็นข้อมูลที่ยังเชื่อถือไม่ได้ การ cast เป็นชนิดที่ต้องการไม่ใช่ validation เช่น Number(\"abc\") ให้ NaN ไม่ได้ throw เอง",
       "ตรวจชนิดและขอบเขตก่อนเรียก domain method แยกข้อผิดพลาดจากระบบกับข้อมูลผิดเงื่อนไข รันทดสอบเดิมหลัง refactoring และเพิ่ม regression test สำหรับข้อผิดพลาดที่พบ"
     ],
-    "code": "function parseDays(input: unknown): number {\n  if (typeof input !== \"number\" || !Number.isInteger(input) || input <= 0) {\n    throw new Error(\"จำนวนวันต้องเป็นจำนวนเต็มบวก\");\n  }\n  return input;\n}\nconsole.log(parseDays(7));",
+    "code": "function parseDays(input) {\n  if (typeof input !== \"number\" || !Number.isInteger(input) || input <= 0) {\n    throw new Error(\"จำนวนวันต้องเป็นจำนวนเต็มบวก\");\n  }\n  return input;\n}\nconsole.log(parseDays(7));",
     "lab": "ทดสอบ string, null, NaN, ทศนิยม และจำนวนวันเกินสิทธิ์ พร้อมสาธิตความก้าวหน้าโครงงาน",
     "ai": "หา test gap ของ validation นี้ ให้เสนอ input และ expected result ก่อนแก้โค้ด",
     "evidence": "ใบงาน 8 ส่วนที่ 2 จุดตรวจโครงงานครั้งที่ 2 และผลก่อน–หลังแก้ไข",
@@ -299,16 +299,16 @@ const LESSONS = [
   {
     "week": 14,
     "title": "เชื่อม OOP กับ API และ React",
-    "subtitle": "บทที่ 9 NestJS Controller Service และ Function Components",
+    "subtitle": "บทที่ 9 Express Route, Service และ Function Components",
     "clo": "CLO2, CLO3, CLO4",
     "goal": "อธิบายเส้นทาง request และเชื่อมหน้าจอกับกฎการยืมได้",
     "body": [
-      "React Function Component แสดงผลและส่งคำขอ API ส่วน NestJS Controller รับข้อมูลและเรียก Service ที่บังคับกฎการยืม Controller ไม่ควรเก็บกฎทั้งหมด หน้าจอใช้ชุดตัวอย่างที่ผู้สอนเตรียมเพื่อลดภาระการเรียน framework",
-      "ตัวอย่างนี้เป็นส่วนหนึ่งของ NestJS project ต้องลงทะเบียน controller/provider ใน module และตรวจข้อมูล request ขณะรัน ใช้ repository ในหน่วยความจำ ไม่เปิดฐานข้อมูลจริงบนเว็บบทเรียน"
+      "React Function Component แสดงผลและส่งคำขอ API ส่วน Express route รับข้อมูลและเรียก Service ที่บังคับกฎการยืม Route ไม่ควรเก็บกฎทั้งหมด หน้าจอใช้ชุดตัวอย่างที่ผู้สอนเตรียมเพื่อลดภาระการเรียน framework",
+      "ตัวอย่างใช้ Node.js และ Express ตรวจข้อมูล request ขณะรันก่อนเรียก Service ใช้ repository ในหน่วยความจำ และไม่เปิด Backend หรือฐานข้อมูลจริงบนเว็บบทเรียน"
     ],
-    "code": "// ส่วนประกอบใน NestJS project ที่ตั้งค่าแล้ว\nimport { Controller, Get, Injectable } from \"@nestjs/common\";\n@Injectable()\nexport class EquipmentService {\n  list() { return [{ id: \"EQ01\", name: \"Camera\" }]; }\n}\n@Controller(\"equipment\")\nexport class EquipmentController {\n  constructor(private readonly service: EquipmentService) {}\n  @Get() list() { return this.service.list(); }\n}",
-    "lab": "ใช้ template สร้าง GET /equipment และ POST /loans เชื่อม React Function Component ทดสอบสำเร็จ ข้อมูลผิด และยืมซ้ำ โดยไม่ใช้ Class Component",
-    "ai": "ตรวจการแบ่งหน้าที่ React, Controller, Service และ Repository พร้อมชี้จุดที่ต้อง validate ขณะรัน",
+    "code": "// Express route ใน Node.js project\napp.get(\"/api/equipment\", (req, res) => {\n  res.json(equipmentService.list());\n});\n\n// React Function Component เรียก API\nfunction EquipmentList() {\n  const [items, setItems] = useState([]);\n  useEffect(() => {\n    fetch(\"/api/equipment\").then(r => r.json()).then(setItems);\n  }, []);\n  return <ul>{items.map(x => <li key={x.id}>{x.name}</li>)}</ul>;\n}",
+    "lab": "ใช้ template สร้าง GET /api/equipment และ POST /api/loans เชื่อม React Function Component ทดสอบสำเร็จ ข้อมูลผิด และยืมซ้ำ โดยไม่ใช้ Class Component",
+    "ai": "ตรวจการแบ่งหน้าที่ React, Express Route, Service และ Repository พร้อมชี้จุดที่ต้อง validate ขณะรัน",
     "evidence": "ใบงาน 9 โค้ดหน้าจอ ผลทดสอบตรรกะ และรายการตรวจหน้าจอ",
     "question": "กฎห้ามยืมซ้ำควรตรวจที่ใด?",
     "options": [
@@ -371,7 +371,7 @@ const LESSONS = [
   {
     "week": 17,
     "title": "สอบปลายภาค",
-    "subtitle": "บทที่ 6–10 ความสัมพันธ์ Interface Collections การทดสอบ และเส้นทาง React/API โดยบูรณาการพื้นฐาน",
+    "subtitle": "บทที่ 6–10 ความสัมพันธ์ Strategy Collections การทดสอบ และเส้นทาง React/API โดยบูรณาการพื้นฐาน",
     "clo": "CLO2–CLO5",
     "exam": true,
     "weight": 30
