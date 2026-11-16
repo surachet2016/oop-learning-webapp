@@ -41,7 +41,9 @@ npm start
 ## Interactive teaching slides
 เปิด `slides.html` จากเมนู “สไลด์ทีละขั้น 10 บท · 88 หน้า” บทที่ 1 มี 34 หน้าเพื่อวางพื้นฐาน JavaScript และแนวคิด OOP อย่างละเอียด ส่วนบทอื่นเรียงจากเป้าหมาย แนวคิด อ่านโค้ด ฝึกตาม ตรวจความเข้าใจ และ Jigsaw checkpoint จนประกอบเป็น mini project
 
-- ซอร์ส: `dist/slides.html`, `slides.css`, `slides-fullscreen.css`, `slides-data.js`, `slides-3d.js`, `slides.js`
+- ซอร์ส: `dist/slides.html`, `slides.css`, `slides-stepwise.css`, `slides-fullscreen.css`, `slides-professional.css`, `slides-data.js`, `slides-3d.js`, `slides.js`
+- ระบบตัวอักษรใช้ **IBM Plex Sans Thai** สำหรับเนื้อหาภาษาไทยและ **IBM Plex Mono** สำหรับโค้ด พร้อมฟอนต์สำรองเมื่อเครือข่ายไม่สามารถโหลด Google Fonts ได้
+- ธีมสไลด์ใช้ลำดับชั้นตัวอักษร พื้นที่ว่าง ความยาวบรรทัด และสีเน้นอย่างจำกัด เพื่อให้อ่านชัดทั้งบนจอคอมพิวเตอร์และโปรเจกเตอร์
 - ใช้ JavaScript/CSS/WebGL แบบไม่พึ่ง CDN หรือ package ภายนอก เพื่อคงการ deploy แบบ static
 - ควบคุมด้วยปุ่มหรือ ←/→, PageUp/PageDown, Home/End (เมื่อไม่ได้กรอกข้อความหรือโฟกัสปุ่ม)
 - โหมดเต็มจอซ่อนเมนูและแถบควบคุม ขยายสไลด์เต็ม 100vw × 100vh ใช้ ←/→ เปลี่ยนหน้า และกด Esc เพื่อออก

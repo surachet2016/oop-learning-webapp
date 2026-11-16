@@ -33,12 +33,12 @@ if (isReadiness) {
 document.querySelector('#resource-nav').innerHTML = isReadiness ? `
   <a href="index.html#home">กลับหน้าหลัก</a>
   <a href="${rawPath}" download>ดาวน์โหลดเอกสาร .md</a>
-  <a href="resource.html?version=js-es6-5&type=worksheet&chapter=1">ดูใบงานที่ 1</a>
+  <a href="resource.html?version=js-es6-6&type=worksheet&chapter=1">ดูใบงานที่ 1</a>
   <button type="button" id="print-resource">พิมพ์ / บันทึก PDF</button>` : `
-  <a href="resource.html?version=js-es6-5&type=code&chapter=${chapterNumber}" ${type === 'code' ? 'aria-current="page"' : ''}>โค้ดตัวอย่าง</a>
-  <a href="resource.html?version=js-es6-5&type=worksheet&chapter=${chapterNumber}" ${type === 'worksheet' ? 'aria-current="page"' : ''}>ใบงาน</a>
+  <a href="resource.html?version=js-es6-6&type=code&chapter=${chapterNumber}" ${type === 'code' ? 'aria-current="page"' : ''}>โค้ดตัวอย่าง</a>
+  <a href="resource.html?version=js-es6-6&type=worksheet&chapter=${chapterNumber}" ${type === 'worksheet' ? 'aria-current="page"' : ''}>ใบงาน</a>
   <a href="${rawPath}" download>ดาวน์โหลดไฟล์ต้นฉบับ</a>
-  <a href="slides.html?version=js-es6-5#slide-${chapterStart}">เปิดสไลด์บทนี้</a>
+  <a href="slides.html?version=js-es6-6#slide-${chapterStart}">เปิดสไลด์บทนี้</a>
   ${type === 'worksheet' ? '<button type="button" id="print-resource">พิมพ์ใบงาน / PDF</button>' : ''}`;
 
 document.querySelector('#print-resource')?.addEventListener('click', () => window.print());

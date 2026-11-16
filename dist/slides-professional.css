@@ -1,0 +1,324 @@
+/* Professional academic presentation theme
+   Typography: IBM Plex Sans Thai for teaching content, IBM Plex Mono for code. */
+:root {
+  --bg: #07111f;
+  --surface: #0d1b2a;
+  --panel: #122235;
+  --panel-soft: #162a40;
+  --fg: #f7f9fc;
+  --muted: #afbdd0;
+  --cyan: #63d9ca;
+  --purple: #f1bd62;
+  --line: #2b4059;
+  --success: #70d6a8;
+  --danger: #f08c8c;
+  --font-sans: "IBM Plex Sans Thai", "Noto Sans Thai", "Leelawadee UI", Thonburi, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+html { background: var(--bg); }
+
+body {
+  background:
+    radial-gradient(circle at 88% 8%, rgb(48 111 125 / 15%), transparent 28rem),
+    linear-gradient(180deg, #081421 0%, var(--bg) 100%);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button, input, select, textarea { font-family: inherit; }
+
+a { color: var(--cyan); text-underline-offset: 3px; }
+
+button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  font-weight: 500;
+  box-shadow: none;
+}
+
+button:hover {
+  border-color: var(--cyan);
+  background: var(--panel-soft);
+}
+
+button:focus-visible, a:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgb(99 217 202 / 42%);
+}
+
+.top {
+  border-bottom-color: var(--line);
+  background: rgb(7 17 31 / 88%);
+  backdrop-filter: blur(14px);
+}
+
+.top a {
+  color: var(--fg);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.top span,
+.small { color: var(--muted); }
+
+#chapter-rail {
+  border-bottom-color: var(--line);
+  background: #0a1726;
+}
+
+#chapter-rail button {
+  border-radius: 7px;
+  font-weight: 600;
+}
+
+#chapter-rail button.active {
+  border-color: var(--cyan);
+  background: var(--cyan);
+  color: #06141a;
+  box-shadow: none;
+}
+
+#stage {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background:
+    linear-gradient(125deg, rgb(18 34 53 / 96%), rgb(10 24 39 / 98%));
+  box-shadow: 0 24px 70px rgb(0 0 0 / 28%);
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .03em;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-sans);
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+h1 {
+  max-width: 20ch;
+  margin: 16px 0 10px;
+  font-size: clamp(31px, 3.45vw, 54px);
+  line-height: 1.22;
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+
+h2 {
+  font-size: clamp(21px, 2vw, 29px);
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.subtitle {
+  max-width: 64ch;
+  margin-bottom: 28px;
+  color: var(--muted);
+  font-size: clamp(15px, 1.4vw, 21px);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.content { gap: clamp(24px, 3vw, 44px); }
+
+.points { margin: 0; }
+
+.points li {
+  max-width: 46ch;
+  margin: 16px 0;
+  padding-left: 18px;
+  border-left: 3px solid var(--purple);
+  font-size: clamp(17px, 1.55vw, 23px);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.glass,
+.overview-chapter,
+.practice-list label,
+.deliverable,
+.model-info,
+.drop {
+  border-color: var(--line);
+  border-radius: 10px;
+  background: rgb(18 34 53 / 82%);
+  backdrop-filter: none;
+}
+
+pre,
+code,
+.object-box {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+
+pre {
+  border-color: #314b64;
+  border-radius: 10px;
+  background: #050d16;
+  color: #d8f3ef;
+  font-size: clamp(12px, 1.25vw, 18px);
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.object-box {
+  border-color: var(--cyan);
+  border-radius: 10px;
+  color: var(--cyan);
+  box-shadow: 14px 14px 0 rgb(241 189 98 / 14%);
+}
+
+.pill,
+.badge,
+.mini-roadmap {
+  border-color: var(--line);
+  border-radius: 999px;
+  background: #0c1b2b;
+  color: var(--cyan);
+  font-weight: 500;
+}
+
+.chapter-card {
+  border-color: #36536b;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #10283a, #17253a);
+}
+
+.chapter-card strong { font-weight: 700; }
+
+.chapter-number {
+  background: var(--cyan);
+  color: #06141a;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.mini-roadmap { color: var(--purple); }
+
+.slide-resources a {
+  border-color: var(--line);
+  border-radius: 7px;
+  background: var(--panel);
+  font-weight: 500;
+}
+
+.slide-resources a:hover {
+  border-color: var(--cyan);
+  background: var(--panel-soft);
+}
+
+.code-step.selected,
+.flow-node.selected,
+.jigsaw-piece.current {
+  border-color: var(--cyan);
+  background: #153547;
+  box-shadow: none;
+}
+
+.practice-list label { cursor: pointer; }
+
+.jigsaw-piece {
+  border-color: #4a6076;
+  border-radius: 8px;
+  background: #0a1726;
+}
+
+.jigsaw-piece.done {
+  border-color: var(--success);
+  background: #113129;
+  color: #c8f5e1;
+}
+
+.deliverable {
+  border-left-color: var(--purple);
+  background: #28251e;
+}
+
+.options button.correct {
+  border-color: var(--success);
+  background: #12362d;
+}
+
+.options button.wrong {
+  border-color: var(--danger);
+  background: #3b2028;
+}
+
+.drawer,
+dialog {
+  border-color: var(--line);
+  border-radius: 12px;
+  background: #0d1b2af5;
+  box-shadow: 0 24px 64px rgb(0 0 0 / 45%);
+}
+
+#bar { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+
+html:fullscreen,
+html:fullscreen body { background: var(--bg); }
+
+html:fullscreen #stage {
+  background:
+    radial-gradient(circle at 90% 10%, rgb(48 111 125 / 13%), transparent 35rem),
+    linear-gradient(125deg, #102134, #081522);
+}
+
+html:fullscreen #stage::after {
+  color: var(--muted);
+  background: rgb(7 17 31 / 84%);
+  font-family: var(--font-sans);
+}
+
+html:fullscreen #stage h1 {
+  max-width: 19ch;
+  font-size: clamp(46px, 4.7vw, 80px);
+  line-height: 1.16;
+}
+
+html:fullscreen #stage .subtitle {
+  max-width: 58ch;
+  font-size: clamp(23px, 1.9vw, 33px);
+  line-height: 1.45;
+}
+
+html:fullscreen #stage .points li {
+  max-width: 40ch;
+  border-left-width: 4px;
+  font-size: clamp(25px, 2.05vw, 36px);
+  line-height: 1.48;
+}
+
+html:fullscreen #stage pre {
+  border-radius: 12px;
+  font-size: clamp(18px, 1.5vw, 26px);
+}
+
+@media (max-width: 800px) {
+  h1 { max-width: none; font-size: 31px; }
+  .subtitle, .points li { max-width: none; }
+}
+
+@media print {
+  body { font-family: var(--font-sans); }
+  .print-slide h1 { font-family: var(--font-sans); font-weight: 700; }
+  .print-slide pre { font-family: var(--font-mono); }
+}
