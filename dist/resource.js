@@ -13,10 +13,10 @@ document.querySelector('#meta').textContent = `บท ${chapterNumber}/10 · ${c
 document.querySelector('#title').textContent = type === 'code' ? `โค้ดตัวอย่าง · ${chapter.codeFile}` : `ใบงานบทที่ ${chapterNumber}`;
 document.querySelector('#description').textContent = chapter.subtitle;
 document.querySelector('#resource-nav').innerHTML = `
-  <a href="resource.html?type=code&chapter=${chapterNumber}" ${type === 'code' ? 'aria-current="page"' : ''}>โค้ดตัวอย่าง</a>
-  <a href="resource.html?type=worksheet&chapter=${chapterNumber}" ${type === 'worksheet' ? 'aria-current="page"' : ''}>ใบงาน</a>
+  <a href="resource.html?version=js-es6-1&type=code&chapter=${chapterNumber}" ${type === 'code' ? 'aria-current="page"' : ''}>โค้ดตัวอย่าง</a>
+  <a href="resource.html?version=js-es6-1&type=worksheet&chapter=${chapterNumber}" ${type === 'worksheet' ? 'aria-current="page"' : ''}>ใบงาน</a>
   <a href="${rawPath}" download>ดาวน์โหลดไฟล์ต้นฉบับ</a>
-  <a href="slides.html#slide-${(chapterNumber - 1) * 6 + 1}">เปิดสไลด์บทนี้</a>`;
+  <a href="slides.html?version=js-es6-1#slide-${(chapterNumber - 1) * 6 + 1}">เปิดสไลด์บทนี้</a>`;
 
 if (type === 'code' && codeSlide) {
   document.querySelector('#structure').hidden = false;
