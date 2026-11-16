@@ -5,6 +5,7 @@ const requestedType = params.get('type');
 const type = ['worksheet', 'readiness'].includes(requestedType) ? requestedType : 'code';
 const isReadiness = type === 'readiness';
 const chapter = CHAPTERS.find(item => item.id === chapterNumber);
+const chapterStart = SLIDES.findIndex(item => item.chapter === chapterNumber) + 1;
 const codeSlide = SLIDES.find(item => item.chapter === chapterNumber && item.kind === 'codewalk');
 const rawPath = isReadiness
   ? 'readiness-guide.md'
@@ -32,12 +33,12 @@ if (isReadiness) {
 document.querySelector('#resource-nav').innerHTML = isReadiness ? `
   <a href="index.html#home">กลับหน้าหลัก</a>
   <a href="${rawPath}" download>ดาวน์โหลดเอกสาร .md</a>
-  <a href="resource.html?version=js-es6-3&type=worksheet&chapter=1">ดูใบงานที่ 1</a>
+  <a href="resource.html?version=js-es6-4&type=worksheet&chapter=1">ดูใบงานที่ 1</a>
   <button type="button" id="print-resource">พิมพ์ / บันทึก PDF</button>` : `
-  <a href="resource.html?version=js-es6-3&type=code&chapter=${chapterNumber}" ${type === 'code' ? 'aria-current="page"' : ''}>โค้ดตัวอย่าง</a>
-  <a href="resource.html?version=js-es6-3&type=worksheet&chapter=${chapterNumber}" ${type === 'worksheet' ? 'aria-current="page"' : ''}>ใบงาน</a>
+  <a href="resource.html?version=js-es6-4&type=code&chapter=${chapterNumber}" ${type === 'code' ? 'aria-current="page"' : ''}>โค้ดตัวอย่าง</a>
+  <a href="resource.html?version=js-es6-4&type=worksheet&chapter=${chapterNumber}" ${type === 'worksheet' ? 'aria-current="page"' : ''}>ใบงาน</a>
   <a href="${rawPath}" download>ดาวน์โหลดไฟล์ต้นฉบับ</a>
-  <a href="slides.html?version=js-es6-3#slide-${(chapterNumber - 1) * 6 + 1}">เปิดสไลด์บทนี้</a>
+  <a href="slides.html?version=js-es6-4#slide-${chapterStart}">เปิดสไลด์บทนี้</a>
   ${type === 'worksheet' ? '<button type="button" id="print-resource">พิมพ์ใบงาน / PDF</button>' : ''}`;
 
 document.querySelector('#print-resource')?.addEventListener('click', () => window.print());

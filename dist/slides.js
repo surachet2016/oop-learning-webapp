@@ -7,6 +7,7 @@ const h = value => String(value).replace(/[&<>"']/g, char => ({
 
 const storageKey = 'oop-slides-javascript-v4';
 const quizTotal = SLIDES.filter(slide => slide.kind === 'quiz').length;
+const chapterStartIndex = chapterId => SLIDES.findIndex(slide => slide.chapter === chapterId);
 let data = { answers: {}, practice: {} };
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey));
@@ -73,7 +74,7 @@ function jigsawPieces(currentChapter) {
 function renderChapter(slide, activity) {
   activity.innerHTML = `<div class="chapter-card">
     <span class="chapter-number">บท ${slide.chapter}/10</span>
-    <strong>${slide.chapter === 1 ? 'Quick Win: ทำตัวอย่างสำเร็จก่อน' : 'ต่อยอดจากชิ้นส่วนที่ทำได้แล้ว'}</strong>
+    <strong>${slide.chapter === 1 ? 'พื้นฐาน: เข้าใจทีละชิ้นก่อนประกอบโปรแกรม' : 'ต่อยอดจากชิ้นส่วนที่ทำได้แล้ว'}</strong>
     <p>${h(slide.piece)}</p>
     <div class="mini-roadmap">ดูผลลัพธ์ → เข้าใจแนวคิด → อ่านโค้ด → ฝึก → ตรวจ → ต่อ Jigsaw</div>
   </div>`;
@@ -160,7 +161,7 @@ function renderQuiz(slide, activity) {
     q('#feedback').className = answered || showAnswers ? 'feedback' : '';
     q('#feedback').textContent = answered || showAnswers
       ? `${answered ? (chosen === slide.answer ? '✓ ถูกต้อง — ' : 'ลองทบทวน — ') : 'เฉลย — '}${slide.explain}` : '';
-    q('#score').textContent = `ผ่านแบบตรวจ ${score()} / ${quizTotal} บท · ฝึกซ้ำได้ ไม่คิดคะแนนรายวิชา`;
+    q('#score').textContent = `ตอบถูก ${score()} / ${quizTotal} ข้อ · ฝึกซ้ำได้ ไม่คิดคะแนนรายวิชา`;
   }
   update();
 }
@@ -230,7 +231,7 @@ function buildNavigation() {
   q('#chapter-rail').innerHTML = CHAPTERS.map(chapter => `<button data-chapter="${chapter.id}" title="${h(chapter.title)}">${chapter.id}</button>`).join('');
   q('#chapter-rail').onclick = event => {
     const button = event.target.closest('[data-chapter]');
-    if (button) setIndex((Number(button.dataset.chapter) - 1) * 6);
+    if (button) setIndex(chapterStartIndex(Number(button.dataset.chapter)));
   };
   q('#chapter-grid').innerHTML = CHAPTERS.map(chapter => `<button data-chapter="${chapter.id}">
     <strong>บท ${chapter.id} · ${h(chapter.title)}</strong>
@@ -241,7 +242,7 @@ function buildNavigation() {
     const button = event.target.closest('[data-chapter]');
     if (!button) return;
     q('#chapter-dialog').close();
-    setIndex((Number(button.dataset.chapter) - 1) * 6);
+    setIndex(chapterStartIndex(Number(button.dataset.chapter)));
   };
   q('#overview-grid').innerHTML = CHAPTERS.map(chapter => `<section class="overview-chapter">
     <h3>บท ${chapter.id} · ${h(chapter.title)}</h3>

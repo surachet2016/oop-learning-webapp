@@ -411,16 +411,340 @@ const worksheetPlans = [
   }
 ];
 
+const chapterOneSlideSpecs = [
+  {
+    kind: 'chapter', title: 'บทที่ 1\nอ่านโครงสร้าง JavaScript และมองแบบ OOP',
+    subtitle: 'จากคำสั่งทีละบรรทัด สู่ข้อมูล สถานะ และพฤติกรรมของอุปกรณ์',
+    points: ['เริ่มจากโค้ดที่อ่านได้ ไม่เริ่มจาก class', 'ทำนายผลก่อนรันและอธิบายด้วยภาษาของตนเอง', 'ประกอบความรู้ทีละชิ้นจนสร้าง catalog.js ได้'],
+    piece: 'ชิ้นที่ 1 · วัตถุ ข้อมูล สถานะ และพฤติกรรม',
+    note: 'ยืนยันก่อนเริ่มว่าแต่ละคนผ่านบทที่ 0: เปิด VS Code, node -v และ node hello.js ได้'
+  },
+  {
+    kind: 'reveal', title: 'แผนที่การเรียนรู้บทที่ 1', subtitle: 'รู้ลำดับก่อนเรียน ช่วยให้คำศัพท์ใหม่ไม่แยกจากกัน',
+    points: ['ช่วงที่ 1 · อ่านคำสั่งและชนิดข้อมูล', 'ช่วงที่ 2 · รวมข้อมูลใน object', 'ช่วงที่ 3 · สร้างพฤติกรรมด้วย function และ if', 'ช่วงที่ 4 · เชื่อมเป็นแนวคิด OOP และชิ้นงาน'],
+    details: ['อ่าน comment, statement, ลำดับบนลงล่าง, string และ boolean', 'ใช้ property เก็บ id, name และ available ของอุปกรณ์หนึ่งชิ้น', 'รับ object เข้า function ตรวจสถานะ แล้วคืนข้อความออกมา', 'ระบุวัตถุ ข้อมูล สถานะ พฤติกรรม และสร้าง catalog.js ที่รันได้'],
+    note: 'แสดงภาพรวมไม่เกิน 3 นาที และย้อนมาชี้ตำแหน่งบนแผนที่เมื่อเปลี่ยนช่วง'
+  },
+  {
+    kind: 'reveal', title: 'เครื่องมือแต่ละตัวทำหน้าที่อะไร', subtitle: 'แยก Editor, Runtime, Terminal และภาษาออกจากกัน',
+    points: ['VS Code ใช้สร้างและแก้ไฟล์', 'JavaScript คือภาษาที่เราเขียน', 'Node.js อ่านและรัน JavaScript', 'Terminal ใช้ส่งคำสั่งและรับผลลัพธ์'],
+    details: ['VS Code ช่วยพิมพ์ จัดสี และเปิดโฟลเดอร์ แต่ไม่ใช่ตัวภาษา', 'ไฟล์นามสกุล .js เก็บคำสั่ง JavaScript', 'คำสั่ง node catalog.js ให้ Node.js ทำงานตามคำสั่งในไฟล์', 'Terminal แสดงทั้ง output และข้อความผิดพลาด จึงเป็นหลักฐานสำคัญ'],
+    note: 'ถามกลับ: ถ้ามี VS Code แต่ไม่มี Node.js จะรัน node catalog.js ได้หรือไม่'
+  },
+  {
+    kind: 'reveal', title: 'โปรแกรมคือชุดคำสั่งที่มีเป้าหมาย', subtitle: 'อย่าเริ่มจากการจำสัญลักษณ์ ให้เริ่มจากสิ่งที่โปรแกรมต้องทำ',
+    points: ['Input · ข้อมูลที่โปรแกรมได้รับ', 'Process · กฎหรือขั้นตอนที่ใช้กับข้อมูล', 'Output · ผลที่โปรแกรมส่งกลับหรือแสดง', 'โปรแกรมที่ดีต้องอธิบายทั้งสามส่วนได้'],
+    details: ['ตัวอย่าง input คือ object ของ Camera', 'ตัวอย่าง process คือการตรวจ available และสร้างข้อความสถานะ', 'ตัวอย่าง output คือข้อความ EQ01 - Camera - พร้อมยืม', 'ถ้าชี้ input/process/output ไม่ได้ แสดงว่ายังอ่านโค้ดไม่ครบความหมาย'],
+    note: 'ใช้ตัวอย่างเครื่องคิดเลขหรือใบเสร็จก่อนเชื่อมกับระบบยืมอุปกรณ์'
+  },
+  {
+    kind: 'codewalk', title: 'Comment, Statement และ Block', subtitle: 'องค์ประกอบเล็กที่สุดที่ต้องมองให้ออก',
+    points: ['comment อธิบายเจตนาและไม่ถูกรัน', 'statement คือคำสั่งหนึ่งหน่วย', 'block รวมหลายคำสั่งด้วย { }'],
+    details: ['บรรทัดที่ขึ้นต้น // เป็นคำอธิบายสำหรับคนอ่าน', 'const name = "Camera"; และ console.log(name); เป็น statements', 'คำสั่งภายใน function หรือ if อยู่ใน block และทำงานตามเงื่อนไขของ block'],
+    code: `// comment: อธิบายสิ่งที่จะทำ
+const name = "Camera"; // statement
+
+if (name === "Camera") { // เริ่ม block
+  console.log(name);      // statement ใน block
+}`,
+    note: 'ให้ผู้เรียนวง comment ขีดเส้นใต้ statement และตีกรอบ block ด้วยสีคนละสี'
+  },
+  {
+    kind: 'codewalk', title: 'JavaScript อ่านจากบนลงล่าง', subtitle: 'ลำดับคำสั่งเปลี่ยนผลลัพธ์ได้',
+    points: ['สร้างค่าก่อนนำค่าไปใช้', 'function declaration เตรียมพฤติกรรมไว้', 'การเรียก function คือจุดที่พฤติกรรมเริ่มทำงาน'],
+    details: ['ขั้น 1 สร้าง name และเก็บ Camera', 'ขั้น 2 เตรียม function show แต่ยังไม่แสดงผล', 'ขั้น 3 เรียก show(name) จึงเข้า function และแสดง Camera'],
+    code: `const name = "Camera";       // ขั้น 1
+
+function show(value) {          // ขั้น 2
+  console.log(value);
+}
+
+show(name);                     // ขั้น 3`,
+    note: 'ให้ผู้เรียนใส่หมายเลขลำดับการทำงานก่อนรัน และเน้นว่าการประกาศ function ไม่เท่ากับการเรียกใช้'
+  },
+  {
+    kind: 'reveal', title: 'ค่าและชนิดข้อมูล', subtitle: 'ค่าแต่ละชนิดตอบคำถามต่างกัน',
+    points: ['string เก็บข้อความ', 'number เก็บจำนวน', 'boolean เก็บจริง/เท็จ', 'ชนิดข้อมูลต้องตรงความหมายของโจทย์'],
+    details: ['"Camera" และ "EQ01" เป็นข้อความ แม้ EQ01 มีตัวเลขอยู่ข้างใน', '2 หรือ 7 เหมาะกับจำนวนชิ้นและจำนวนวัน', 'true/false เหมาะกับคำถามสองคำตอบ เช่น พร้อมยืมหรือไม่', 'ถ้าเก็บ available เป็น "yes"/"no" จะตรวจเงื่อนไขยากและสะกดผิดได้'],
+    note: 'ให้ผู้เรียนจัดหมวดค่า 6–8 ตัวอย่างก่อนเปิดคำอธิบาย'
+  },
+  {
+    kind: 'codewalk', title: 'String: ข้อความต้องอยู่ในเครื่องหมายคำพูด', subtitle: 'รหัสและชื่อเป็นข้อความ แม้ไม่ได้ใช้คำนวณ',
+    points: ['ใช้ "..." หรือ \'...\' ครอบข้อความ', 'ต่อข้อความด้วย + ได้', 'ข้อความกับชื่อตัวแปรไม่ใช่สิ่งเดียวกัน'],
+    details: ['"Camera" คือค่า string', 'id + " - " + name สร้าง string ใหม่จากหลายส่วน', 'console.log(name) อ่านค่าตัวแปร แต่ console.log("name") แสดงคำว่า name'],
+    code: `const id = "EQ01";
+const name = "Camera";
+const label = id + " - " + name;
+
+console.log(label); // EQ01 - Camera`,
+    note: 'สาธิตเอา quote ออกหนึ่งตำแหน่งเพื่อให้เห็น SyntaxError แล้วคืนค่าเดิม'
+  },
+  {
+    kind: 'codewalk', title: 'Boolean: สถานะที่มีสองคำตอบ', subtitle: 'true และ false ไม่มีเครื่องหมายคำพูด',
+    points: ['true หมายถึงจริง', 'false หมายถึงเท็จ', 'boolean ใช้เป็นเงื่อนไขได้โดยตรง'],
+    details: ['available: true สื่อว่าอุปกรณ์พร้อมยืม', 'available: false สื่อว่าอุปกรณ์ไม่พร้อมยืม', '"false" เป็น string ที่มีข้อความ ไม่ใช่ boolean false'],
+    code: `const available = true;
+
+console.log(available);        // true
+console.log(typeof available); // boolean
+console.log(typeof "true");    // string`,
+    note: 'ถามว่าค่า "false" ใน if เป็นจริงหรือเท็จ แล้วอธิบายว่าจึงไม่ควรใช้ string แทน boolean'
+  },
+  {
+    kind: 'codewalk', title: 'const: ตั้งชื่อให้ค่าอ้างอิง', subtitle: 'ใช้เป็นค่าเริ่มต้นเมื่อยังไม่จำเป็นต้องกำหนดใหม่',
+    points: ['ประกาศด้วย const ชื่อ = ค่า', 'อ่านชื่อแทนการเขียนค่าซ้ำ', 'ห้ามกำหนดตัวแปร const ใหม่ด้วย ='],
+    details: ['const name = "Camera" สร้างชื่อ name ให้อ้างถึงข้อความ', 'ชื่อที่สื่อความหมายทำให้โค้ดอ่านเหมือนประโยค', 'name = "Tripod" หลังประกาศ const จะเกิด TypeError'],
+    code: `const equipmentId = "EQ01";
+const equipmentName = "Camera";
+
+console.log(equipmentId);
+console.log(equipmentName);`,
+    note: 'เน้นว่าคำว่า constant binding ไม่ได้แปลว่า object ภายในแก้ property ไม่ได้ทั้งหมด ซึ่งจะอธิบายในสไลด์ object'
+  },
+  {
+    kind: 'codewalk', title: 'let: ค่าที่ต้องกำหนดใหม่ระหว่างทำงาน', subtitle: 'ใช้เมื่อกฎของโปรแกรมทำให้ค่าต้องเปลี่ยน',
+    points: ['ประกาศค่าเริ่มต้นด้วย let', 'กำหนดค่าใหม่ได้ภายหลัง', 'ใช้เท่าที่จำเป็นเพื่อควบคุมการเปลี่ยนแปลง'],
+    details: ['status เริ่มเป็น "ถูกยืม"', 'เมื่อ available เป็น true จึงกำหนด status ใหม่เป็น "พร้อมยืม"', 'ถ้าค่าไม่ต้องถูกกำหนดใหม่ควรใช้ const เพื่อบอกเจตนา'],
+    code: `let status = "ถูกยืม";
+const available = true;
+
+if (available === true) {
+  status = "พร้อมยืม";
+}
+
+console.log(status);`,
+    note: 'ติดตามค่าของ status ก่อนเข้า if และหลังออกจาก if ด้วยตาราง trace'
+  },
+  {
+    kind: 'quiz', title: 'ตรวจความเข้าใจ · const หรือ let', subtitle: 'เลือกจากพฤติกรรมของค่า ไม่เลือกจากความเคยชิน',
+    points: ['ตัวแปร status เริ่มเป็น “ถูกยืม” และอาจเปลี่ยนเป็น “พร้อมยืม” ควรประกาศอย่างไร?'],
+    options: ['const status', 'let status', 'ไม่ต้องประกาศ'], answer: 1,
+    explain: 'status ถูกกำหนดค่าใหม่ตามเงื่อนไข จึงใช้ let ส่วนค่าที่ไม่กำหนดใหม่ควรเริ่มด้วย const',
+    hint: 'ถามว่ามีคำสั่ง status = ... เกิดขึ้นหลังการประกาศหรือไม่',
+    note: 'ให้ผู้เรียนอธิบายเหตุผลก่อนเลือก ไม่ให้คะแนนจากการเดาสัญลักษณ์'
+  },
+  {
+    kind: 'reveal', title: 'Object: รวมข้อมูลของสิ่งเดียวกัน', subtitle: 'จากตัวแปรกระจัดกระจาย สู่ข้อมูลที่มีความหมายเป็นหนึ่งหน่วย',
+    points: ['object แทนสิ่งหนึ่งสิ่งในโจทย์', 'property คือคุณลักษณะของสิ่งนั้น', 'value คือค่าปัจจุบันของ property', 'object ทำให้ส่งข้อมูลทั้งชุดเข้า function ได้'],
+    details: ['equipment แทนอุปกรณ์หนึ่งชิ้น', 'id, name และ available เป็นชื่อ properties', '"EQ01", "Camera" และ true เป็น values', 'แทนที่จะส่งสามค่าแยกกัน เราส่ง equipment หนึ่ง object'],
+    note: 'ให้ผู้เรียนเสนอ properties ของนักศึกษา หนังสือ และห้องเรียน แล้วตัด property ที่ไม่เกี่ยวกับโจทย์ออก'
+  },
+  {
+    kind: 'codewalk', title: 'อ่าน Object Literal ทีละสัญลักษณ์', subtitle: 'ชื่อ object → วงเล็บปีกกา → property: value',
+    points: ['{ } ครอบข้อมูลของ object', ': เชื่อม property กับ value', ', แยกแต่ละ property', 'ปิด statement ด้วย ;'],
+    details: ['equipment เป็นชื่อตัวแปรที่อ้างถึง object', 'id: "EQ01" หมายถึง property id มีค่า EQ01', 'comma บอกว่ายังมี property ถัดไป', 'semicolon จบคำสั่งประกาศ object'],
+    code: `const equipment = {
+  id: "EQ01",
+  name: "Camera",
+  available: true
+};`,
+    note: 'ให้ผู้เรียนชี้ทุกสัญลักษณ์และอ่านออกเสียงเป็นประโยคก่อนคัดลอกโค้ด'
+  },
+  {
+    kind: 'codewalk', title: 'อ่าน Property ด้วยเครื่องหมายจุด', subtitle: 'object.property หมายถึงค่าหนึ่งภายใน object',
+    points: ['equipment.id อ่านรหัส', 'equipment.name อ่านชื่อ', 'equipment.available อ่านสถานะ', 'property ที่ไม่มีจะได้ undefined'],
+    details: ['จุดหลัง equipment เลือก property ของ object นั้น', 'ค่าที่อ่านยังคงมีชนิดข้อมูลเดิม', 'การสะกด property ต้องตรงตัวพิมพ์', 'equipment.price คืน undefined เพราะตัวอย่างยังไม่มี price'],
+    code: `console.log(equipment.id);        // EQ01
+console.log(equipment.name);      // Camera
+console.log(equipment.available); // true
+console.log(equipment.price);     // undefined`,
+    note: 'ให้ผู้เรียนทำนายทั้ง 4 บรรทัดและอธิบาย undefined โดยไม่ใช้คำว่า error เหมารวม'
+  },
+  {
+    kind: 'practice', title: 'ฝึกเปลี่ยน Property และสังเกต State', subtitle: 'เปลี่ยนทีละจุดเพื่อเห็นเหตุและผล',
+    points: ['ทำนาย equipment.available ก่อนแก้', 'กำหนด equipment.available = false', 'อ่านค่าเดิมอีกครั้งและเปรียบเทียบ', 'อธิบายว่า object เดิมมี state เปลี่ยนไป'],
+    hint: 'พิมพ์ console.log ก่อนและหลังการกำหนดค่า แล้วดูว่าเป็น object เดิมหรือไม่',
+    note: 'ชี้ความแตกต่างระหว่าง const equipment กับการแก้ property: ตัวแปรยังอ้าง object เดิม จึงแก้ property ได้'
+  },
+  {
+    kind: 'reveal', title: 'Function: ตั้งชื่อให้กระบวนการ', subtitle: 'รวบคำสั่งที่ทำหน้าที่เดียวกันและเรียกใช้ซ้ำได้',
+    points: ['function มีชื่อที่บอกพฤติกรรม', 'รับ input ผ่าน parameter', 'ทำงานภายใน block', 'ส่ง output กลับด้วย return'],
+    details: ['describeEquipment บอกว่าพฤติกรรมคืออธิบายอุปกรณ์', 'item เป็นชื่อชั่วคราวของ input ภายใน function', 'คำสั่งใน { } ทำงานเมื่อ function ถูกเรียก', 'return ส่งข้อความกลับไปยังจุดที่เรียก'],
+    note: 'เปรียบ function เป็นเครื่อง: ใส่ input → ทำ process → รับ output โดยไม่ต้องลงรายละเอียดเครื่องจักรทั้งหมด'
+  },
+  {
+    kind: 'codewalk', title: 'กายวิภาคของ Function Declaration', subtitle: 'อ่านหัว function ให้ครบก่อนอ่านคำสั่งภายใน',
+    points: ['function คือคำสำคัญ', 'describeEquipment คือชื่อ', '(item) คือ parameter list', '{ ... } คือ function body'],
+    details: ['keyword บอก JavaScript ว่าเรากำลังประกาศ function', 'ชื่อควรเป็นคำกริยาและสื่อหน้าที่', 'parameter คือช่องรับข้อมูล ไม่ใช่ข้อมูลจริงจนกว่าจะเรียก', 'body เก็บขั้นตอนที่ทำทุกครั้งเมื่อเรียกใช้'],
+    code: `function describeEquipment(item) {
+  const label = item.id + " - " + item.name;
+  return label;
+}`,
+    note: 'ให้ผู้เรียนปิด body แล้วอธิบายหน้าที่จากชื่อและ parameter ก่อน'
+  },
+  {
+    kind: 'codewalk', title: 'Parameter กับ Argument ต่างกันอย่างไร', subtitle: 'ชื่อช่องรับข้อมูล กับค่าจริงที่ส่งเข้าไป',
+    points: ['parameter อยู่ตอนประกาศ function', 'argument อยู่ตอนเรียก function', 'แต่ละครั้งส่ง object คนละตัวได้', 'function เดิมจึงใช้ซ้ำได้'],
+    details: ['item คือ parameter ใน function describeEquipment(item)', 'camera คือ argument ใน describeEquipment(camera)', 'ครั้งถัดไปส่ง tripod ได้โดยไม่เขียน function ใหม่', 'ระหว่างทำงาน item จะอ้างถึง argument ของครั้งนั้น'],
+    code: `function showName(item) { // item = parameter
+  return item.name;
+}
+
+const camera = { name: "Camera" };
+const tripod = { name: "Tripod" };
+
+console.log(showName(camera)); // camera = argument
+console.log(showName(tripod)); // tripod = argument`,
+    note: 'ใช้ภาพกล่อง parameter และลูกศรจาก arguments สองตัว เพื่อแก้ความเข้าใจว่า item เป็น object ถาวร'
+  },
+  {
+    kind: 'reveal', title: 'Local Variable และขอบเขตการใช้งาน', subtitle: 'ตัวแปรภายใน function มีหน้าที่ชั่วคราวของการเรียกครั้งนั้น',
+    points: ['status ถูกสร้างภายใน function', 'ใช้ได้ภายใน block ของ function', 'การเรียกแต่ละครั้งมี status ของตนเอง', 'ช่วยไม่ให้ตัวแปรชั่วคราวรบกวนภายนอก'],
+    details: ['status เป็น local variable เพราะประกาศใน describeEquipment', 'โค้ดภายนอกไม่ควรพึ่ง status โดยตรง', 'เรียกด้วย camera และ tripod จะคำนวณ status แยกกัน', 'local scope ลดโอกาสชื่อชนกันและสถานะค้างจากครั้งก่อน'],
+    note: 'ยังไม่ลงรายละเอียด lexical scope ลึก ให้ยึดหลักว่า { } ของ function เป็นพื้นที่ทำงานของตัวแปรชั่วคราว'
+  },
+  {
+    kind: 'codewalk', title: 'if: เลือกทำงานเมื่อเงื่อนไขเป็นจริง', subtitle: 'เงื่อนไขอยู่ใน ( ) และคำสั่งที่เลือกอยู่ใน { }',
+    points: ['ประเมินเงื่อนไขก่อน', 'ถ้า true จึงเข้า block', 'ถ้า false ข้าม block', 'จากนั้นทำคำสั่งถัดไป'],
+    details: ['item.available === true เปรียบเทียบค่าและได้ boolean', 'เมื่อ true จึงกำหนด status เป็น พร้อมยืม', 'เมื่อ false status ยังคงเป็น ถูกยืม', 'หลัง if โปรแกรมไปยัง return ไม่ว่าจะเข้าหรือข้าม block'],
+    code: `let status = "ถูกยืม";
+
+if (item.available === true) {
+  status = "พร้อมยืม";
+}
+
+return status;`,
+    note: 'วาดลูกศรสองเส้น true/false แล้วให้ผู้เรียน trace ทั้งสองกรณี'
+  },
+  {
+    kind: 'codewalk', title: 'Trace เงื่อนไขสองเส้นทาง', subtitle: 'อย่าเดา ให้บันทึกค่าทีละขั้น',
+    points: ['กรณี A: available = true', 'กรณี B: available = false', 'ค่าเริ่มต้นเหมือนกันแต่เส้นทางต่างกัน', 'ทั้งสองกรณีต้องมี output ที่อธิบายได้'],
+    details: ['A เริ่ม status=ถูกยืม → เงื่อนไข true → status=พร้อมยืม → return พร้อมยืม', 'B เริ่ม status=ถูกยืม → เงื่อนไข false → ข้าม block → return ถูกยืม', 'การเขียน trace table ช่วยเห็นว่าค่าเปลี่ยนที่บรรทัดใด', 'test ที่ดีต้องตรวจทั้งเส้นทาง true และ false'],
+    code: `// Trace A
+available: true  → if: true  → status: "พร้อมยืม"
+
+// Trace B
+available: false → if: false → status: "ถูกยืม"`,
+    note: 'ให้ครึ่งห้อง trace true อีกครึ่ง trace false แล้วแลกอธิบายกัน'
+  },
+  {
+    kind: 'codewalk', title: 'return: ส่งผลกลับและจบการทำงานของ Function', subtitle: 'ค่าที่ return ต้องถูกรับหรือนำไปใช้ต่อ',
+    points: ['return ส่งค่าออกจาก function', 'คำสั่งหลัง return ในเส้นทางเดียวกันไม่ทำงาน', 'ผู้เรียกเก็บผลในตัวแปรได้', 'function ที่ไม่มี return ชัดเจนคืน undefined'],
+    details: ['return message ส่ง string กลับไปยังจุดเรียก', 'เมื่อ return แล้วการเรียกครั้งนั้นจบ', 'const message = describeEquipment(equipment) รับ output', 'console.log ภายใน function ไม่ทดแทน return เมื่อต้องใช้ค่าต่อ'],
+    code: `function createLabel(item) {
+  const label = item.id + " - " + item.name;
+  return label;
+}
+
+const result = createLabel(equipment);`,
+    note: 'ใช้ลูกศรจาก argument เข้า function และลูกศร return กลับมาที่ result'
+  },
+  {
+    kind: 'codewalk', title: 'console.log: แสดงผลเพื่อสังเกต', subtitle: 'แสดงค่าใน Terminal แต่ไม่ได้ส่งค่ากลับจาก function',
+    points: ['ใช้ดูค่าและลำดับการทำงาน', 'output ปรากฏใน Terminal', 'เหมาะกับการเรียนรู้และตรวจข้อผิดพลาด', 'ไม่ควรสับสนกับ return'],
+    details: ['console.log(message) แสดงข้อความให้ผู้ใช้หรือผู้พัฒนาเห็น', 'ค่าที่แสดงไม่ถูกเก็บอัตโนมัติ', 'เราใช้ log ก่อน–หลังการเปลี่ยน state เพื่อเป็นหลักฐาน', 'ในระบบจริงอาจส่งผลให้ UI หรือ API แทนการ log'],
+    code: `const message = describeEquipment(equipment);
+
+console.log(message);
+console.log("จบโปรแกรม");`,
+    note: 'ให้ผู้เรียนลบ console.log ชั่วคราวแล้วสังเกตว่า function ยังคืนค่าได้แต่หน้าจอไม่แสดง'
+  },
+  {
+    kind: 'quiz', title: 'ตรวจความเข้าใจ · return กับ console.log', subtitle: 'สองคำสั่งนี้ทำหน้าที่คนละอย่าง',
+    points: ['ถ้าต้องการให้ค่าจาก function ถูกนำไปใช้คำนวณต่อ ควรใช้สิ่งใด?'],
+    options: ['console.log อย่างเดียว', 'return', 'comment'], answer: 1,
+    explain: 'return ส่งค่ากลับให้ผู้เรียกนำไปเก็บหรือใช้ต่อ ส่วน console.log เพียงแสดงค่าใน Terminal',
+    hint: 'มองหาคำสั่งที่มีลูกศรส่ง output กลับจาก function',
+    note: 'หลังตอบ ให้ผู้เรียนเขียนหนึ่งประโยคเปรียบเทียบ return กับ console.log'
+  },
+  {
+    kind: 'codewalk', title: 'ประกอบเป็น Input → Process → Output', subtitle: 'กรอบอ่านโปรแกรมที่ใช้ได้กับทุกภาษา',
+    points: ['Input คือ equipment', 'Process คือ describeEquipment', 'Output คือ message', 'Display คือ console.log(message)'],
+    details: ['object ถูกส่งเป็น argument เข้า function', 'function อ่าน properties ตรวจ if และสร้าง string', 'return ส่ง string มาเก็บใน message', 'console.log แสดง message ใน Terminal'],
+    code: `// INPUT
+const equipment = { id: "EQ01", name: "Camera", available: true };
+
+// PROCESS
+const message = describeEquipment(equipment);
+
+// OUTPUT / DISPLAY
+console.log(message);`,
+    note: 'ให้ผู้เรียนวาดกล่อง 4 กล่องและลูกศรจากค่าจริงในโค้ด ไม่ใช้เพียงคำจำกัดความ'
+  },
+  {
+    kind: 'reveal', title: 'แนวคิด OOP: Object มี Data, State และ Behavior', subtitle: 'เข้าใจแบบจำลองก่อนเรียนไวยากรณ์ class',
+    points: ['Object · สิ่งที่ระบบสนใจ', 'Data · ข้อมูลระบุตัวตนและรายละเอียด', 'State · ค่าที่เปลี่ยนตามเวลา', 'Behavior · การกระทำหรือกฎที่เกี่ยวข้อง'],
+    details: ['equipment คือ object ที่แทนอุปกรณ์หนึ่งชิ้น', 'id และ name เป็น data ของอุปกรณ์', 'available เป็น state เพราะเปลี่ยนหลังยืมหรือคืน', 'describeEquipment เป็น behavior ที่อ่านข้อมูลและสถานะเพื่อสร้างผลลัพธ์'],
+    note: 'ย้ำว่า OOP ไม่เท่ากับการเขียน class จำนวนมาก แต่คือการจัดความรับผิดชอบให้แบบจำลองชัดเจน'
+  },
+  {
+    kind: 'reveal', title: 'Object วันนี้ กับ Class ในบทถัดไป', subtitle: 'รู้ขอบเขตของสิ่งที่เรียน ไม่รีบกระโดดไปไวยากรณ์ยาก',
+    points: ['วันนี้ใช้ object literal หนึ่งหรือสองชิ้น', 'function ยังอยู่นอก object เพื่ออ่านง่าย', 'ภายหลัง class จะเป็นแบบสำหรับสร้างหลาย objects', 'method จะวาง behavior ใกล้ data ที่รับผิดชอบ'],
+    details: ['เราเริ่มจากสิ่งที่มองเห็นและรันได้ก่อน', 'การแยก function ทำให้ฝึก input/process/output ได้ชัด', 'เมื่อพบว่าต้องสร้าง Equipment หลายชิ้นโครงสร้างเดียวกัน class จึงมีเหตุผล', 'บท class จะอธิบาย constructor, this, instance และ method หลังพื้นฐานพร้อม'],
+    note: 'ไม่สอน syntax class ในหน้านี้ ให้ตอบเพียงว่าปัญหาใดทำให้ class มีประโยชน์'
+  },
+  {
+    kind: 'codewalk', title: 'อ่านโปรแกรมเต็ม · ส่วนที่ 1 ข้อมูล', subtitle: 'เริ่มจาก object ก่อนอ่าน function',
+    points: ['ชื่อตัวแปร equipment', 'properties id, name, available', 'ชนิด string, string, boolean', 'available คือ state ที่เงื่อนไขจะอ่าน'],
+    details: ['equipment แทนอุปกรณ์หนึ่งชิ้น', 'id ใช้ระบุ EQ01 และ name ใช้แสดง Camera', 'true ไม่มี quote จึงเป็น boolean', 'ยังไม่มีคำสั่งใดเปลี่ยน object ในส่วนนี้'],
+    code: `const equipment = {
+  id: "EQ01",
+  name: "Camera",
+  available: true
+};`,
+    note: 'ห้ามเลื่อนไป function จนผู้เรียนกรอกตาราง property–value–type ครบ'
+  },
+  {
+    kind: 'codewalk', title: 'อ่านโปรแกรมเต็ม · ส่วนที่ 2 พฤติกรรม', subtitle: 'ติดตาม parameter → local variable → if → return',
+    points: ['item รับ object จากผู้เรียก', 'status เป็น local variable', 'if อ่าน item.available', 'return สร้าง output จาก properties และ status'],
+    details: ['เมื่อเรียกด้วย equipment ค่า item จึงอ้าง object นั้น', 'status เริ่มด้วยค่าของเส้นทาง false', 'เส้นทาง true กำหนด status ใหม่', 'output ไม่แก้ equipment แต่สร้าง string ใหม่'],
+    code: `function describeEquipment(item) {
+  let status = "ถูกยืม";
+  if (item.available === true) {
+    status = "พร้อมยืม";
+  }
+  return item.id + " - " + item.name + " - " + status;
+}`,
+    note: 'ให้ผู้เรียนชี้ input, condition, state ชั่วคราว และ output จากบรรทัดจริง'
+  },
+  {
+    kind: 'codewalk', title: 'อ่านโปรแกรมเต็ม · ส่วนที่ 3 เรียกใช้และ Trace', subtitle: 'ทำนาย output ก่อนกดรันทุกครั้ง',
+    points: ['ส่ง equipment เป็น argument', 'รับค่าที่ return ใน message', 'แสดง message ด้วย console.log', 'เปลี่ยน available แล้ว trace ใหม่'],
+    details: ['describeEquipment(equipment) เริ่มการทำงานของ function', 'return กลับมาเป็น string ที่เก็บใน message', 'Terminal แสดง EQ01 - Camera - พร้อมยืม', 'ถ้า available=false เงื่อนไขไม่เข้า block และข้อความจบด้วย ถูกยืม'],
+    code: `const message = describeEquipment(equipment);
+console.log(message);
+
+// คาดหวัง: EQ01 - Camera - พร้อมยืม`,
+    note: 'ปิดจอผลลัพธ์ก่อน ให้ทุกคนเขียน expected output แล้วจึงรันพร้อมกัน'
+  },
+  {
+    kind: 'practice', title: 'ฝึกประกอบความเข้าใจทีละขั้น', subtitle: 'เปลี่ยนหนึ่งสิ่ง ทำนาย รัน และอธิบาย ก่อนทำขั้นต่อไป',
+    points: ['รันโค้ดเดิมและบันทึก output', 'เปลี่ยน name เป็น Microphone แล้วทำนายก่อนรัน', 'เปลี่ยน available เป็น false และ trace if', 'เพิ่ม category แล้วแสดงในข้อความ', 'สร้าง equipment2 และใช้ function เดิม'],
+    hint: 'ถ้าติด ให้กลับไปหากล่อง Input → Process → Output และตรวจชื่อ property ทีละตัว',
+    note: 'ตรวจ checkpoint หลังขั้น 3: ผู้เรียนต้องอธิบายบรรทัดที่ทำให้ผลเปลี่ยน ไม่รับเพียงภาพผลรัน'
+  },
+  {
+    kind: 'quiz', title: 'ตรวจความเข้าใจรวมบทที่ 1', subtitle: 'ใช้เหตุผลจากโค้ด ไม่ใช้การจำคำศัพท์',
+    points: ['เหตุใด equipment2 จึงใช้ describeEquipment function เดิมได้?'],
+    options: ['เพราะ function รับ object ผ่าน parameter และอ่าน properties ที่กำหนด', 'เพราะ console.log สร้าง object ใหม่ให้', 'เพราะตัวแปรทุกตัวใน JavaScript มีค่าเหมือนกัน'], answer: 0,
+    explain: 'parameter ทำให้ function รับ argument ต่างกันได้ หาก object มี properties ที่ function ต้องใช้ ก็ประมวลผลด้วยขั้นตอนเดิมได้',
+    hint: 'มองที่ item ใน function และค่าที่ส่งเข้า describeEquipment(...)',
+    note: 'ให้ผู้เรียนยกตัวอย่าง camera และ tripod ประกอบคำตอบก่อนเปิดเฉลย'
+  },
+  {
+    kind: 'jigsaw', title: 'Jigsaw Checkpoint 1/10', subtitle: 'ชิ้นที่ 1 · วัตถุ ข้อมูล สถานะ และพฤติกรรม',
+    points: ['ไฟล์ catalog.js ที่รันได้', 'แผนภาพ Input → Process → Output', 'คำอธิบาย Object–Data–State–Behavior', 'ผลรัน available ทั้ง true และ false'],
+    piece: 'ชิ้นที่ 1 · วัตถุ ข้อมูล สถานะ และพฤติกรรม',
+    deliverable: 'catalog.js + ภาพผลรัน 2 เส้นทาง + ตาราง property–value–type + คำอธิบายด้วยภาษาของตนเอง',
+    note: 'ตรวจด้วยการถามสดหนึ่งข้อ เช่น เปลี่ยน property ใดแล้ว output เปลี่ยน เพราะบรรทัดใด'
+  }
+];
+
 const slides = [];
 for (const c of chapters) {
   const p = worksheetPlans[c.id - 1];
-  const common = { chapter: c.id, week: c.weeks, clo: c.clo, codeLink: `resource.html?version=js-es6-3&type=code&chapter=${c.id}`, worksheet: `resource.html?version=js-es6-3&type=worksheet&chapter=${c.id}` };
-  slides.push({ ...common, kind: 'chapter', title: `บทที่ ${c.id}\n${c.title}`, subtitle: c.subtitle, points: c.outcomes, piece: c.piece, note: `เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์` });
-  slides.push({ ...common, kind: 'reveal', title: `${c.title}: แนวคิดสำคัญ`, subtitle: 'เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง', points: c.concepts, details: c.concepts.map((x, i) => `แนวคิด ${i + 1}: ${x}`), note: 'ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง' });
-  slides.push({ ...common, kind: 'codewalk', title: `อ่านโค้ดทีละส่วน`, subtitle: c.codeFile, points: c.walkthrough, details: c.walkthrough, code: c.code, note: 'อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน' });
-  slides.push({ ...common, kind: 'practice', title: `ฝึกตามแบบมีขั้น`, subtitle: 'ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก', points: c.practice, hint: `หากติด ให้ย้อนดูโค้ดตัวอย่างบท ${c.id} แล้วเปลี่ยนเพียงหนึ่งจุด`, note: 'เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน' });
-  slides.push({ ...common, kind: 'quiz', title: `ตรวจความเข้าใจบทที่ ${c.id}`, subtitle: 'ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา', points: [c.quiz[0]], options: c.quiz[1], answer: c.quiz[2], explain: c.quiz[3], hint: c.quiz[4], note: 'ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย' });
-  slides.push({ ...common, kind: 'jigsaw', title: `Jigsaw Checkpoint ${c.id}/10`, subtitle: c.piece, points: [c.deliverable, 'นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า', 'ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน'], piece: c.piece, deliverable: c.deliverable, note: 'ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร' });
+  const startSlide = slides.length + 1;
+  const common = { chapter: c.id, week: c.weeks, clo: c.clo, codeLink: `resource.html?version=js-es6-4&type=code&chapter=${c.id}`, worksheet: `resource.html?version=js-es6-4&type=worksheet&chapter=${c.id}` };
+  if (c.id === 1) {
+    slides.push(...chapterOneSlideSpecs.map(spec => ({ ...common, ...spec })));
+  } else {
+    slides.push({ ...common, kind: 'chapter', title: `บทที่ ${c.id}\n${c.title}`, subtitle: c.subtitle, points: c.outcomes, piece: c.piece, note: `เปิดบทด้วยภาพปลายทางและชิ้นส่วน Jigsaw ที่จะได้ หลีกเลี่ยงการอธิบายศัพท์ทั้งหมดก่อนผู้เรียนเห็นโจทย์` });
+    slides.push({ ...common, kind: 'reveal', title: `${c.title}: แนวคิดสำคัญ`, subtitle: 'เปิดทีละข้อ แล้วให้นักศึกษายกตัวอย่างด้วยภาษาของตนเอง', points: c.concepts, details: c.concepts.map((x, i) => `แนวคิด ${i + 1}: ${x}`), note: 'ให้ผู้เรียนเปิดคำอธิบายทีละข้อและเชื่อมกับผลลัพธ์ที่เห็นจากตัวอย่าง' });
+    slides.push({ ...common, kind: 'codewalk', title: `อ่านโค้ดทีละส่วน`, subtitle: c.codeFile, points: c.walkthrough, details: c.walkthrough, code: c.code, note: 'อย่าเริ่มด้วยการพิมพ์ตามทั้งหมด ให้ชี้ input, rule, state และ output ก่อน แล้วค่อยรัน' });
+    slides.push({ ...common, kind: 'practice', title: `ฝึกตามแบบมีขั้น`, subtitle: 'ทำให้สำเร็จหนึ่งขั้นก่อนเพิ่มความยาก', points: c.practice, hint: `หากติด ให้ย้อนดูโค้ดตัวอย่างบท ${c.id} แล้วเปลี่ยนเพียงหนึ่งจุด`, note: 'เดินตรวจผลลัพธ์จริง ไม่ให้ข้ามไปคัดลอกคำตอบทั้งหมด ผู้เรียนที่เสร็จเร็วให้อธิบายเหตุผลกับเพื่อน' });
+    slides.push({ ...common, kind: 'quiz', title: `ตรวจความเข้าใจบทที่ ${c.id}`, subtitle: 'ตอบก่อนเปิดเฉลย · ไม่คิดคะแนนรายวิชา', points: [c.quiz[0]], options: c.quiz[1], answer: c.quiz[2], explain: c.quiz[3], hint: c.quiz[4], note: 'ให้ทุกคนเลือกคำตอบและอธิบายเหตุผลหนึ่งประโยคก่อนเปิดเฉลย' });
+    slides.push({ ...common, kind: 'jigsaw', title: `Jigsaw Checkpoint ${c.id}/10`, subtitle: c.piece, points: [c.deliverable, 'นำชิ้นส่วนนี้ไปรวมกับของบทก่อนหน้า', 'ตรวจด้วยผลรันหรือผลทดสอบ ไม่ใช้ความรู้สึกตัดสิน'], piece: c.piece, deliverable: c.deliverable, note: 'ปิดบทด้วยหลักฐานชิ้นเล็กที่ทำสำเร็จได้ แล้วชี้ว่าจะนำไปต่อกับบทถัดไปอย่างไร' });
+  }
 
   writeFileSync(join(examplesDir, c.codeFile), `// บทที่ ${c.id}: ${c.title}\n// ตัวอย่างเพื่อการเรียนรู้รายวิชา 07-034-206\n\n${c.code}\n`);
   writeFileSync(join(worksheetsDir, `ch${String(c.id).padStart(2, '0')}.md`), `# ใบงานบทที่ ${c.id}: ${c.title}
@@ -442,9 +766,9 @@ ${c.outcomes.map(x => `- [ ] ${x}`).join('\n')}
 
 ## ทรัพยากรประจำบท
 
-- [สไลด์บทที่ ${c.id}](../slides.html?version=js-es6-3#slide-${(c.id - 1) * 6 + 1})
+- [สไลด์บทที่ ${c.id}](../slides.html?version=js-es6-4#slide-${startSlide})
 - [โค้ดตัวอย่าง ${c.codeFile}](../examples/${c.codeFile})
-${c.id === 1 ? '- [บทที่ 0: เตรียมเครื่องมือ](../resource.html?version=js-es6-3&type=readiness) และตรวจว่า `node -v` ทำงานก่อนเริ่ม' : '- ชุดเริ่มต้น: ดาวน์โหลดจากหน้าหลัก แล้วรัน `npm test` และ `npm run demo`'}
+${c.id === 1 ? '- [บทที่ 0: เตรียมเครื่องมือ](../resource.html?version=js-es6-4&type=readiness) และตรวจว่า `node -v` ทำงานก่อนเริ่ม' : '- ชุดเริ่มต้น: ดาวน์โหลดจากหน้าหลัก แล้วรัน `npm test` และ `npm run demo`'}
 
 ---
 
